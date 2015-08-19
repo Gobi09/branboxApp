@@ -22,13 +22,18 @@ angular.module('starter', ['ionic', 'ngRoute', 'starter.controllers', 'starter.s
         })
     .when('/login',
         {
-            templateUrl: 'templates/Login.html',
+            templateUrl: 'templates/login.html',
             controller: 'DashCtrl'
         })
 
     .when('/register',
         {
             templateUrl: 'templates/register.html',
+            controller: 'DashCtrl'
+        })
+    .when('/latestOffer',
+        {
+            templateUrl: 'templates/latestOffer.html',
             controller: 'DashCtrl'
         })
     .when('/components',
@@ -44,4 +49,4 @@ angular.module('starter', ['ionic', 'ngRoute', 'starter.controllers', 'starter.s
     .otherwise('/dashboard');
 
 }]);
-//});
+
