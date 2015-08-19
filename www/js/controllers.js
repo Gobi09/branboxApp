@@ -23,6 +23,7 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute'])
   })
 
 .controller('locationCtrl', function($scope, Chats) {
+  
   var myLatlng = new google.maps.LatLng(11.9310, 79.7852);
     var mapOptions = {
       center: myLatlng,
