@@ -46,6 +46,11 @@ angular.module('starter', ['ionic', 'ngRoute', 'starter.controllers', 'starter.s
             templateUrl: 'templates/gallery.html',
             controller: 'DashCtrl'
         })
+    .when('/aboutUs',
+        {
+            templateUrl: 'templates/aboutUs.html',
+            controller: 'DashCtrl'
+        })
     .otherwise('/dashboard');
 
 }]);
