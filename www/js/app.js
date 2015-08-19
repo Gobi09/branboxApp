@@ -20,7 +20,12 @@ angular.module('starter', ['ionic', 'ngRoute', 'starter.controllers', 'starter.s
             templateUrl: 'templates/location.html',
             controller: 'locationCtrl'
         })
-    
+    .when('/login',
+        {
+            templateUrl: 'templates/Login.html',
+            controller: 'DashCtrl'
+        })
+
     .when('/register',
         {
             templateUrl: 'templates/register.html',
