@@ -21,10 +21,24 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute'])
 
   
   })
-.controller('ChatsCtrl', function($scope, Chats) {
 
+.controller('locationCtrl', function($scope, Chats) {
+  var myLatlng = new google.maps.LatLng(11.9310, 79.7852);
+    var mapOptions = {
+      center: myLatlng,
+      zoom: 16,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+    var map = new google.maps.Map(document.getElementById("locationMap"), mapOptions);
+      var myLocation = new google.maps.Marker({
+        position: new google.maps.LatLng(11.9310, 79.7852),
+        map: map,
+        title: "My Location"
+      });
+    $scope.map = map;
   
 })
+
 
 
 
