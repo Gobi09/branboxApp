@@ -15,6 +15,11 @@ angular.module('starter', ['ionic', 'ngRoute', 'starter.controllers', 'starter.s
             templateUrl: 'templates/contactForm.html',
             controller: 'contactCtrl'
         })
+    .when('/register',
+        {
+            templateUrl: 'templates/register.html',
+            controller: 'DashCtrl'
+        })
     .when('/components',
         {
             templateUrl: 'templates/components.html',
