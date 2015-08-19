@@ -3,7 +3,7 @@ angular.module('starter', ['ionic', 'ngRoute', 'starter.controllers', 'starter.s
 .config(['$routeProvider','$stateProvider',
          function($routeProvider,$stateProvider) {
 
-     
+ 
   $routeProvider
     .when('/dashboard',
         {
@@ -13,7 +13,7 @@ angular.module('starter', ['ionic', 'ngRoute', 'starter.controllers', 'starter.s
     .when('/contactForm',
         {
             templateUrl: 'templates/contactForm.html',
-            controller: 'DashCtrl'
+            controller: 'contactCtrl'
         })
     .when('/components',
         {
@@ -25,8 +25,7 @@ angular.module('starter', ['ionic', 'ngRoute', 'starter.controllers', 'starter.s
             templateUrl: 'templates/gallery.html',
             controller: 'DashCtrl'
         })
-    
     .otherwise('/dashboard');
 
 }]);
-
+//});
