@@ -1,0 +1,171 @@
+<ion-view>
+    <!--<script src="assets/js/functions.js"></script>-->
+    <script>
+        $(document).ready(function(){
+            $('.lightbox').lightGallery({
+                enableTouch: true
+            });
+        });
+    </script>
+    <!--<script src="assets/js/demo.js"></script>-->
+    <div class="block-header">
+                        <h2>Media</h2>
+                    
+                        <ul class="actions">
+                            <li>
+                                <a href="#">
+                                    <i class="md md-trending-up"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="md md-done-all"></i>
+                                </a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" data-toggle="dropdown">
+                                    <i class="md md-more-vert"></i>
+                                </a>
+                    
+                                <ul class="dropdown-menu dropdown-menu-right">
+                                    <li>
+                                        <a href="#">Refresh</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Manage Widgets</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Widgets Settings</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    
+                    </div>
+                
+        <div class="card">
+            <div class="card-header">
+                <h2>Lightbox <small>JQuery lightGallery is a lightweight jQuery lightbox gallery for displaying image and video gallery</small></h2>
+            </div>
+    
+            <div class="card-body card-padding">
+                <p class="f-500 c-black m-b-20">Images</p>
+    
+                <div class="lightbox row">
+                    <div data-src="assets/media/gallery/1.jpg" class="col-sm-2 col-xs-6">
+                        <div class="lightbox-item">
+                            <img src="assets/media/gallery/thumbs/1.jpg" alt="" />
+                        </div>
+                    </div>
+    
+                    <div data-src="assets/media/gallery/2.jpg" class="col-sm-2 col-xs-6" data-sub-html="<em><h3>This is a caption heading</h3><p>Here goes the description...</p></em>">
+                        <div class="lightbox-item">
+                            <img src="assets/media/gallery/thumbs/2.jpg" alt=""  />
+                        </div>
+                    </div>
+               
+                    <div data-src="assets/media/gallery/3.jpg" class="col-sm-2 col-xs-6">
+                        <div class="lightbox-item">
+                            <img src="assets/media/gallery/thumbs/3.jpg" alt=""  />
+                        </div>
+                    </div>
+                
+                    <div data-src="assets/media/gallery/4.jpg" class="col-sm-2 col-xs-6" data-sub-html="<em><h3>This is a caption heading</h3><p>Here goes the description...</p></em>">
+                        <div class="lightbox-item">
+                            <img src="assets/media/gallery/thumbs/4.jpg" alt=""  />
+                        </div>
+                    </div>
+                
+                    <div data-src="assets/media/gallery/5.jpg" class="col-sm-2 col-xs-6">
+                        <div class="lightbox-item">
+                            <img src="assets/media/gallery/thumbs/5.jpg" alt=""  />
+                        </div>
+                    </div>
+                    
+                    <div data-src="assets/media/gallery/1.jpg" class="col-sm-2 col-xs-6" data-sub-html="<em><h3>This is a caption heading</h3><p>Here goes the description...</p></em>">
+                        <div class="lightbox-item">
+                            <img src="assets/media/gallery/thumbs/6.jpg" alt=""  />
+                        </div>
+                    </div>
+                </div>
+    
+                <p class="f-500 m-b-20 c-black">Videos</p>
+                <div class="lightbox row">
+                    <div data-src="https://www.youtube.com/watch?v=bZrrGF2MHIs" class="col-sm-2 col-xs-6">
+                        <div class="lightbox-item"> 
+                            <img src="assets/media/gallery/thumbs/1.jpg" alt=""  />
+                        </div>
+                    </div>
+                    
+                    <div data-src="https://www.youtube.com/watch?v=u8OZoyHvX78" class="col-sm-2 col-xs-6">
+                        <div class="lightbox-item">
+                            <img src="assets/media/gallery/thumbs/2.jpg" alt=""  />
+                        </div>
+                    </div>
+                    
+                    <div data-src="http://vimeo.com/1084537" class="col-sm-2 col-xs-6">
+                        <div class="lightbox-item"> 
+                            <img src="assets/media/gallery/thumbs/3.jpg" alt=""  />
+                        </div>
+                    </div>
+                    
+                    <div data-src="https://www.youtube.com/watch?v=6s7AkoQY5Xk" class="col-sm-2 col-xs-6">
+                        <div class="lightbox-item"> 
+                            <img src="assets/media/gallery/thumbs/4.jpg" alt=""  />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-header">
+                <h2>Media Payer <small>HTML5 video and audio made easy. One file. Any browser. Same UI.</small></h2>
+            </div>
+            
+            <div class="card-body card-padding">
+                <div class="row">
+                    <div class="col-sm-6 m-b-20">
+                        <p class="f-500 c-black m-b-20">Basic Example</p>
+                        
+                        <video style="height: 100%; width: 100%" poster="assets/media/big_buck_bunny.jpg" controls="controls" preload="none"> <!-- id could be any according to you -->
+                            <source type="video/mp4" src="assets/media/big_buck_bunny.mp4" />	
+                        </video>
+                    </div>
+                    
+                    <div class="col-sm-6 m-b-20">
+                        <p class="f-500 c-black m-b-20">Multi-Codec with no JavaScript fallback player - Cross Browser</p>
+                        <video style="height: 100%; width: 100%" id="multiCodec" poster="assets/media/big_buck_bunny.jpg" controls="controls" preload="none"> <!-- id could be any according to you -->
+                            <!-- MP4 source must come first for iOS -->
+                            <source type="video/mp4" src="assets/media/big_buck_bunny.mp4" />
+                            <!-- WebM for Firefox 4 and Opera -->
+                            <source type="video/webm" src="assets/media/big_buck_bunny.html" />
+                            <!-- OGG for Firefox 3 -->
+                            <source type="video/ogg" src="assets/media/big_buck_bunny-2.html" />
+                            <!-- Fallback flash player for no-HTML5 browsers with JavaScript turned off -->
+                            <object type="application/x-shockwave-flash" data="assets/media/flashmediaelement.swf" style="width: 100%; height: 100%;"> 		
+                                    <param name="movie" value="assets/media/flashmediaelement.swf" /> 
+                                    <param name="flashvars" value="controls=true&amp;poster=assets/media/big_buck_bunny.jpg&amp;file=assets/media/big_buck_bunny.mp4" /> 		
+                                    <!-- Image fall back for non-HTML5 browser with JavaScript turned off and no Flash player installed -->
+                                    <img src="assets/media/big_buck_bunny.jpg" alt="Media" title="No video playback capabilities" style="width: 100%; height: 100%;">
+                            </object> 	
+                        </video>
+                    </div>  
+                    <div class="col-md-6 m-b-20">
+                        <p class="f-500 c-black m-b-20">Youtube Video (Preview in server NOT local)</p>
+                        <video style="width: 100%;">
+                            <source src="http://www.youtube.com/watch?v=2CvtOUqd84o" type="video/youtube" >
+                        </video>
+                    </div>
+                    <div class="col-md-6 m-b-20">
+                        <p class="f-500 c-black m-b-20">Youtube Video (Preview in server NOT local)</p>
+                        <video style="width: 100%;">
+                            <source src="https://www.youtube.com/watch?v=E_DGd7QN290" type="video/youtube" >
+                        </video>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</ion-view>

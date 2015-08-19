@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title></title>
+
+    
+    <link href="css/style.css" rel="stylesheet">
+    <!-- Vendor CSS -->
+    <link href="assets/vendors/bower_components/fullcalendar/dist/fullcalendar.min.css" rel="stylesheet">
+    <link href="assets/vendors/bower_components/animate.css/animate.min.css" rel="stylesheet">
+    <link href="assets/vendors/bower_components/sweetalert/dist/sweetalert-override.min.css" rel="stylesheet">
+    <link href="assets/vendors/bower_components/material-design-iconic-font/css/material-design-iconic-font.min.css" rel="stylesheet">
+    <link href="assets/vendors/socicon/socicon.min.css" rel="stylesheet">
+        
+    <!-- CSS -->
+    <link href="assets/css/app.min.1.css" rel="stylesheet">
+    <link href="assets/css/app.min.2.css" rel="stylesheet">
+    <link href="lib/ionic/css/ionic.css" rel="stylesheet">
+
+    <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+    <link href="css/ionic.app.css" rel="stylesheet">
+    -->
+    <!-- Javascript Libraries -->
+    <script src="assets/vendors/bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="assets/vendors/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    
+    <script src="assets/vendors/bower_components/flot/jquery.flot.js"></script>
+    <script src="assets/vendors/bower_components/flot/jquery.flot.resize.js"></script>
+    <script src="assets/vendors/bower_components/flot.curvedlines/curvedLines.js"></script>
+    <script src="assets/vendors/sparklines/jquery.sparkline.min.js"></script>
+    <script src="assets/vendors/bower_components/jquery.easy-pie-chart/dist/jquery.easypiechart.min.js"></script>
+    
+    <script src="assets/vendors/bower_components/moment/min/moment.min.js"></script>
+    <script src="assets/vendors/bower_components/fullcalendar/dist/fullcalendar.min.js"></script>
+    <script src="assets/vendors/bower_components/simpleWeather/jquery.simpleWeather.min.js"></script>
+    <script src="assets/vendors/bower_components/jquery.nicescroll/jquery.nicescroll.min.js"></script>
+    <script src="assets/vendors/bower_components/Waves/dist/waves.min.js"></script>
+    <script src="assets/vendors/bootstrap-growl/bootstrap-growl.min.js"></script>
+    <script src="assets/vendors/bower_components/sweetalert/dist/sweetalert.min.js"></script>
+    
+    <!-- Placeholder for IE9 -->
+    <!--[if IE 9 ]>
+        <script src="assets/vendors/bower_components/jquery-placeholder/jquery.placeholder.min.js"></script>
+    <![endif]-->
+    
+    <script src="assets/js/flot-charts/curved-line-chart.js"></script>
+    <script src="assets/js/flot-charts/line-chart.js"></script>
+    <script src="assets/js/charts.js"></script>
+    
+    <script src="assets/js/functions.js"></script>
+    <script src="assets/js/demo.js"></script>
+    
+    
+    <!-- ionic/angularjs js -->
+    <script src="lib/ionic/js/ionic.bundle.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.7/angular.js"></script>
+    <script src="lib/ionic/js/ionic.bundle.js"></script>
+    <script src="https://code.angularjs.org/1.4.4/angular-touch.js"></script>
+    
+    <script src="lib/ocLazyLoad/ocLazyLoad.js"></script>
+
+    <!-- cordova script (this will be a 404 during development) -->
+    <script src="cordova.js"></script>
+
+    <!-- your app's js -->
+    <script src="js/app.js"></script>
+    <script src="js/controllers.js"></script>
+    <script src="js/services.js"></script>
+    
+    
+    
+    </head>
+  <!--ng-controller="DashCtrl"-->
+    <body ng-app="MapApp">
+        <div ng-controller="MainCtrl">
+            <ion-nav-view></ion-nav-view>
+        </div>
+        <!--<body ng-controller="DashCtrl" ng-app="starter">-->
+    <!--
+      The nav bar that will be updated as we navigate between views.
+    -->
+    
+    <header id="header">
+        <ul class="header-inner">
+            <li id="menu-trigger" data-trigger="#sidebar">
+                <div class="line-wrap">
+                    <div class="line top"></div>
+                    <div class="line center"></div>
+                    <div class="line bottom"></div>
+                </div>
+            </li>
+        
+            <li class="logo hidden-xs">
+                <a href="index-2.html">Material Admin</a>
+            </li>
+            
+            <li class="pull-right">
+            <ul class="top-menu">
+                <li id="toggle-width">
+                    <div class="toggle-switch">
+                        <input id="tw-switch" type="checkbox" hidden="hidden">
+                        <label for="tw-switch" class="ts-helper"></label>
+                    </div>
+                </li>
+                <li id="top-search">
+                    <a class="tm-search" href="#"></a>
+                </li>
+                <li class="dropdown">
+                    <a data-toggle="dropdown" class="tm-message" href="#"><i class="tmn-counts">6</i></a>
+                    <div class="dropdown-menu dropdown-menu-lg pull-right">
+                        <div class="listview">
+                            <div class="lv-header">
+                                Messages
+                            </div>
+                            <div class="lv-body c-overflow">
+                                <a class="lv-item" href="#">
+                                    <div class="media">
+                                        <div class="pull-left">
+                                            <img class="lv-img-sm" src="assets/img/profile-pics/1.jpg" alt="">
+                                        </div>
+                                        <div class="media-body">
+                                            <div class="lv-title">David Belle</div>
+                                            <small class="lv-small">Cum sociis natoque penatibus et magnis dis parturient montes</small>
+                                        </div>
+                                    </div>
+                                </a>
+                                <a class="lv-item" href="#">
+                                    <div class="media">
+                                        <div class="pull-left">
+                                            <img class="lv-img-sm" src="assets/img/profile-pics/2.jpg" alt="">
+                                        </div>
+                                        <div class="media-body">
+                                            <div class="lv-title">Jonathan Morris</div>
+                                            <small class="lv-small">Nunc quis diam diamurabitur at dolor elementum, dictum turpis vel</small>
+                                        </div>
+                                    </div>
+                                </a>
+                                <a class="lv-item" href="#">
+                                    <div class="media">
+                                        <div class="pull-left">
+                                            <img class="lv-img-sm" src="assets/img/profile-pics/3.jpg" alt="">
+                                        </div>
+                                        <div class="media-body">
+                                            <div class="lv-title">Fredric Mitchell Jr.</div>
+                                            <small class="lv-small">Phasellus a ante et est ornare accumsan at vel magnauis blandit turpis at augue ultricies</small>
+                                        </div>
+                                    </div>
+                                </a>
+                                <a class="lv-item" href="#">
+                                    <div class="media">
+                                        <div class="pull-left">
+                                            <img class="lv-img-sm" src="assets/img/profile-pics/4.jpg" alt="">
+                                        </div>
+                                        <div class="media-body">
+                                            <div class="lv-title">Glenn Jecobs</div>
+                                            <small class="lv-small">Ut vitae lacus sem ellentesque maximus, nunc sit amet varius dignissim, dui est consectetur neque</small>
+                                        </div>
+                                    </div>
+                                </a>
+                                <a class="lv-item" href="#">
+                                    <div class="media">
+                                        <div class="pull-left">
+                                            <img class="lv-img-sm" src="assets/img/profile-pics/4.jpg" alt="">
+                                        </div>
+                                        <div class="media-body">
+                                            <div class="lv-title">Bill Phillips</div>
+                                            <small class="lv-small">Proin laoreet commodo eros id faucibus. Donec ligula quam, imperdiet vel ante placerat</small>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <a class="lv-footer" href="#">View All</a>
+                        </div>
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <a data-toggle="dropdown" class="tm-notification" href="#"><i class="tmn-counts">9</i></a>
+                    <div class="dropdown-menu dropdown-menu-lg pull-right">
+                        <div class="listview" id="notifications">
+                            <div class="lv-header">
+                                Notification
+                
+                                <ul class="actions">
+                                    <li class="dropdown">
+                                        <a href="#" data-clear="notification">
+                                            <i class="md md-done-all"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="lv-body c-overflow">
+                                <a class="lv-item" href="#">
+                                    <div class="media">
+                                        <div class="pull-left">
+                                            <img class="lv-img-sm" src="assets/img/profile-pics/1.jpg" alt="">
+                                        </div>
+                                        <div class="media-body">
+                                            <div class="lv-title">David Belle</div>
+                                            <small class="lv-small">Cum sociis natoque penatibus et magnis dis parturient montes</small>
+                                        </div>
+                                    </div>
+                                </a>
+                                <a class="lv-item" href="#">
+                                    <div class="media">
+                                        <div class="pull-left">
+                                            <img class="lv-img-sm" src="assets/img/profile-pics/2.jpg" alt="">
+                                        </div>
+                                        <div class="media-body">
+                                            <div class="lv-title">Jonathan Morris</div>
+                                            <small class="lv-small">Nunc quis diam diamurabitur at dolor elementum, dictum turpis vel</small>
+                                        </div>
+                                    </div>
+                                </a>
+                                <a class="lv-item" href="#">
+                                    <div class="media">
+                                        <div class="pull-left">
+                                            <img class="lv-img-sm" src="assets/img/profile-pics/3.jpg" alt="">
+                                        </div>
+                                        <div class="media-body">
+                                            <div class="lv-title">Fredric Mitchell Jr.</div>
+                                            <small class="lv-small">Phasellus a ante et est ornare accumsan at vel magnauis blandit turpis at augue ultricies</small>
+                                        </div>
+                                    </div>
+                                </a>
+                                <a class="lv-item" href="#">
+                                    <div class="media">
+                                        <div class="pull-left">
+                                            <img class="lv-img-sm" src="assets/img/profile-pics/4.jpg" alt="">
+                                        </div>
+                                        <div class="media-body">
+                                            <div class="lv-title">Glenn Jecobs</div>
+                                            <small class="lv-small">Ut vitae lacus sem ellentesque maximus, nunc sit amet varius dignissim, dui est consectetur neque</small>
+                                        </div>
+                                    </div>
+                                </a>
+                                <a class="lv-item" href="#">
+                                    <div class="media">
+                                        <div class="pull-left">
+                                            <img class="lv-img-sm" src="assets/img/profile-pics/4.jpg" alt="">
+                                        </div>
+                                        <div class="media-body">
+                                            <div class="lv-title">Bill Phillips</div>
+                                            <small class="lv-small">Proin laoreet commodo eros id faucibus. Donec ligula quam, imperdiet vel ante placerat</small>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                
+                            <a class="lv-footer" href="#">View Previous</a>
+                        </div>
+                
+                    </div>
+                </li>
+                <li class="dropdown hidden-xs">
+                    <a data-toggle="dropdown" class="tm-task" href="#"><i class="tmn-counts">2</i></a>
+                    <div class="dropdown-menu pull-right dropdown-menu-lg">
+                        <div class="listview">
+                            <div class="lv-header">
+                                Tasks
+                            </div>
+                            <div class="lv-body">
+                                <div class="lv-item">
+                                    <div class="lv-title m-b-5">HTML5 Validation Report</div>
+                
+                                    <div class="progress">
+                                        <div class="progress-bar" role="progressbar" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100" style="width: 95%">
+                                            <span class="sr-only">95% Complete (success)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="lv-item">
+                                    <div class="lv-title m-b-5">Google Chrome Extension</div>
+                
+                                    <div class="progress">
+                                        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
+                                            <span class="sr-only">80% Complete (success)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="lv-item">
+                                    <div class="lv-title m-b-5">Social Intranet Projects</div>
+                
+                                    <div class="progress">
+                                        <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%">
+                                            <span class="sr-only">20% Complete</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="lv-item">
+                                    <div class="lv-title m-b-5">Bootstrap Admin Template</div>
+                
+                                    <div class="progress">
+                                        <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
+                                            <span class="sr-only">60% Complete (warning)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="lv-item">
+                                    <div class="lv-title m-b-5">Youtube Client App</div>
+                
+                                    <div class="progress">
+                                        <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
+                                            <span class="sr-only">80% Complete (danger)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                
+                            <a class="lv-footer" href="#">View All</a>
+                        </div>
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <a data-toggle="dropdown" class="tm-settings" href="#"></a>
+                    <ul class="dropdown-menu dm-icon pull-right">
+                        <li>
+                            <a data-action="fullscreen" href="#"><i class="md md-fullscreen"></i> Toggle Fullscreen</a>
+                        </li>
+                        <li>
+                            <a data-action="clear-localstorage" href="#"><i class="md md-delete"></i> Clear Local Storage</a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="md md-person"></i> Privacy Settings</a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="md md-settings"></i> Other Settings</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="hidden-xs" id="chat-trigger" data-trigger="#chat">
+                    <a class="tm-chat" href="#"></a>
+                </li>
+                </ul>
+            </li>
+        </ul>
+    
+        <!-- Top Search Content -->
+        <div id="top-search-wrap">
+            <input type="text">
+            <i id="top-search-close">&times;</i>
+        </div>
+    </header>
+    
+    <!--
+      The views will be rendered in the <ion-nav-view> directive below
+      Templates are in the /templates folder (but you could also
+      have templates inline in this html file if you'd like).
+    -->
+    <section id="main">
+        <aside id="sidebar">
+            <div class="sidebar-inner c-overflow">
+                <div class="profile-menu">
+                    <a href="#">
+                        <div class="profile-pic">
+                            <img src="assets/img/profile-pics/1.jpg" alt="">
+                        </div>
+
+                        <div class="profile-info">
+                            Malinda Hollaway
+
+                            <i class="md md-arrow-drop-down"></i>
+                        </div>
+                    </a>
+
+                    <ul class="main-menu">
+                        <li>
+                            <a href="profile-about.html"><i class="md md-person"></i> View Profile</a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="md md-settings-input-antenna"></i> Privacy Settings</a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="md md-settings"></i> Settings</a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="md md-history"></i> Logout</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <ul class="main-menu">
+                    <li class="active"><a href="index-2.html"><i class="md md-home"></i> Home</a></li>
+                    <li><a href="typography.html"><i class="md md-format-underline"></i> Typography</a></li>
+                    <li class="sub-menu">
+                        <a href="#"><i class="md md-now-widgets"></i> Widgets</a>
+
+                        <ul>
+                            <li><a href="widget-templates.html">Templates</a></li>
+                            <li><a class="active" href="widgets.html">Widgets</a></li>
+                        </ul>
+                    </li>
+                    <li class="sub-menu">
+                        <a href="#"><i class="md md-view-list"></i> Tables</a>
+
+                        <ul>
+                            <li><a href="tables.html">Normal Tables</a></li>
+                            <li><a href="data-tables.html">Data Tables</a></li>
+                        </ul>
+                    </li>
+                    <li class="sub-menu">
+                        <a href="#"><i class="md md-my-library-books"></i> Forms</a>
+
+                        <ul>
+                            <li><a href="form-elements.html">Basic Form Elements</a></li>
+                            <li><a href="form-components.html">Form Components</a></li>
+                            <li><a href="form-examples.html">Form Examples</a></li>
+                            <li><a href="form-validations.html">Form Validation</a></li>
+                        </ul>
+                    </li>
+                    <li class="sub-menu">
+                        <a href="#"><i class="md md-swap-calls"></i>User Interface</a>
+                        <ul>
+                            <li><a href="colors.html">Colors</a></li>
+                            <li><a href="animations.html">Animations</a></li>
+                            <li><a href="box-shadow.html">Box Shadow</a></li>
+                            <li><a href="buttons.html">Buttons</a></li>
+                            <li><a href="icons.html">Icons</a></li>
+                            <li><a href="alerts.html">Alerts</a></li>
+                            <li><a href="notification-dialog.html">Notifications & Dialogs</a></li>
+                            <li><a href="media.html">Media</a></li>
+                            <li><a href="components.html">Components</a></li>
+                            <li><a href="other-components.html">Others</a></li>
+                        </ul>
+                    </li>
+                    <li class="sub-menu">
+                        <a href="#"><i class="md md-trending-up"></i>Charts</a>
+                        <ul>
+                            <li><a href="flot-charts.html">Flot Charts</a></li>
+                            <li><a href="other-charts.html">Other Charts</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="calendar.html"><i class="md md-today"></i> Calendar</a></li>
+                    <li><a href="generic-classes.html"><i class="md md-layers"></i> Generic Classes</a></li>
+                    <li class="sub-menu">
+                        <a href="#"><i class="md md-content-copy"></i> Sample Pages</a>
+                        <ul>
+                            <li><a href="profile-about.html">Profile</a></li>
+                            <li><a href="list-view.html">List View</a></li>
+                            <li><a href="messages.html">Messages</a></li>
+                            <li><a href="login.html">Login and Sign Up</a></li>
+                            <li><a href="404.html">Error 404</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </aside>
+        
+        <aside id="chat">
+            <ul class="tab-nav tn-justified" role="tablist">
+                <li role="presentation" class="active"><a href="#friends" aria-controls="friends" role="tab" data-toggle="tab">Friends</a></li>
+                <li role="presentation"><a href="#online" aria-controls="online" role="tab" data-toggle="tab">Online Now</a></li>
+            </ul>
+        
+            <div class="chat-search">
+                <div class="fg-line">
+                    <input type="text" class="form-control" placeholder="Search People">
+                </div>
+            </div>
+            
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane fade in active" id="friends">
+                    <div class="listview">
+                        <a class="lv-item" href="#">
+                            <div class="media">
+                                <div class="pull-left p-relative">
+                                    <img class="lv-img-sm" src="assets/img/profile-pics/2.jpg" alt="">
+                                    <i class="chat-status-busy"></i>
+                                </div>
+                                <div class="media-body">
+                                    <div class="lv-title">Jonathan Morris</div>
+                                    <small class="lv-small">Available</small>
+                                </div>
+                            </div>
+                        </a>
+                        
+                        <a class="lv-item" href="#">
+                            <div class="media">
+                                <div class="pull-left">
+                                    <img class="lv-img-sm" src="assets/img/profile-pics/1.jpg" alt="">
+                                </div>
+                                <div class="media-body">
+                                    <div class="lv-title">David Belle</div>
+                                    <small class="lv-small">Last seen 3 hours ago</small>
+                                </div>
+                            </div>
+                        </a>
+                        
+                        <a class="lv-item" href="#">
+                            <div class="media">
+                                <div class="pull-left p-relative">
+                                    <img class="lv-img-sm" src="assets/img/profile-pics/3.jpg" alt="">
+                                    <i class="chat-status-online"></i>
+                                </div>
+                                <div class="media-body">
+                                    <div class="lv-title">Fredric Mitchell Jr.</div>
+                                    <small class="lv-small">Availble</small>
+                                </div>
+                            </div>
+                        </a>
+                        
+                        <a class="lv-item" href="#">
+                            <div class="media">
+                                <div class="pull-left p-relative">
+                                    <img class="lv-img-sm" src="assets/img/profile-pics/4.jpg" alt="">
+                                    <i class="chat-status-online"></i>
+                                </div>
+                                <div class="media-body">
+                                    <div class="lv-title">Glenn Jecobs</div>
+                                    <small class="lv-small">Availble</small>
+                                </div>
+                            </div>
+                        </a>
+                        
+                        <a class="lv-item" href="#">
+                            <div class="media">
+                                <div class="pull-left">
+                                    <img class="lv-img-sm" src="assets/img/profile-pics/5.jpg" alt="">
+                                </div>
+                                <div class="media-body">
+                                    <div class="lv-title">Bill Phillips</div>
+                                    <small class="lv-small">Last seen 3 days ago</small>
+                                </div>
+                            </div>
+                        </a>
+                        
+                        <a class="lv-item" href="#">
+                            <div class="media">
+                                <div class="pull-left">
+                                    <img class="lv-img-sm" src="assets/img/profile-pics/6.jpg" alt="">
+                                </div>
+                                <div class="media-body">
+                                    <div class="lv-title">Wendy Mitchell</div>
+                                    <small class="lv-small">Last seen 2 minutes ago</small>
+                                </div>
+                            </div>
+                        </a>
+                        <a class="lv-item" href="#">
+                            <div class="media">
+                                <div class="pull-left p-relative">
+                                    <img class="lv-img-sm" src="assets/img/profile-pics/7.jpg" alt="">
+                                    <i class="chat-status-busy"></i>
+                                </div>
+                                <div class="media-body">
+                                    <div class="lv-title">Teena Bell Ann</div>
+                                    <small class="lv-small">Busy</small>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div role="tabpanel" class="tab-pane fade" id="online">
+                    <div class="listview">
+                        <a class="lv-item" href="#">
+                            <div class="media">
+                                <div class="pull-left p-relative">
+                                    <img class="lv-img-sm" src="assets/img/profile-pics/2.jpg" alt="">
+                                    <i class="chat-status-busy"></i>
+                                </div>
+                                <div class="media-body">
+                                    <div class="lv-title">Jonathan Morris</div>
+                                    <small class="lv-small">Available</small>
+                                </div>
+                            </div>
+                        </a>
+                        
+                        <a class="lv-item" href="#">
+                            <div class="media">
+                                <div class="pull-left p-relative">
+                                    <img class="lv-img-sm" src="assets/img/profile-pics/3.jpg" alt="">
+                                    <i class="chat-status-online"></i>
+                                </div>
+                                <div class="media-body">
+                                    <div class="lv-title">Fredric Mitchell Jr.</div>
+                                    <small class="lv-small">Availble</small>
+                                </div>
+                            </div>
+                        </a>
+                        
+                        <a class="lv-item" href="#">
+                            <div class="media">
+                                <div class="pull-left p-relative">
+                                    <img class="lv-img-sm" src="assets/img/profile-pics/4.jpg" alt="">
+                                    <i class="chat-status-online"></i>
+                                </div>
+                                <div class="media-body">
+                                    <div class="lv-title">Glenn Jecobs</div>
+                                    <small class="lv-small">Availble</small>
+                                </div>
+                            </div>
+                        </a>
+
+                        <a class="lv-item" href="#">
+                            <div class="media">
+                                <div class="pull-left p-relative">
+                                    <img class="lv-img-sm" src="assets/img/profile-pics/7.jpg" alt="">
+                                    <i class="chat-status-busy"></i>
+                                </div>
+                                <div class="media-body">
+                                    <div class="lv-title">Teena Bell Ann</div>
+                                    <small class="lv-small">Busy</small>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </aside>
+        
+        <section id="content" >
+            <div class="container" >
+                <ion-nav-view></ion-nav-view>
+            <!--<div ng-view></div>-->
+            
+<!--<div ng-show="showActions" ng-swipe-right="showActions = false">
+  <button ng-click="reply()">Reply</button>
+  <button ng-click="delete()">Delete</button>
+</div>-->
+
+
+
+<script>
+//angular.module('ngSwipeLeftExample', ['ngTouch']);
+</script>
+
+            </div>
+        </section>
+    </section>
+    
+    <script id="menu.html" type="text/ng-template">
+        <ion-side-menus enable-menu-with-back-views="false">
+            <ion-side-menu-content>
+                <ion-nav-bar class="bar-stable nav-title-slide-ios7">
+                    <ion-nav-back-button>
+                        
+                    </ion-nav-back-button>
+                    <ion-nav-buttons side="left">
+                        <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
+                            
+                        </button>
+                    </ion-nav-buttons>
+                </ion-nav-bar>
+                <ion-nav-view name="menuContent"></ion-nav-view>
+            </ion-side-menu-content>
+            <ion-side-menu side="left">
+                <ion-header-bar class="bar-stable">
+                    <h1 class="title">Theme</h1>
+                </ion-header-bar>
+                <ion-content>
+                    <ion-list>
+                        <ion-item nav-clear menu-close href="#/map/home" class="item item-icon-left" >
+                            <i class="icon ion-ios7-ionic-outline"></i>Map
+                        </ion-item>
+                        <ion-item nav-clear menu-close href="#/map/help" class="item item-icon-left" >
+                            <i class="icon ion-ios7-help"></i>Help
+                        </ion-item>
+                    </ion-list>
+                </ion-content>
+            </ion-side-menu>
+        </ion-side-menus>
+    </script>
+    <script id="gpsView.html" type="text/ng-template">
+        <ion-view title="Map">
+            <ion-content class="has-header padding">
+                <!-- map directive-->
+                <app-map style="height:400px;margin:12px;box-shadow:0 3px 25px black;"
+                center="basel"
+                zoom="15"
+                markers="whoiswhere">
+                    
+                </app-map>
+            </ion-content>
+        </ion-view>
+    </script>
+    <script id="helpView.html" type="text/ng-template">
+        <ion-view title="Help">
+            <ion-content class="has-header padding">
+                <ion-item>Item 1</ion-item>
+                <ion-item>Item 2</ion-item>
+            </ion-content>
+        </ion-view>
+    </script>
+    
+    
+    <script>
+            //angular.module("LazyLoadTest", ["oc.lazyLoad"])
+            //    .controller("TestController", function($scope, $ocLazyLoad, $compile) {
+            //        $ocLazyLoad.load("js/testApp.js").then(function() {
+            //            console.log('loaded!!');
+            //            var el, elToAppend;
+            //            elToAppend = $compile('<say-hello to="world"></say-hello>')($scope);
+            //            el = angular.element('#example');
+            //            el.append(elToAppend);
+            //        }, function(e) {
+            //            console.log('errr');
+            //            console.error(e);
+            //        })
+            //    });
+            
+            'use strict';
+var MapApp = angular.module('MapApp', [
+	'ionic']);
+
+/**
+ * Routing table including associated controllers.
+ */
+MapApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
+	$stateProvider
+		.state('menu', {url: "/map", abstract: true, templateUrl: "menu.html"})
+		.state('menu.home', {url: '/home', views: {'menuContent': {templateUrl: 'gpsView.html', controller: 'GpsCtrl'} }  })
+		.state('menu.help', {url: '/help', views: {'menuContent': {templateUrl: 'helpView.html', controller: 'HelpCtrl'} }  });
+
+	// if none of the above states are matched, use this as the fallback
+	$urlRouterProvider.otherwise('/map/home');
+}]);
+
+/**
+ * HEADER - handle menu toggle
+ */
+MapApp.controller('HeaderCtrl', function($scope) {
+	// Main app controller, empty for the example
+
+});
+/**
+ * MAIN CONTROLLER - handle inapp browser
+ */
+MapApp.controller('MainCtrl', ['$scope', function($scope) {
+  // do something
+}]);
+
+/**
+ * A google map / GPS controller.
+ */
+MapApp.controller('GpsCtrl', ['$scope','$ionicPlatform', '$location',
+	function($scope, $ionicPlatform, $location) {
+
+	// init gps array
+    $scope.whoiswhere = [];
+    $scope.basel = { lat: 47.55633987116614, lon: 7.576619513223015 };
+
+
+    // check login code
+	$ionicPlatform.ready(function() {	navigator.geolocation.getCurrentPosition(function(position) {
+		    $scope.position=position;
+	        var c = position.coords;
+	        $scope.gotoLocation(c.latitude, c.longitude);
+		    $scope.$apply();
+		    },function(e) { console.log("Error retrieving position " + e.code + " " + e.message) });
+	    $scope.gotoLocation = function (lat, lon) {
+	        if ($scope.lat != lat || $scope.lon != lon) {
+	            $scope.basel = { lat: lat, lon: lon };
+	            if (!$scope.$$phase) $scope.$apply("basel");
+				}
+			};
+
+		    // some points of interest to show on the map
+		    // to be user as markers, objects should have "lat", "lon", and "name" properties
+		    $scope.whoiswhere = [
+		        { "name": "My Marker", "lat": $scope.basel.lat, "lon": $scope.basel.lon },
+				];
+
+			});
+
+}]);
+
+/**
+ * MAIN CONTROLLER - handle inapp browser
+ */
+MapApp.controller('HelpCtrl', ['$scope', function($scope) {
+  // do something
+}]);
+
+// formats a number as a latitude (e.g. 40.46... => "40°27'44"N")
+MapApp.filter('lat', function () {
+    return function (input, decimals) {
+        if (!decimals) decimals = 0;
+        input = input * 1;
+        var ns = input > 0 ? "N" : "S";
+        input = Math.abs(input);
+        var deg = Math.floor(input);
+        var min = Math.floor((input - deg) * 60);
+        var sec = ((input - deg - min / 60) * 3600).toFixed(decimals);
+        return deg + "°" + min + "'" + sec + '"' + ns;
+    }
+});
+
+// formats a number as a longitude (e.g. -80.02... => "80°1'24"W")
+MapApp.filter('lon', function () {
+    return function (input, decimals) {
+        if (!decimals) decimals = 0;
+        input = input * 1;
+        var ew = input > 0 ? "E" : "W";
+        input = Math.abs(input);
+        var deg = Math.floor(input);
+        var min = Math.floor((input - deg) * 60);
+        var sec = ((input - deg - min / 60) * 3600).toFixed(decimals);
+        return deg + "°" + min + "'" + sec + '"' + ew;
+    }
+});
+
+
+/**
+ * Handle Google Maps API V3+
+ */
+// - Documentation: https://developers.google.com/maps/documentation/
+MapApp.directive("appMap", function ($window) {
+    return {
+        restrict: "E",
+        replace: true,
+        template: "<div></div>",
+        scope: {
+            center: "=",        // Center point on the map (e.g. <code>{ latitude: 10, longitude: 10 }</code>).
+            markers: "=",       // Array of map markers (e.g. <code>[{ lat: 10, lon: 10, name: "hello" }]</code>).
+            width: "@",         // Map width in pixels.
+            height: "@",        // Map height in pixels.
+            zoom: "@",          // Zoom level (one is totally zoomed out, 25 is very much zoomed in).
+            mapTypeId: "@",     // Type of tile to show on the map (roadmap, satellite, hybrid, terrain).
+            panControl: "@",    // Whether to show a pan control on the map.
+            zoomControl: "@",   // Whether to show a zoom control on the map.
+            scaleControl: "@"   // Whether to show scale control on the map.
+        },
+        link: function (scope, element, attrs) {
+            var toResize, toCenter;
+            var map;
+            var infowindow;
+            var currentMarkers;
+   	        var callbackName = 'InitMapCb';
+
+   			// callback when google maps is loaded
+			$window[callbackName] = function() {
+				console.log("map: init callback");
+				createMap();
+				updateMarkers();
+				};
+
+			if (!$window.google || !$window.google.maps ) {
+				console.log("map: not available - load now gmap js");
+				loadGMaps();
+				}
+			else
+				{
+				console.log("map: IS available - create only map now");
+				createMap();
+				}
+			function loadGMaps() {
+				console.log("map: start loading js gmaps");
+				var script = $window.document.createElement('script');
+				script.type = 'text/javascript';
+				script.src = 'http://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true&callback=InitMapCb';
+				$window.document.body.appendChild(script);
+				}
+
+			function createMap() {
+				console.log("map: create map start");
+				var mapOptions = {
+					zoom: 13,
+					center: new google.maps.LatLng(47.55, 7.59),
+					mapTypeId: google.maps.MapTypeId.ROADMAP,
+					panControl: true,
+					zoomControl: true,
+					mapTypeControl: true,
+					scaleControl: false,
+					streetViewControl: false,
+					navigationControl: true,
+					disableDefaultUI: true,
+					overviewMapControl: true
+					};
+				if (!(map instanceof google.maps.Map)) {
+					console.log("map: create map now as not already available ");
+					map = new google.maps.Map(element[0], mapOptions);
+          // EDIT Added this and it works on android now
+          // Stop the side bar from dragging when mousedown/tapdown on the map
+          google.maps.event.addDomListener(element[0], 'mousedown', function(e) {
+            e.preventDefault();
+            return false;
+            });
+					infowindow = new google.maps.InfoWindow(); 
+					}
+				}
+
+			scope.$watch('markers', function() {
+				updateMarkers();
+				});
+
+			// Info window trigger function 
+			function onItemClick(pin, label, datum, url) { 
+				// Create content  
+				var contentString = "Name: " + label + "<br />Time: " + datum;
+				// Replace our Info Window's content and position
+				infowindow.setContent(contentString);
+				infowindow.setPosition(pin.position);
+				infowindow.open(map)
+				google.maps.event.addListener(infowindow, 'closeclick', function() {
+					//console.log("map: info windows close listener triggered ");
+					infowindow.close();
+					});
+				} 
+
+			function markerCb(marker, member, location) {
+			    return function() {
+					//console.log("map: marker listener for " + member.name);
+					var href="http://maps.apple.com/?q="+member.lat+","+member.lon;
+					map.setCenter(location);
+					onItemClick(marker, member.name, member.date, href);
+					};
+				}
+
+			// update map markers to match scope marker collection
+			function updateMarkers() {
+				if (map && scope.markers) {
+					// create new markers
+					//console.log("map: make markers ");
+					currentMarkers = [];
+					var markers = scope.markers;
+					if (angular.isString(markers)) markers = scope.$eval(scope.markers);
+					for (var i = 0; i < markers.length; i++) {
+						var m = markers[i];
+						var loc = new google.maps.LatLng(m.lat, m.lon);
+						var mm = new google.maps.Marker({ position: loc, map: map, title: m.name });
+						//console.log("map: make marker for " + m.name);
+						google.maps.event.addListener(mm, 'click', markerCb(mm, m, loc));
+						currentMarkers.push(mm);
+						}
+					}
+				}
+
+			// convert current location to Google maps location
+			function getLocation(loc) {
+				if (loc == null) return new google.maps.LatLng(40, -73);
+				if (angular.isString(loc)) loc = scope.$eval(loc);
+				return new google.maps.LatLng(loc.lat, loc.lon);
+				}
+
+			} // end of link:
+		}; // end of return
+});
+
+        </script>
+  </body>
+</html>
