@@ -10,6 +10,21 @@ angular.module('starter', ['ionic', 'ngRoute', 'starter.controllers', 'starter.s
             templateUrl: 'templates/dashboard.html',
             controller: 'DashCtrl'
         })
+       .when('/menu',
+        {
+            templateUrl: 'templates/menu.html',
+           // controller: 'DashCtrl'
+        })
+       .when('/subMenu',
+        {
+            templateUrl: 'templates/subMenu.html',
+           // controller: 'DashCtrl'
+        })
+       .when('/items',
+        {
+            templateUrl: 'templates/items.html',
+           // controller: 'DashCtrl'
+        })
     .when('/contactForm',
         {
             templateUrl: 'templates/contactForm.html',

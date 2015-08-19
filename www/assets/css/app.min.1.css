@@ -9757,7 +9757,7 @@ body #content {
 }
 
 #header {
-  background: #4285F4;
+  background: #dd595c;
   box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.3);
   height: 65px;
   position: fixed;
@@ -10270,7 +10270,7 @@ body #content {
   height: 129px;
   margin-bottom: 5px;
   width: 100%;
-  background: url(../img/profile-menu.png) no-repeat left top;
+  background: url(../img/gooogd.jpg) no-repeat left top;
   background-size: 100%;
 }
 
@@ -10278,13 +10278,18 @@ body #content {
   padding: 12px;
 }
 
+/* changed by gobi*/
+
 #sidebar .profile-menu > a .profile-pic > img {
-  width: 47px;
-  height: 47px;
+  width: 75px;
+  height: 60px;
   border-radius: 50%;
-  border: 3px solid rgba(0, 0, 0, 0.14);
+  /*border: 3px solid rgba(0, 0, 0, 0.14);*/
   box-sizing: content-box;
+  
 }
+
+/* changed by gobi*/
 
 #sidebar .profile-menu > a .profile-info {
   background: rgba(0, 0, 0, 0.37);
@@ -10718,7 +10723,7 @@ input:focus {
 }
 
 .listview a.lv-item:hover {
-  background: #ECF9FF;
+  background: #8ed7cf;
 }
 
 .listview [class*="lv-img"] {
@@ -10731,8 +10736,8 @@ input:focus {
 }
 
 .listview .lv-img-sm {
-  width: 35px;
-  height: 35px;
+  width: 75px;
+  height: 75px;
 }
 
 .listview .lv-header {
@@ -14681,7 +14686,7 @@ a.thumbnail.active {
 }
 
 #messages-main .ms-menu .lv-item:not(.active):hover {
-  background: #F2F2F2;
+  background: #4d4d4d;
   cursor: pointer;
 }
 
