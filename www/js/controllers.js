@@ -5,7 +5,7 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute'])
   
   })
 .controller('contactCtrl', function($scope) {
-      
+
       var myLatlng = new google.maps.LatLng(37.3000, -120.4833);
         var mapOptions = {
             center: myLatlng,
@@ -21,7 +21,6 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute'])
                 title: "My Location"
             });
         });
-        console.log(map);
         $scope.map = map;
 
   

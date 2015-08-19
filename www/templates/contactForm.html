@@ -8,26 +8,49 @@
 </style>
 
 <ion-view>
-<div class="card"> 
-<div class="bs-item z-depth-4">
-        <div id="location"> </div>
-    </div>
+<div class="card bs-item z-depth-4"> 
+    <div class="contacts clearfix row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="card-header">
+                <div id="location"> </div>  
+                <div class="card-body ">
+                   <div class="row ">
+                        <div class="col-md-6 col-sm-6 col-xs-5"> <h5>Pravinkumar, </h5><h5>Pondicherry</h5></div>
+                        <div class="col-md-6 col-sm-6 col-xs-7"> <h5><i class="md md-quick-contacts-mail"></i> pravinkumar@appnlogic.com</h5> <h5><i class="md md-quick-contacts-dialer"></i> 9791557237.</h5></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>    
 </div>
+
+
+
 
 <div class="card">
         <div class="card-body card-padding">
             <form role="form">
-                <div class="form-group fg-float">
-                    <div class="fg-line">
-                        <input type="text" class="input-sm form-control fg-input">
+                <div class="row">
+                    <div class="col-sm-12">                       
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="md md-person"></i></span>
+                            <div class="fg-line">
+                                <input type="text" placeholder="Full Name" class="form-control">
+                            </div>
+                        </div><br>
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="md md-email"></i></span>
+                            <div class="fg-line">
+                                <input type="text" placeholder="Email Address" class="form-control">
+                            </div>
+                        </div><br>
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="md md-comment"></i></span>
+                            <div class="fg-line">
+                                <input type="text" placeholder="Email Address" class="form-control">
+                            </div>
+                        </div><br>
                     </div>
-                    <label class="fg-label">Input Small</label>
-                </div>                
-                <div class="form-group fg-float">
-                    <div class="fg-line">
-                        <input type="text" class="input-sm form-control fg-input">
-                    </div>
-                    <label class="fg-label">Input Small</label>
                 </div>
                 <button type="submit" class="btn btn-primary btn-sm m-t-10">Submit</button>
             </form>
