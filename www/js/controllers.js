@@ -47,7 +47,7 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute'])
   $scope.settings = {
     enableFriends: true
   };
-});
+})
 
 // .controller('galleryCrtl', function($scope,$ocLazyLoad) {
 //       alert('test');
@@ -69,3 +69,106 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute'])
 //         console.log(map);
 //         $scope.map = map;
 // });
+
+
+.controller('MenuController', function($scope,$http,$location) {
+
+    var businessId=1;
+          //Menus from server and sync here.....
+    $http.post('http://www.appnlogic.com/branboxAppAdmin/branboxAdminUi/ajaxMenu.php',{bussId: businessId}, {headers: {'Content-Type': 'application/x-www-form-urlencoded'} })
+      .success(function (json) {
+       
+        var ajaxlength = json.rows.length;
+       
+
+         $scope.MenuData= json.rows;
+          console.log($scope.MenuData);
+      }).error(function(){  
+          alert("server Error");
+       });
+
+
+
+})
+
+.controller('SubMenuController', function($scope,$http,$location) {
+
+    var businessId=1;
+   var url = $location.url();
+    var temp = url.split("=");
+    var getMenuId=temp[1];
+    //var getMenuId=11;
+
+          //Menus from server and sync here.....
+     $http.post('http://www.appnlogic.com/branboxAppAdmin/branboxAdminUi/ajaxSubMenuWithItem.php',{bussId:businessId,menuId:getMenuId}, {headers: {'Content-Type': 'application/x-www-form-urlencoded'} })
+      .success(function (json) {
+       
+        var ajaxlength = json.rows.length;
+       
+
+         $scope.SubMenuData= json.rows;
+          //console.log($scope.SubMenuData);
+      }).error(function(){  
+          alert("server Error");
+       });
+})
+
+.controller('SubMenuItemController', function($scope,$http,$location) {
+
+    var businessId=1;
+   var url = $location.url();
+  var url = $location.url();
+    var temp = url.split("=");
+    var menuId=temp[1];
+    var subMenuId=temp[2];
+    //var getMenuId=11;
+
+          //Menus from server and sync here.....
+     $http.post('http://www.appnlogic.com/branboxAppAdmin/branboxAdminUi/ajaxSubMenu.php',{bussId:businessId,menuId:menuId,subMenuId:subMenuId}, {headers: {'Content-Type': 'application/x-www-form-urlencoded'} })
+      .success(function (json) {
+       
+        var ajaxlength = json.rows.length;
+       
+
+         $scope.SubMenuItemData= json.rows;
+          //console.log($scope.SubMenuData);
+      }).error(function(){  
+          alert("server Error");
+       });
+
+
+       $scope.minus=function(val,index,item)
+    {
+      alert();
+       
+     var total=$("#quantity"+index).val();
+     total--;
+      if (total>=1)
+      {
+         
+          var price=item.price *total;
+          $("#quantity"+index).val(total);
+          $("#price"+index).html(price);
+          $("#addtocart"+index).val(total);
+      }
+      else{
+          var price=item.price*1;
+          $("#price"+index).html(price);
+        }
+    }
+
+    $scope.plus=function(val,index,item)
+    {
+      var total= $("#quantity"+index).val();
+        if (total>=1)
+        {
+         
+            total++;
+            var price=item.price *total;
+              $("#quantity"+index).val(total);
+              $("#price"+index).html(price);
+              $("#addtocart"+index).val(total);
+          
+        }
+    }
+})

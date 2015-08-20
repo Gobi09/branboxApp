@@ -13,17 +13,17 @@ angular.module('starter', ['ionic', 'ngRoute', 'starter.controllers', 'starter.s
        .when('/menu',
         {
             templateUrl: 'templates/menu.html',
-           // controller: 'DashCtrl'
+            controller: 'MenuController'
         })
-       .when('/subMenu',
+       .when('/subMenu/=:id',
         {
             templateUrl: 'templates/subMenu.html',
-           // controller: 'DashCtrl'
+            controller: 'SubMenuController'
         })
-       .when('/items',
+       .when('/items/=:menuId=:subMenuId',
         {
             templateUrl: 'templates/items.html',
-           // controller: 'DashCtrl'
+            controller: 'SubMenuItemController'
         })
     .when('/contactForm',
         {

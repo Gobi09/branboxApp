@@ -1,5 +1,5 @@
 <ion-view>
-    <div class="card">
+    <div class="card" ng-controller="SubMenuController">
         <div class="card-body card-padding">
              <div class="card-header jumbotron">
                 <h2>Sub Menu<small>Select Sub Menu Categories</small></h2>
@@ -9,7 +9,7 @@
                 </div>
                 <div class="chat-search">
                     <div class="fg-line">
-                        <input type="text" class="form-control" placeholder="Search Sub Menu">
+                        <input type="search" class="form-control" ng-model="SubMenus" placeholder="Search Sub Menu">
                     </div>
                 </div>
             </div>
@@ -20,22 +20,22 @@
                     <input type="text" class="form-control" placeholder="Search Sub Menu">
                 </div>
             </div> -->
-            <div class="listview">
-                <a href="#items" class="lv-item">
+            <div class="listview" ng-repeat="SubMenus in SubMenuData  | filter:SubMenus">
+                <a href="#items/={{SubMenus.menuId}}={{SubMenus.id}}" class="lv-item">
                     <div class="media">
                         <div class="pull-left p-relative">
-                            <img alt="" src="img/soup2.jpg" class="lv-img-sm">
+                            <img alt="" src="{{SubMenus.image}}" class="lv-img-sm">
                         </div>
                         <div class="media-body">
-                            <div class="lv-title" id="menu-size">Soups</div>
-                            <small class="lv-small">Starters Categories</small>
+                            <div class="lv-title" id="menu-size">{{SubMenus.name}}</div>
+                            <small class="lv-small">{{SubMenus.name}} Categories</small>
                         </div>
                          <div class="p-relative pull-right">
                             <i class="md-chevron-right md-lg"></i>
                         </div>
                     </div>
                 </a>
-                <a href="#items" class="lv-item">
+               <!--  <a href="#items" class="lv-item">
                     <div class="media">
                         <div class="pull-left p-relative">
                             <img alt="" src="img/bri3.jpg"class="lv-img-sm">
@@ -78,7 +78,7 @@
                             <i class="md-chevron-right md-lg"></i>
                         </div>
                     </div>
-                </a>
+                </a> -->
             </div>
         </div>
     </div>

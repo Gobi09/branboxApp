@@ -6565,6 +6565,12 @@ a.thumbnail.active {
 .media-object {
   display: block;
 }
+.media-object img{
+  
+  width: 70px;
+  height: 60px;
+  border-radius: 10px;
+}
 
 .media-right,
 .media > .pull-right {

@@ -1,5 +1,5 @@
 <ion-view>
-    <div class="card ">
+    <div class="card" ng-controller="MenuController">
         <div class="card-body card-padding">
             <div class="card-header jumbotron">
                 <h2>Restaurant Menus<small>Select Menu Categories</small></h2>
@@ -9,27 +9,27 @@
                 </div>
                 <div class="chat-search">
                     <div class="fg-line">
-                        <input type="text" class="form-control" placeholder="Search Menu ">
+                        <input type="search" class="form-control" ng-model="Menus"   placeholder="Search Menu ">
                     </div>
                 </div>
             </div>
           
-            <div class="listview ">
-                <a href="" class="lv-item">
+            <div class="listview " ng-repeat="Menus in MenuData  | filter:Menus">
+                <a href="#subMenu/={{Menus.id}}" class="lv-item">
                     <div class="media">
                         <div class="pull-left p-relative">
-                            <img alt="" src="img/soup1.jpg" class="lv-img-sm">
+                            <img alt="" src="{{Menus.image}}" class="lv-img-sm">
                         </div>
                         <div class="media-body">
-                            <div class="lv-title"id="menu-size">Starters</div>
-                            <small class="lv-small">Starters Categories</small>
+                            <div class="lv-title"id="menu-size">{{Menus.name}}</div>
+                            <small class="lv-small">{{Menus.name}} Categories</small>
                         </div>
                         <div class="p-relative pull-right">
                             <i class="md-chevron-right md-lg"></i>
                         </div>
                     </div>
                 </a>
-                <a href="#subMenu" class="lv-item">
+                <!-- <a href="#subMenu" class="lv-item">
                     <div class="media">
                         <div class="pull-left p-relative">
                             <img alt="" src="img/br2.jpg"class="lv-img-sm">
@@ -72,7 +72,7 @@
                             <i class="md-chevron-right md-lg"></i>
                         </div>
                     </div>
-                </a>
+                </a> -->
             </div>
         </div>
     </div>

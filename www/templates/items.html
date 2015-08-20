@@ -1,100 +1,105 @@
 <ion-view>
-    <div class="card">
+    <div class="card" ng-controller="SubMenuItemController">
         <div class="card-body card-padding">
-        
-        <div class="media-demo">
-                                <div class="media">
-                                    <div class="pull-left">
-                                        <a href="#">
-                                            <img alt="" src="img/profile-pics/1.jpg" class="media-object">
-                                        </a>
-                                    </div>
-                                    <div class="media-body">
-                                        <h4 class="media-heading">Media heading</h4>
-                                        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                                    </div>
-                                </div>
-                                <div class="media">
-                                    <div class="pull-left">
-                                        <a href="#">
-                                            <img alt="" src="img/profile-pics/2.jpg" class="media-object">
-                                        </a>
-                                    </div>
-                                    <div class="media-body">
-                                        <h4 class="media-heading">Media heading</h4>
-                                        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                                        <div class="media">
-                                            <div class="pull-left">
-                                                <a href="#">
-                                                    <img alt="" src="img/profile-pics/3.jpg" class="media-object">
-                                                </a>
-                                            </div>
-                                            <div class="media-body">
-                                                <h4 class="media-heading">Nested media heading</h4>
-                                                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="media">
-                                    <div class="pull-right">
-                                        <a href="#">
-                                            <img alt="" src="img/profile-pics/6.jpg" class="media-object">
-                                        </a>
-                                    </div>
-                                    
-                                    <div class="media-body">
-                                        <h4 class="media-heading">Media heading</h4>
-                                        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.
-                                    </div>
-                                </div>
-                                <div class="media">
-                                    <div class="pull-left">
-                                        <a href="#">
-                                            <img alt="" src="img/profile-pics/4.jpg" class="media-object">
-                                        </a>
-                                    </div>
-                                    <div class="pull-right">
-                                        <a href="#">
-                                            <img alt="" src="img/profile-pics/5.jpg" class="media-object">
-                                        </a>
-                                    </div>
-                                    <div class="media-body">
-                                        <h4 class="media-heading">Media heading</h4>
-                                        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.
-                                    </div>
-                                    
-                                </div>
+            <div class="card-header jumbotron">
+                <h2>Items<small>Select Items</small></h2>
+                <p></p>
+                <div id="top-search-wrap">
+                    <input type="text">
+                </div>
+                <div class="chat-search">
+                    <div class="fg-line">
+                        <input type="search" class="form-control" ng-model="SubMenuItem" placeholder="Search Items ">
+                    </div>
+                </div>
+            </div>
+            <div></div>
+            <div class="media-demo" ng-repeat="SubMenuItem in SubMenuItemData  | filter:SubMenuItem">
+                <div class="media">
+                    <div class="pull-left">
+                        <a href=""  class="media-object">
+                            <img alt="" src="{{SubMenuItem.image}}">
+                        </a>
+                    </div>
+                    <div class="media-body">
+                        <h4 class="media-heading">{{SubMenuItem.name}} <span>{{SubMenuItem.price}} AED</span></h4>
+                        <h4 class="media-heading">Quantity: <span>10</span></h4>
+                        <div class="btn-group btn-group-lg">
+                            <button class="btn btn-danger btn-sm waves-effect" type="button" ng-click='minus($event,$index,item);' id="minus" value="1" >-</button>
+                            <button class="btn btn-warning btn-sm waves-effect"  value="1" name="quantity{{$index}}" ng-model="quantity" id="quantity{{$index}}" type="button">1</button>
+                            <button class="btn btn-danger btn-sm waves-effect"  ng-click='plus($event,$index,item);' id="plus" value="1" type="button">+</button>
+                             <button class="btn btn-success btn-sm waves-effect text-center icon-left ion-ios-cart" value="1" id="addtocart{{$index}}" ng-click="addToCart($event,item);" type="button" ><i class="md-shopping-cart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- <div class="media">
+                    <div class="pull-left">
+                        <a href=""  class="media-object">
+                            <img alt="" src="img/bri3.jpg">
+                        </a>
+                    </div>
+                    <div class="media-body">
+                        <h4 class="media-heading">Mushroom Soya Biryani  (50 AED)   </h4>
+                        
+                    </div>
+                </div>
+                
+                <div class="media">
+                    <div class="pull-left">
+                        <a href=""  class="media-object">
+                            <img alt="" src="img/milsh.jpg">
+                        </a>
+                    </div>
+                    <div class="media-body">
+                        <h4 class="media-heading">Chocklate Milk shake  (40 AED)</h4>
+                        
+                    </div>
+                </div> -->
+                
+                <!-- <div class="media">
+                    <div class="pull-left">
+                         <a href="#"  class="media-object">
+                            <img alt="" src="img/soup2.jpg">
+                        </a>
+                    </div>
+                    <div class="media-body">
+                        <h4 class="media-heading">Media heading</h4>
+                        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+                        <div class="media">
+                            <div class="pull-left">
+                                <a href="#"  class="media-object">
+                                    <img alt="" src="img/soup2.jpg">
+                                </a>
                             </div>
+                            <div class="media-body">
+                                <h4 class="media-heading">Nested media heading</h4>
+                                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+                
+               <!--  <div class="media">
+                    <div class="pull-left">
+                        <a href=""  class="media-object">
+                            <img alt="" src="img/soup2.jpg">
+                        </a>
+                    </div>
+                    <div class="pull-right">
+                        <a href=""  class="media-object">
+                            <img alt="" src="img/soup2.jpg">
+                        </a>
+                    </div>
+                    <div class="media-body">
+                        <h4 class="media-heading">Media heading</h4>
+                        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.
+                    </div>
+                    
+                </div> -->
+            </div>
 
         </div>
     </div>
 
-    <div class="card">
-                                <div class="card-header">
-                                    <h2>Rotating Entrances <small>Click on the buttons below to start the animation</small></h2>
-                                </div>
-                                
-                                <div class="card-body card-padding">
-                                    <img alt="" src="img/headers/sm/8.png" class="animated">
-                                        
-                                    <div class="row animation-demo">
-                                        <div class="col-xs-6">
-                                            <button class="btn bgm-cyan waves-effect">rotateIn</button>
-                                        </div>
-                                        <div class="col-xs-6">
-                                            <button class="btn bgm-cyan waves-effect">rotateInDownLeft</button>
-                                        </div>
-                                        <div class="col-xs-6">
-                                            <button class="btn bgm-cyan waves-effect">rotateInDownRight</button>
-                                        </div>
-                                        <div class="col-xs-6">
-                                            <button class="btn bgm-cyan waves-effect">rotateInUpLeft</button>
-                                        </div>
-                                        <div class="col-xs-6">
-                                            <button class="btn bgm-cyan waves-effect">rotateInUpRight</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
 </div>
