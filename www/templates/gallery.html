@@ -55,20 +55,8 @@
             <div class="card-body card-padding">
                 <div class="row">
                     <div class="col-sm-6 m-b-20">
-                        <video style="height: 100%; width: 100%" id="multiCodec" poster="assets/media/big_buck_bunny.jpg" controls="controls" preload="none"> <!-- id could be any according to you -->
-                            <!-- MP4 source must come first for iOS -->
-                            <source type="video/mp4" src="assets/media/big_buck_bunny.mp4" />
-                            <!-- WebM for Firefox 4 and Opera -->
-                            <source type="video/webm" src="assets/media/big_buck_bunny.html" />
-                            <!-- OGG for Firefox 3 -->
-                            <source type="video/ogg" src="assets/media/big_buck_bunny-2.html" />
-                            <!-- Fallback flash player for no-HTML5 browsers with JavaScript turned off -->
-                            <object type="application/x-shockwave-flash" data="assets/media/flashmediaelement.swf" style="width: 100%; height: 100%;"> 		
-                                    <param name="movie" value="assets/media/flashmediaelement.swf" /> 
-                                    <param name="flashvars" value="controls=true&amp;poster=assets/media/big_buck_bunny.jpg&amp;file=assets/media/big_buck_bunny.mp4" /> 		
-                                    <!-- Image fall back for non-HTML5 browser with JavaScript turned off and no Flash player installed -->
-                                    <img src="assets/media/big_buck_bunny.jpg" alt="Media" title="No video playback capabilities" style="width: 100%; height: 100%;">
-                            </object> 	
+                         <video style="height: 100%; width: 100%" poster="assets/media/big_buck_bunny.jpg" controls="controls" preload="none"> <!-- id could be any according to you -->
+                            <source type="video/mp4" src="assets/media/big_buck_bunny.mp4" />   
                         </video>
                     </div>  
                 </div>
