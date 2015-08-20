@@ -51,10 +51,10 @@ angular.module('starter', ['ionic', 'ngRoute', 'starter.controllers', 'starter.s
             templateUrl: 'templates/register.html',
             controller: 'DashCtrl'
         })
-    .when('/latestOffer',
+    .when('/latestOffers',
         {
             templateUrl: 'templates/latestOffer.html',
-            controller: 'DashCtrl'
+            //controller: 'DashCtrl'
         })
     .when('/components',
         {
