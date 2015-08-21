@@ -50,13 +50,13 @@ angular.module('starter', ['ionic', 'ngRoute', 'starter.controllers', 'starter.s
     .when('/login',
         {
             templateUrl: 'templates/login.html',
-            controller: 'DashCtrl'
+            controller: 'authentication'
         })
 
     .when('/register',
         {
             templateUrl: 'templates/register.html',
-            controller: 'DashCtrl'
+            controller: 'registerForm'
         })
     .when('/latestOffers',
         {
