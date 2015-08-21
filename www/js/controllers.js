@@ -1,5 +1,4 @@
 angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute'])
-
 .controller('DashCtrl', function($scope,$ocLazyLoad) {
 
   
