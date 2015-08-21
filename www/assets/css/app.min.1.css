@@ -12705,13 +12705,14 @@ input:focus {
   border: 0;
 }
 
+/*modified by gobi*/
 .table > thead > tr > th:first-child,
 .table > tbody > tr > th:first-child,
 .table > tfoot > tr > th:first-child,
 .table > thead > tr > td:first-child,
 .table > tbody > tr > td:first-child,
 .table > tfoot > tr > td:first-child {
-  padding-left: 30px;
+  /*padding-left: 30px;*/
 }
 
 .table > thead > tr > th:last-child,
@@ -12720,9 +12721,10 @@ input:focus {
 .table > thead > tr > td:last-child,
 .table > tbody > tr > td:last-child,
 .table > tfoot > tr > td:last-child {
-  padding-right: 30px;
+  /*padding-right: 30px;*/
 }
 
+/*modified by gobi*/
 .table > tbody > tr.active > td,
 .table > tfoot > tr.active > td,
 .table > tbody > tr.info > td,

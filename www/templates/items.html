@@ -62,8 +62,17 @@
                             <tbody>
                                 <tr ng-repeat="ingredients in SubMenuItemIngredientsData" ng-if="SubMenuItem.id==ingredients.itemId" >
                                     <td>{{ingredients.ingredients}}-{{ingredients.price}} AED</td>
-                                    <td></td>
-                                    <td></td>
+                                    <td>
+                                        <label class="checkbox checkbox-inline m-r-20" >
+                                        <input type="checkbox" value="option1" checked ng-if="ingredients.category!='base'" >
+                                        <i class="input-helper"></i>
+                                        </label>
+                                    </td>
+                                    <td>
+                                        <div class="form-group fg-line">
+                                        <input id="exampleInputEmail1" class="form-control input-sm" type="email" placeholder="Extras">
+                                        </div>
+                                    </td>
                                 </tr>
                             </tbody>     
                         </table>

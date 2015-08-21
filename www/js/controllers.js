@@ -171,6 +171,12 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute'])
       }).error(function(){  
           alert("server Error");
        });
+
+      $scope.goback=function()
+      {
+        window.history.back();
+      }
+
 })
 .controller('SubMenuItemController', function($scope,$http,$location) {
   $("#sidebar").removeClass("toggled");
@@ -219,18 +225,16 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute'])
        });
 
 
-              // var db = window.openDatabase("branbox", "1.0", "branbox Demo", 200 * 1024 * 1024);
-              //db.transaction(function(tx){
-                //tx.executeSql('DROP TABLE IF EXISTS ordertable');
-               //   tx.executeSql('DELETE FROM ordertable');
-                //  tx.executeSql('CREATE TABLE IF NOT EXISTS ordertable (id INTEGER PRIMARY KEY AUTOINCREMENT,businessId INTEGER ,menuId INTEGER, subMenuId INTEGER,itemId INTEGER, itemName TEXT, image TEXT, price TEXT, subTotal TEXT, quantity TEXT, garnish TEXT,tax TEXT,offers TEXT)');
-                // tx.executeSql('INSERT OR REPLACE INTO ordertable (businessId,menuId,subMenuId,itemId,itemName,image,subTotal,quantity,garnish,tax,offers)VALUES ("23","34","6634","23","34","6634","23","34","6634","23","34")',successID);
-                // function successID(){
-                //      return true;
-                 // }
-
-
-                //});
+              var db = window.openDatabase("branbox", "1.0", "branbox Demo", 200 * 1024 * 1024);
+              db.transaction(function(tx){
+                tx.executeSql('DROP TABLE IF EXISTS ordertable');
+                 tx.executeSql('DELETE FROM ordertable');
+                 tx.executeSql('CREATE TABLE IF NOT EXISTS ordertable (id INTEGER PRIMARY KEY AUTOINCREMENT,businessId INTEGER ,menuId INTEGER, subMenuId INTEGER,itemId INTEGER, itemName TEXT, image TEXT, price TEXT, subTotal TEXT, quantity TEXT, garnish TEXT,tax TEXT,offers TEXT)');
+                tx.executeSql('INSERT OR REPLACE INTO ordertable (businessId,menuId,subMenuId,itemId,itemName,image,subTotal,quantity,garnish,tax,offers)VALUES ("23","34","6634","23","34","6634","23","34","6634","23","34")',successID);
+                });
+                function successID(){
+                     return true;
+                 }
 
       $scope.goback=function()
       {
@@ -314,6 +318,127 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute'])
 
 .controller('AddToCartController', function($scope,$http,$location) {
 
+    $scope.totalAmount="";
+     $scope.FinalOrderData="";
+     var json_arr =  [];  
+
+     var db = window.openDatabase("branbox", "1.0", "branbox Demo", 200 * 1024 * 1024);
+              db.transaction(function(tx){
+                  tx.executeSql('SELECT * FROM ordertable',[], function (tx, results)
+                  {
+
+                    var itemLength = results.rows.length;
+                    var menudatas=results.rows;
+                    for(var i = 0; i < itemLength; i++) 
+                    {
+                        var row = menudatas.item(i);
+                        var obj = {menuId:row.menuId,subMenuId:row.subMenuId,itemId:row.id,itemName:row.itemName,image:row.image,price:row.price,quantity:row.quantity,subTotal:row.subTotal};
+                        json_arr.push(obj);
+                    }  
+                    $scope.OrderedItem=json_arr;
+                    console.log( $scope.OrderedItem);
+                  });
+              });
+
+        $scope.removeOrder = function(index,order) {
+            var db = window.openDatabase("branbox", "1.0", "branbox Demo", 200 * 1024 * 1024);
+             db.transaction(function(tx){
+                  tx.executeSql('DELETE FROM ordertable where id="'+order.itemId+'"',[], function (tx, results)
+                  {
+                    var myPopup = $ionicPopup.alert({
+                     buttons: [
+                          {
+                            text: '<b>Ordered Item Deleted</b>',
+                            type: 'button-assertive',
+                          }
+                        ]
+                   });
+                     $timeout(function() {
+                         myPopup.close(); 
+                      }, 1000);
+                   });
+
+               
+              });
+          $scope.OrderedItem.splice(index,1);
+           //alert(order.itemId);
+        };
+
+        $scope.getTotal = function(){
+          //alert("call from");
+            var total = 0;
+            var length= $scope.OrderedItem.length;
+
+            for(var i = 0; i < length; i++){
+                var product = $scope.OrderedItem[i];
+                total += parseInt(product.subTotal);
+                //alert(product.subTotal);
+            }
+            $scope.totalAmount=total;
+            if (total==0) {
+              $("#food").hide();
+            };
+            return total;
+        };
+
+        $scope.getsubtotal = function(val,index){
+          console.log($scope.OrderedItem);
+            //alert();
+            // var quantity=$("#quantity").val();
+          var quantity=$(val.target).val() ;
+          if(quantity=="" || quantity=="0")
+          {
+            
+              $("#quantity").val(0);
+              $("#subTotal").val(0);  
+          }
+          else
+          {
+
+            var data= angular.copy($scope.OrderedItem);
+            var price=data[index].price;
+            var total = quantity*price;
+
+            $scope.OrderedItem.splice(index,1,{itemId: data[index].itemId,
+              subMenuId:data[index].subMenuId,
+              menuId:data[index].menuId,
+              itemName:data[index].itemName,
+              price:data[index].price,
+              image:data[index].image,
+              quantity: quantity,
+              subTotal: total}); 
+            //console.log($scope.OrderedItem);
+            $scope.getTotal();
+          }
+        };
+
+        $scope.getFood=function(orderData){
+          var json_arr =  []; 
+          //json_array= orderData;
+          console.log(orderData);
+          console.log(orderData[0].menuId);
+          var itemLength = orderData.length;
+
+          console.log(itemLength);
+           for(var i = 0; i < itemLength; i++) 
+              {
+                  var row = orderData[i];
+                  var obj = {menuId:orderData.menuId,subMenuId:orderData.subMenuId,itemId:orderData.id,itemName:orderData.itemName,image:orderData.image,price:orderData.price,quantity:orderData.quantity,subTotal:orderData.subTotal};
+                  json_arr.push(obj);
+                  
+              }  
+                $scope.FinalOrderData=json_arr;
+                console.log($scope.FinalOrderData);
+
+                $http.post('http://www.appnlogic.com/branboxAppAdmin/branboxAdminUi/ordertableData.php',$scope.FinalOrderData, {headers: {'Content-Type': 'application/x-www-form-urlencoded'} })
+                  .success(function (json) {
+                   
+                  }).error(function(){  
+                      alert("server Error");
+                   });
+
+
+        };
 
      $scope.goback=function()
       {
@@ -324,6 +449,8 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute'])
 
 //register form (ezhil)
 .controller('registerForm', function($scope,$http,$location) {  
+    $("#sidebar").removeClass("toggled");
+  $("#menu-trigger").removeClass("open");
   $scope.insertForm=function()
   {
     var fname = $("#fname").val(); 
@@ -362,6 +489,8 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute'])
 
 //login authentication (ezhil)
 .controller('authentication', function($scope,$http,$location) {  
+    $("#sidebar").removeClass("toggled");
+  $("#menu-trigger").removeClass("open");
   $scope.loginAuthentication=function()
   {
     
