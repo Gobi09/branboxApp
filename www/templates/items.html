@@ -13,93 +13,72 @@
                     </div>
                 </div>
             </div>
-            <div></div>
-            <div class="media-demo" ng-repeat="SubMenuItem in SubMenuItemData  | filter:SubMenuItem">
+            <div ng-repeat="SubMenuItem in SubMenuItemData  | filter:SubMenuItem">
+                <h4 class="media-heading" ng-init="price = SubMenuItem.price">Item: 
+                    {{SubMenuItem.name}} <span class="pull-right">Price: <span id="price{{$index}}"  ng-model="price">{{price}}</span> AED</span>
+                    <input type="hidden" class="price{{$index}}" value="{{item.price}}">
+                </h4>
+            <div class="media-demo" >
                 <div class="media">
                     <div class="pull-left">
                         <a href=""  class="media-object">
                             <img alt="" src="{{SubMenuItem.image}}">
                         </a>
                     </div>
-                    <div class="media-body">
-                        <h4 class="media-heading">{{SubMenuItem.name}} <span>{{SubMenuItem.price}} AED</span></h4>
-                        <h4 class="media-heading">Quantity: <span>10</span></h4>
-                        <div class="btn-group btn-group-lg">
-                            <button class="btn btn-danger btn-sm waves-effect" type="button" ng-click='minus($event,$index,item);' id="minus" value="1" >-</button>
-                            <button class="btn btn-warning btn-sm waves-effect"  value="1" name="quantity{{$index}}" ng-model="quantity" id="quantity{{$index}}" type="button">1</button>
-                            <button class="btn btn-danger btn-sm waves-effect"  ng-click='plus($event,$index,item);' id="plus" value="1" type="button">+</button>
-                             <button class="btn btn-success btn-sm waves-effect text-center icon-left ion-ios-cart" value="1" id="addtocart{{$index}}" ng-click="addToCart($event,item);" type="button" ><i class="md-shopping-cart"></i></button>
-                        </div>
-                    </div>
-                </div>
 
-                <!-- <div class="media">
-                    <div class="pull-left">
-                        <a href=""  class="media-object">
-                            <img alt="" src="img/bri3.jpg">
-                        </a>
-                    </div>
                     <div class="media-body">
-                        <h4 class="media-heading">Mushroom Soya Biryani  (50 AED)   </h4>
-                        
+                        <h4 class="media-heading">Quantity :-</h4>
+                       
+
                     </div>
                 </div>
-                
-                <div class="media">
-                    <div class="pull-left">
-                        <a href=""  class="media-object">
-                            <img alt="" src="img/milsh.jpg">
-                        </a>
-                    </div>
-                    <div class="media-body">
-                        <h4 class="media-heading">Chocklate Milk shake  (40 AED)</h4>
-                        
-                    </div>
-                </div> -->
-                
-                <!-- <div class="media">
-                    <div class="pull-left">
-                         <a href="#"  class="media-object">
-                            <img alt="" src="img/soup2.jpg">
-                        </a>
-                    </div>
-                    <div class="media-body">
-                        <h4 class="media-heading">Media heading</h4>
-                        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                        <div class="media">
-                            <div class="pull-left">
-                                <a href="#"  class="media-object">
-                                    <img alt="" src="img/soup2.jpg">
-                                </a>
-                            </div>
-                            <div class="media-body">
-                                <h4 class="media-heading">Nested media heading</h4>
-                                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
-                
-               <!--  <div class="media">
-                    <div class="pull-left">
-                        <a href=""  class="media-object">
-                            <img alt="" src="img/soup2.jpg">
-                        </a>
-                    </div>
-                    <div class="pull-right">
-                        <a href=""  class="media-object">
-                            <img alt="" src="img/soup2.jpg">
-                        </a>
-                    </div>
-                    <div class="media-body">
-                        <h4 class="media-heading">Media heading</h4>
-                        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.
-                    </div>
+                <br>
+
+                 <div class="btn-group btn-group-lg">
+                    <button class="btn btn-danger btn-sm waves-effect" type="button" ng-click='minus($event,$index,SubMenuItem);' id="minus" value="1" >-</button>
+                    <input type="button"  value="1" name="quantity{{$index}}" ng-model="quantity" class="btn bgm-bluegray quantity1 btn-sm waves-effect"id="quantity{{$index}}">
+
+                   <!--   -->
+                    <button class="btn btn-danger btn-sm waves-effect"  ng-click='plus($event,$index,SubMenuItem);' id="plus" value="1" type="button">+</button>
+                     
                     
-                </div> -->
+
+                     <button class="btn bgm-teal  btn-sm waves-effect md-info" type="button" data-toggle="collapse" data-target="#collapseExample{{$index}}" aria-expanded="false" aria-controls="collapseExample{{$index}}">
+                    </button>
+                     <button class="btn bgm-gray btn-sm waves-effect text-center icon-left ion-ios-cart" value="1" id="addtocart{{$index}}" ng-click="addToCart($event,SubMenuItem);" type="button" ><i class="md-shopping-cart"></i></button>
+                     
+                </div>
+                <div class="collapse m-t-10" id="collapseExample{{$index}}">
+                    <h4>Ingredients</h4>
+                       <div class="table-responsive" style="" tabindex="5">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Ingredients</th>
+                                    <th>Addon</th>
+                                    <th>Extra</th>
+                                </tr>
+                            </thead>  
+                            <tbody>
+                                <tr ng-repeat="ingredients in SubMenuItemIngredientsData" >
+                                    <td>{{ingredients.ingredients}}</td>
+                                    <td>{{ingredients.price}}</td>
+                                    <td>{{ingredients.category}}</td>
+                                </tr>
+                            </tbody>     
+                        </table>
+
+
+                </div>
             </div>
+            <br>
 
         </div>
+         <br>
+        </div>
+        <a aria-expanded="false" data-toggle="dropdown" href="" ng-click="goback();" class="btn bgm-deeppurple btn-float z-depth-1 waves-effect pull-right">
+           <i class="md  md-keyboard-backspace"></i>
+        </a>
     </div>
 
 </div>

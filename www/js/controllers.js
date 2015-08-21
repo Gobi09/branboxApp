@@ -4,6 +4,24 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute'])
 
   
   })
+.controller('contactCtrl', function($scope) {
+    var myLatlng = new google.maps.LatLng(11.9310, 79.7852);
+    var mapOptions = {
+      center: myLatlng,
+      zoom: 16,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+    var map = new google.maps.Map(document.getElementById("location"), mapOptions);
+      var myLocation = new google.maps.Marker({
+        position: new google.maps.LatLng(11.9310, 79.7852),
+        map: map,
+        title: "My Location"
+      });
+    $scope.map = map;
+
+  
+
+
 .controller('contactCtrl', function($scope,$http) {
     $http.post('http://www.appnlogic.com/branboxAppAdmin/branboxAdminUi/branbox.php', {branboxVariable:'contactUs',businessId:'6'},{headers: {'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8'} })     
     .success(function(data) {      
@@ -39,6 +57,10 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute'])
     
   })
 
+.controller('locationCtrl', function($scope, Chats) {
+  
+  var myLatlng = new google.maps.LatLng(11.9310, 79.7852);
+
 .controller('locationCtrl', function($scope, $http) {
   $http.post('http://www.appnlogic.com/branboxAppAdmin/branboxAdminUi/branbox.php',{'branboxVariable':'location', businessId:'1'},{headers: {'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8'} }).success(function(data){
     $scope.initialize(data);
@@ -49,18 +71,26 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute'])
   $scope.initialize = function(data) {
     var infowindow = new google.maps.InfoWindow()
     var mapOptions = {
+      center: myLatlng,
+      zoom: 16,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
         center: new google.maps.LatLng(data[0]['latitude'], data[0]['longitude']),
         zoom: 3,
         mapTypeId: google.maps.MapTypeId.ROADMAP
     };
     var map = new google.maps.Map(document.getElementById("locationMap"), mapOptions);
+      var myLocation = new google.maps.Marker({
+        position: new google.maps.LatLng(11.9310, 79.7852),
     for (var i = 0; i < data.length; i++) {
       var image = 'img/logo.jpg';
       var marker = new google.maps.Marker({
         map: map,
+        title: "My Location"
         icon: image,
         position: new google.maps.LatLng (data[i]['latitude'], data[i]['longitude'])
       });
+    $scope.map = map;
+  
       var content = "Business Location :" + data[i]['location'];     
       google.maps.event.addListener(marker,'click', (function(marker,content,infowindow){ 
         return function() {
@@ -81,6 +111,27 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute'])
     enableFriends: true
   };
 })
+
+// .controller('galleryCrtl', function($scope,$ocLazyLoad) {
+//       alert('test');
+//       var myLatlng = new google.maps.LatLng(37.3000, -120.4833);
+//         var mapOptions = {
+//             center: myLatlng,
+//             zoom: 16,
+//             mapTypeId: google.maps.MapTypeId.ROADMAP
+//         };
+//         var map = new google.maps.Map(document.getElementById("location"), mapOptions);
+//         navigator.geolocation.getCurrentPosition(function(pos) {
+//             map.setCenter(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
+//             var myLocation = new google.maps.Marker({
+//                 position: new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude),
+//                 map: map,
+//                 title: "My Location"
+//             });
+//         });
+//         console.log(map);
+//         $scope.map = map;
+// });
 
 
 //author Pravinkumar on 20/8/2015
@@ -162,7 +213,8 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute'])
 })
 
 .controller('SubMenuItemController', function($scope,$http,$location) {
-
+  $("#sidebar").removeClass("toggled");
+  $("#menu-trigger").removeClass("open");
     var businessId=1;
     var url = $location.url();
     var url = $location.url();
@@ -170,14 +222,35 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute'])
     var menuId=temp[1];
     var subMenuId=temp[2];
     //var getMenuId=11;
+    var ingredients=[];
 
           //Menus from server and sync here.....
      $http.post('http://www.appnlogic.com/branboxAppAdmin/branboxAdminUi/ajaxSubMenu.php',{bussId:businessId,menuId:menuId,subMenuId:subMenuId}, {headers: {'Content-Type': 'application/x-www-form-urlencoded'} })
       .success(function (json) {
        
         var ajaxlength = json.rows.length;
-       
+        // console.log( json.rows[0].menuId);
+        // console.log( json.rows[0].subMenuId);
+        // console.log( json.rows[0].id);
+         for(var i=0; i<ajaxlength;i++)
+         {
+            $http.post('http://www.appnlogic.com/branboxAppAdmin/branboxAdminUi/ajaxIngredients.php',{bussId:businessId,menuId:json.rows[i].menuId,subMenuId:json.rows[i].subMenuId,itemId:json.rows[i].id}, {headers: {'Content-Type': 'application/x-www-form-urlencoded'} })
+            .success(function (jsonIng) {
 
+               for(var i = 0; i < itemLength; i++) {
+                      var row = menudatas.item(i);
+                      var obj = {id:row.id,businessId: row.businessId,menuId:row.menuId,subMenuId:row.subMenuId,itemName:row.itemName,image:row.image,price:row.price,garnish:row.garnish,tax:row.tax,offers:row.offers,position:row.position,status:row.status,online:row.online,createdTime:row.createdTime};
+                      json_arr.push(obj);
+                }  
+            
+                ingredients.push(jsonIng.rows);
+
+            });
+
+         }
+         
+         $scope.SubMenuItemIngredientsData=ingredients;
+         console.log($scope.SubMenuItemIngredientsData);
          $scope.SubMenuItemData= json.rows;
           //console.log($scope.SubMenuData);
       }).error(function(){  
@@ -185,16 +258,35 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute'])
        });
 
 
-       $scope.minus=function(val,index,item)
+              // var db = window.openDatabase("branbox", "1.0", "branbox Demo", 200 * 1024 * 1024);
+              //db.transaction(function(tx){
+                //tx.executeSql('DROP TABLE IF EXISTS ordertable');
+               //   tx.executeSql('DELETE FROM ordertable');
+                //  tx.executeSql('CREATE TABLE IF NOT EXISTS ordertable (id INTEGER PRIMARY KEY AUTOINCREMENT,businessId INTEGER ,menuId INTEGER, subMenuId INTEGER,itemId INTEGER, itemName TEXT, image TEXT, price TEXT, subTotal TEXT, quantity TEXT, garnish TEXT,tax TEXT,offers TEXT)');
+                // tx.executeSql('INSERT OR REPLACE INTO ordertable (businessId,menuId,subMenuId,itemId,itemName,image,subTotal,quantity,garnish,tax,offers)VALUES ("23","34","6634","23","34","6634","23","34","6634","23","34")',successID);
+                // function successID(){
+                //      return true;
+                 // }
+
+
+                //});
+
+      $scope.goback=function()
+      {
+        window.history.back();
+      }
+    $scope.minus=function(val,index,item)
     {
-      alert();
+      console.log(item);
        
      var total=$("#quantity"+index).val();
+    // alert(total);
      total--;
       if (total>=1)
       {
          
           var price=item.price *total;
+         // alert(price);
           $("#quantity"+index).val(total);
           $("#price"+index).html(price);
           $("#addtocart"+index).val(total);
@@ -219,5 +311,99 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute'])
           
         }
     }
-});
+
+      $scope.addToCart=function(val,json)
+    {
+
+      
+       console.log(json);
+      var quantity=$(val.target).val();
+      var price=json.price *quantity;
+      console.log(json.price);
+      alert(price);
+        var db = window.openDatabase("branbox", "1.0", "branbox Demo", 200 * 1024 * 1024);
+              db.transaction(function(tx){
+                  tx.executeSql('SELECT * FROM ordertable where itemId="'+json.id+'"',[], function (tx, results)
+                {
+                  var itemLength = results.rows.length;
+                  var menudatas=results.rows;
+                   if(itemLength==1 )
+                   {
+                      tx.executeSql('UPDATE  ordertable SET quantity="'+quantity+'" ,subTotal="'+price+'"  WHERE itemId="'+json.id+'" ',successID);
+                       
+                   }
+                   else
+                   {
+                     tx.executeSql('INSERT OR REPLACE INTO ordertable (businessId,menuId,subMenuId,itemId,itemName,image,price,subTotal,quantity,garnish,tax,offers)VALUES("'+json.businessId+'","'+json.menuId+'","'+json.subMenuId+'","'+json.id+'","'+json.name+'","'+json.image+'","'+json.price+'","'+price+'","'+quantity+'","'+json.garnish+'","'+json.tax+'","'+json.offers+'")',successID);
+                     
+                    
+                   }
+                 
+                });
+                  function successID(){
+                      return true;
+                  }
+
+                  
+              });
+      }
+
+
+})
+
+.controller('AddToCartController', function($scope,$http,$location) {
+
+
+     $scope.goback=function()
+      {
+        window.history.back();
+      }
+
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

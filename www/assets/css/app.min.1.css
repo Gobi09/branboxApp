@@ -18,6 +18,19 @@ body {
   
 }
 
+/* gobi icon*/
+.md-large
+{
+  font-size: 25px;
+}
+
+.md-white
+{
+  background-position: center center;
+  color: #fff;
+}
+
+/* gobi icon*/
 
 article,
 aside,

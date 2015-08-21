@@ -25,6 +25,13 @@ angular.module('starter', ['ionic', 'ngRoute', 'starter.controllers', 'starter.s
             templateUrl: 'templates/items.html',
             controller: 'SubMenuItemController'
         })
+
+      .when('/addTocart',
+        {
+            templateUrl: 'templates/addTocart.html',
+            controller: 'AddToCartController'
+        })
+
     .when('/contactForm',
         {
             templateUrl: 'templates/contactForm.html',
