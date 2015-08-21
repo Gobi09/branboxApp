@@ -60,7 +60,7 @@
                                 </tr>
                             </thead>  
                             <tbody>
-                                <tr ng-repeat="ingredients in SubMenuItemIngredientsData" >
+                                <tr ng-repeat="ingredients in SubMenuItemIngredientsData" ng-if="SubMenuItem.id==ingredients.itemId" >
                                     <td>{{ingredients.ingredients}}</td>
                                     <td>{{ingredients.price}}</td>
                                     <td>{{ingredients.category}}</td>
