@@ -224,17 +224,18 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute'])
        });
 
 
-              var db = window.openDatabase("branbox", "1.0", "branbox Demo", 200 * 1024 * 1024);
+              var db = window.openDatabase("branbox1", "1.0", "branbox Demo", 200 * 1024 * 1024);
               db.transaction(function(tx){
-                tx.executeSql('DROP TABLE IF EXISTS ordertable');
+               // tx.executeSql('DROP TABLE IF EXISTS ordertable');
                  tx.executeSql('DELETE FROM ordertable');
                  tx.executeSql('CREATE TABLE IF NOT EXISTS ordertable (id INTEGER PRIMARY KEY AUTOINCREMENT,businessId INTEGER ,menuId INTEGER, subMenuId INTEGER,itemId INTEGER, itemName TEXT, image TEXT, price TEXT, subTotal TEXT, quantity TEXT, garnish TEXT,tax TEXT,offers TEXT)');
-                tx.executeSql('INSERT OR REPLACE INTO ordertable (businessId,menuId,subMenuId,itemId,itemName,image,subTotal,quantity,garnish,tax,offers)VALUES ("23","34","6634","23","34","6634","23","34","6634","23","34")',successID);
-                });
-                function successID(){
+                //tx.executeSql('INSERT OR REPLACE INTO ordertable (businessId,menuId,subMenuId,itemId,itemName,image,subTotal,quantity,garnish,tax,offers)VALUES ("23","34","6634","23","34","6634","23","34","6634","23","34")',successID);
+                 function successID(){
                      return true;
                  }
 
+                });
+               
       $scope.goback=function()
       {
         window.history.back();
@@ -285,7 +286,7 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute'])
       var price=json.price *quantity;
       console.log(json.price);
       alert(price);
-        var db = window.openDatabase("branbox", "1.0", "branbox Demo", 200 * 1024 * 1024);
+        var db = window.openDatabase("branbox1", "1.0", "branbox Demo", 200 * 1024 * 1024);
               db.transaction(function(tx){
                   tx.executeSql('SELECT * FROM ordertable where itemId="'+json.id+'"',[], function (tx, results)
                 {
@@ -340,21 +341,21 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute'])
               });
 
         $scope.removeOrder = function(index,order) {
-            var db = window.openDatabase("branbox", "1.0", "branbox Demo", 200 * 1024 * 1024);
+            var db = window.openDatabase("branbox1", "1.0", "branbox Demo", 200 * 1024 * 1024);
              db.transaction(function(tx){
                   tx.executeSql('DELETE FROM ordertable where id="'+order.itemId+'"',[], function (tx, results)
                   {
-                    var myPopup = $ionicPopup.alert({
-                     buttons: [
-                          {
-                            text: '<b>Ordered Item Deleted</b>',
-                            type: 'button-assertive',
-                          }
-                        ]
-                   });
-                     $timeout(function() {
-                         myPopup.close(); 
-                      }, 1000);
+                   //  var myPopup = $ionicPopup.alert({
+                   //   buttons: [
+                   //        {
+                   //          text: '<b>Ordered Item Deleted</b>',
+                   //          type: 'button-assertive',
+                   //        }
+                   //      ]
+                   // });
+                   //   $timeout(function() {
+                   //       myPopup.close(); 
+                   //    }, 1000);
                    });
 
                
