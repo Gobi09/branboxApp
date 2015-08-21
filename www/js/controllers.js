@@ -321,3 +321,84 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute'])
       }
 
 })
+
+//register form (ezhil)
+.controller('registerForm', function($scope,$http,$location) {  
+  $scope.insertForm=function()
+  {
+    var fname = $("#fname").val(); 
+    var password = $("#password").val();
+    var gender = $("#gender").val();
+    var dob = $("#dob").val();
+    var email = $("#email").val();
+    var mobile = $("#mobile").val();
+    var address1 = $("#address1").val();
+    var address2 = $("#address2").val();
+    var country = $("#country").val();
+    var state = $("#state").val();
+    var city = $("#city").val();
+    var bussinessId= $("#bussinessId").val();    
+    var code = $("#postalCode").val();
+    alert(gender); 
+
+    $http.post('http://www.appnlogic.com/branboxAppAdmin/branboxAdminUi/registerUser.php',{busId:bussinessId,fname:fname,password:password,gender:gender,dob:dob,email:email,mobile:mobile,address1:address1,address2:address2,country:country,state:state,city:city,code:code}, {headers: {'Content-Type': 'application/x-www-form-urlencoded'} })
+    .success(function (response) {
+       
+      if(response!==null)
+      {
+        //$location.path('templates/menu.html');
+        //alert('success');
+        $location.path('/menu');
+
+      }else{
+        alert('fail');
+      }
+    }).error(function(){  
+        alert("server Error");
+      });
+  }
+
+})
+
+//login authentication (ezhil)
+.controller('authentication', function($scope,$http,$location) {  
+  $scope.loginAuthentication=function()
+  {
+    
+    var password = $("#password").val();    
+    var email = $("#email").val();  
+    // alert(password);
+    // alert(email);
+    // exit();  
+
+    $http.post('http://www.appnlogic.com/branboxAppAdmin/branboxAdminUi/ajaxLogin.php',{password:password,email:email}, {headers: {'Content-Type': 'application/x-www-form-urlencoded'} })
+    .success(function (json) {
+      var ajaxlength = json.rows.length;
+        alert(ajaxlength);
+        if(ajaxlength == 1){
+          $location.path('/dashboard');
+        }
+        else
+        {
+          $location.path('/login');
+          $("#password").val("");
+          $("#email").val("");
+        }
+        $scope.SubMenuData= json.rows;
+
+       
+      // if(response!==null)
+      // {        
+      //   $location.path('/menu');
+      // }else{
+      //   alert('fail');
+      // }
+    }).error(function(){  
+        alert("server Error");
+      });
+  }
+
+})
+
+
+//check Login User data

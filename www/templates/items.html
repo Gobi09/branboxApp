@@ -54,16 +54,16 @@
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th>Ingredients</th>
-                                    <th>Addon</th>
+                                    <th>Ingredients-Price</th>
+                                    <th>Yes/No</th>
                                     <th>Extra</th>
                                 </tr>
                             </thead>  
                             <tbody>
                                 <tr ng-repeat="ingredients in SubMenuItemIngredientsData" ng-if="SubMenuItem.id==ingredients.itemId" >
-                                    <td>{{ingredients.ingredients}}</td>
-                                    <td>{{ingredients.price}}</td>
-                                    <td>{{ingredients.category}}</td>
+                                    <td>{{ingredients.ingredients}}-{{ingredients.price}} AED</td>
+                                    <td></td>
+                                    <td></td>
                                 </tr>
                             </tbody>     
                         </table>
