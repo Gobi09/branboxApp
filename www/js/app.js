@@ -69,7 +69,7 @@ angular.module('starter', ['ionic', 'ngRoute', 'starter.controllers', 'starter.s
     .when('/aboutUs',
         {
             templateUrl: 'templates/aboutUs.html',
-            controller: 'DashCtrl'
+            controller: 'aboutUs'
         })
     .otherwise('/dashboard');
 

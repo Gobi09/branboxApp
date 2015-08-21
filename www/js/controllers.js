@@ -4,22 +4,39 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute'])
 
   
   })
-.controller('contactCtrl', function($scope) {
-    var myLatlng = new google.maps.LatLng(11.9310, 79.7852);
-    var mapOptions = {
-      center: myLatlng,
-      zoom: 16,
-      mapTypeId: google.maps.MapTypeId.ROADMAP
-    };
-    var map = new google.maps.Map(document.getElementById("location"), mapOptions);
-      var myLocation = new google.maps.Marker({
-        position: new google.maps.LatLng(11.9310, 79.7852),
-        map: map,
-        title: "My Location"
-      });
-    $scope.map = map;
-
-  
+.controller('contactCtrl', function($scope,$http) {
+    $http.post('http://www.appnlogic.com/branboxAppAdmin/branboxAdminUi/branbox.php', {branboxVariable:'contactUs',businessId:'6'},{headers: {'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8'} })     
+    .success(function(data) {      
+    // contact map 
+        var myLatlng = new google.maps.LatLng(data['latitude'], data['longitude']);
+        var mapOptions = {
+          center: myLatlng,
+          zoom: 16,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        var map = new google.maps.Map(document.getElementById("location"), mapOptions);     
+          var myLocation = new google.maps.Marker({
+            position: new google.maps.LatLng(data['latitude'], data['longitude']),
+            map: map,
+            title: "My Location"
+          });
+        $scope.map = map;
+        // contact information  
+        $scope.name = '<div class="contactUsName">' +data['brandName']+','+ '</div>'; 
+          $scope.companyName = '<div class="contactUsAdd">' +data['companyName']+','+ '</div>'; 
+          $scope.address1 = '<div class="contactUsAdd">' +data['address1']+','+ '</div>'; 
+          $scope.address2 = '<div class="contactUsAdd">' +data['address2']+','+ '</div>'; 
+          $scope.city = '<div class="contactUsAdd">' +data['city']+','+ '</div>'; 
+          $scope.state = '<div class="contactUsAdd">' +data['state']+','+ '</div>'; 
+          $scope.country = '<div class="contactUsAdd">' +data['country']+','+ '</div>'; 
+          $scope.postalCode = '<div class="contactUsAdd">' +data['postalCode']+','+ '</div>'; 
+          $scope.phoneNumber = '<div class="contactUsAdd">' +data['phoneNumber1']+','+ '</div>'; 
+          $scope.email = '<div class="contactUsAdd">' +data['email1']+','+ '</div>'; 
+          $scope.website = '<div class="contactUsAdd">' +data['website']+','+ '</div>'; 
+    }).error(function(){         
+      $scope.error = "server Error";     
+     });
+    
   })
 
 .controller('locationCtrl', function($scope, Chats) {
@@ -49,26 +66,18 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute'])
   };
 })
 
-// .controller('galleryCrtl', function($scope,$ocLazyLoad) {
-//       alert('test');
-//       var myLatlng = new google.maps.LatLng(37.3000, -120.4833);
-//         var mapOptions = {
-//             center: myLatlng,
-//             zoom: 16,
-//             mapTypeId: google.maps.MapTypeId.ROADMAP
-//         };
-//         var map = new google.maps.Map(document.getElementById("location"), mapOptions);
-//         navigator.geolocation.getCurrentPosition(function(pos) {
-//             map.setCenter(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
-//             var myLocation = new google.maps.Marker({
-//                 position: new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude),
-//                 map: map,
-//                 title: "My Location"
-//             });
-//         });
-//         console.log(map);
-//         $scope.map = map;
-// });
+
+//author Pravinkumar on 20/8/2015
+.controller('aboutUs', function($scope,$http) {
+  $http.post('http://www.appnlogic.com/branboxAppAdmin/branboxAdminUi/branbox.php', {branboxVariable:'aboutUs',businessId:'1'},{headers: {'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8'} })     
+  .success(function(data) {    
+    $scope.aboutImages = { src : data[0]['image'] };
+    $scope.title = data[0]['title'];
+    $scope.description = data[0]['description'];     
+  }).error(function(){         
+    $scope.error = "server Error";     
+  }); 
+})
 
 
 .controller('MenuController', function($scope,$http,$location) {

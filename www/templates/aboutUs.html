@@ -1,22 +1,20 @@
 <ion-view >
-	
-	<div class="card z-depth-5">
+    <div class="card z-depth-5">
         <div class="card-header bgm-orange">
             <h2>About Us</h2>
     	</div>
     	<div class="card-body card-padding">
-            <p class="m-b-25">For quoting blocks of content from another source within your document.</p>
-    		<blockquote class="m-b-25">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-            </blockquote>
-    		<blockquote class="m-b-25">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-                <footer>Someone famous in <cite title="Source Title">Source Title</cite></footer>
-            </blockquote>
-    		<blockquote class="blockquote-reverse m-b-25">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-                <footer>Someone famous in <cite title="Source Title">Source Title</cite></footer>
-            </blockquote>
+            <div class="media">
+                <div class="pull-right">
+                    <a href="#">
+                        <img src="assets/media/gallery/thumbs/5.jpg" alt="" />
+                    </a>
+                </div>
+                <div class="media-body">                 
+                    <h4 class="media-heading">{{title}}</h4>
+                    <div ng-bind-html="description">
+                </div>
+            </div><br/>
         </div>
     </div>
 </ion-view>
