@@ -2,22 +2,22 @@
     <div class="block-header">
         <img class="img-responsive img-circle" id="circle" src="img/logo.jpg">        
     </div>
-    <div class="bs-item z-depth-5">
+    <div class="bs-item z-depth-5" ng-controller="authentication">
         <div class="card">
             <div class="card-header">
                 <h2>Login</h2>
             </div>
             <div class="card-body card-padding">
-                <form role="form">
+                <form name="form"  role="form">
                     <div class="form-group fg-float">
                         <div class="fg-line">
-                            <input class="form-control fg-input" type="email">
+                            <input class="form-control fg-input" type="email" name="email" id="email">
                         </div>
-                        <label class="fg-label">Email address</label>
+                        <label class="fg-label">Email</label>
                     </div>
                     <div class="form-group fg-float">
                         <div class="fg-line">
-                            <input class="form-control fg-input" type="password">
+                            <input class="form-control fg-input" type="password" id="password" name="password">
                         </div>
                         <label class="fg-label">Password</label>
                     </div>
@@ -28,7 +28,7 @@
                             Don't forget to check me out
                         </label>
                     </div>
-                    <button type="submit" class="btn btn-primary btn-sm waves-effect">Sign In</button>
+                    <button type="submit" ng-click="loginAuthentication();" class="btn btn-primary btn-sm waves-effect">Sign In</button>
                     <a href="#register" type="submit" class="btn btn-primary btn-sm">Register</a>
                 </form>
             </div>

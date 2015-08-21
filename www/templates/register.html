@@ -3,81 +3,91 @@
         <img class="img-responsive img-circle" src="img/logo.jpg">        
     </div>
     <div class="bs-item z-depth-5">
-        <div class="card">
+        <div class="card" ng-controller="registerForm">
             <div class="card-header">
                 <h2>Register</h2>
             </div>
             <div class="card-body card-padding">
-                <form role="form">
+                <form role="form" >
                     <div class="form-group fg-float">
                         <div class="fg-line">
-                            <input class="form-control fg-input" type="email">
+                            <input class="form-control fg-input" type="text" id="fname">
                         </div>
                         <label class="fg-label">First Name</label>
                     </div>                    
                     <div class="form-group fg-float">
                         <div class="fg-line">
-                            <input class="form-control fg-input" type="password">
+                            <input class="form-control fg-input" type="password" id="password" ng-pattern="/^\d+$/">
                         </div>
                         <label class="fg-label">Password</label>
                     </div>
                     <div class="form-group fg-float">
-                        <div class="fg-line">
-                            <input class="form-control fg-input" type="text">
+                        <div class="select">
+                            <select class="form-control" id="gender">
+                                <option>Select</option>
+                                <option value="m">Male</option>
+                                <option value="f">Female</option>
+                                <option value="o">Others</option>                               
+                            </select>
                         </div>
-                        <label class="fg-label">Gender</label>
+                        <!-- <div class="fg-line">
+                            <input class="form-control fg-input" type="text" id="gender">
+                        </div>
+                        <label class="fg-label">Gender</label> -->
                     </div>
-                    <div class="form-group fg-float">
-                        <div class="fg-line dtp-container dropdown">
-                            <input class="form-control date-picker" type="text">
+                    <div class="form-group  fg-float">
+                        <div class="dtp-container dropdown fg-line">
+                            <input class="form-control fg-input" type="text" id="dob">
                         </div>
                         <label class="fg-label">Date of Birth</label>
                     </div>                    
                     <div class="form-group fg-float">
                         <div class="fg-line">
-                            <input class="form-control fg-input" type="email">
+                            <input class="form-control fg-input" type="email" id="email">
                         </div>
                         <label class="fg-label">Email</label>
                     </div>
                     <div class="form-group fg-float">
                         <div class="fg-line">
-                            <input class="form-control fg-input" type="text">
+                            <input class="form-control fg-input" type="text" id="mobile">
                         </div>
                         <label class="fg-label">Mobile Number</label>
                     </div>
                     <div class="form-group fg-float">
                         <div class="fg-line">
-                            <input class="form-control fg-input" type="text">
+                            <input class="form-control fg-input" type="text" id="address1">
                         </div>
                         <label class="fg-label">Address 1</label>
                     </div>
                     <div class="form-group fg-float">
                         <div class="fg-line">
-                            <input class="form-control fg-input" type="text">
+                            <input class="form-control fg-input" type="text" id="address2">
                         </div>
                         <label class="fg-label">Address 2</label>
                     </div>
                     <div class="form-group fg-float">
                         <div class="fg-line">
-                            <input class="form-control fg-input" type="text">
-                        </div>
-                        <label class="fg-label">Country</label>
-                    </div>
-                    <div class="form-group fg-float">
-                        <div class="fg-line">
-                            <input class="form-control fg-input" type="text">
-                        </div>
-                        <label class="fg-label">State</label>
-                    </div>
-                    <div class="form-group fg-float">
-                        <div class="fg-line">
-                            <input class="form-control fg-input" type="text">
+                            <input class="form-control fg-input" type="text" id="city">
                         </div>
                         <label class="fg-label">City</label>
                     </div>
                     <div class="form-group fg-float">
                         <div class="fg-line">
-                            <input class="form-control fg-input" type="text">
+                            <input class="form-control fg-input" type="text" id="state">
+                        </div>
+                        <label class="fg-label">State</label>
+                    </div>
+                    <div class="form-group fg-float">
+                        <div class="fg-line">
+                            <input class="form-control fg-input" type="text" id="country">
+                        </div>
+                        <label class="fg-label">Country</label>
+                    </div>                
+                    <div class="form-group fg-float">
+                        <div class="fg-line">
+                            <input class="form-control fg-input" type="text" id="postalCode">
+                            <input class="form-control fg-input" type="hidden" id="bussinessId" value="1">
+                            <input class="form-control fg-input" type="hidden" id="times" value="2:45">
                         </div>
                         <label class="fg-label">Postal code</label>
                     </div>
@@ -88,7 +98,7 @@
                             Terms and Condition
                         </label>
                     </div>
-                    <a href="" type="submit" class="btn btn-primary btn-sm waves-effect">Submit</a>
+                    <a ng-click="insertForm();" type="submit" class="btn btn-primary btn-sm waves-effect">Submit</a>
                     <button type="submit" class="btn btn-primary btn-sm waves-effect" onclick="window.history.back();">Cancel</button>
                 </form>
             </div>
