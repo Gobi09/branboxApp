@@ -64,7 +64,7 @@ angular.module('starter', ['ionic', 'ngRoute', 'starter.controllers', 'starter.s
     .when('/gallery',
         {
             templateUrl: 'templates/gallery.html',
-            controller: 'DashCtrl'
+            controller: 'gallery'
         })
     .when('/aboutUs',
         {

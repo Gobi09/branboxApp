@@ -78,7 +78,19 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute'])
     $scope.error = "server Error";     
   }); 
 })
-
+.controller('gallery', function($scope,$http) {
+  $http.post('http://www.appnlogic.com/branboxAppAdmin/branboxAdminUi/branbox.php', {branboxVariable:'gallery',businessId:'1'},{headers: {'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8'} })     
+  .success(function(data) {    
+    $scope.galleryImages=data;
+    $scope.$on('test', function(ngRepeatFinishedEvent) {
+        $('.lightbox').lightGallery({
+            enableTouch: true
+        });
+    });
+  }).error(function(){         
+    $scope.error = "server Error";     
+  }); 
+})
 
 .controller('MenuController', function($scope,$http,$location) {
 
@@ -125,8 +137,8 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute'])
 .controller('SubMenuItemController', function($scope,$http,$location) {
 
     var businessId=1;
-   var url = $location.url();
-  var url = $location.url();
+    var url = $location.url();
+    var url = $location.url();
     var temp = url.split("=");
     var menuId=temp[1];
     var subMenuId=temp[2];
@@ -181,3 +193,23 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute'])
         }
     }
 })
+    .directive('onFinishRender', function ($timeout) {
+    return {
+        restrict: 'A',
+        link: function (scope, element, attr) {
+            if (scope.$last === true) {
+                $timeout(function () {
+                    scope.$emit(attr.onFinishRender);
+                });
+            }
+        }
+    }
+})
+// .controller('myC', function($scope) {
+//     $scope.ta = [1, 2, 3, 4, 5, 6];
+    
+//     $scope.$on('test', function(ngRepeatFinishedEvent) {
+//         console.log($("p"));
+//         alert("done");
+//     });
+// }

@@ -1,26 +1,31 @@
 <ion-view>
-    <script>
-        $(document).ready(function(){
-            $('.lightbox').lightGallery({
-                enableTouch: true
-            });
+<script>
+    $(document).ready(function(){
+        $('.lightbox').lightGallery({
+            enableTouch: true
         });
-    </script>
+    });
+    
+</script>
+        
         <div class="card">
             <div class="card-body card-padding">
                 <p class="f-500 c-black m-b-20">Images</p>
-    
                 <div class="lightbox row">
-                    <div data-src="assets/media/gallery/1.jpg" class="col-sm-2 col-xs-6">
-                        <div class="lightbox-item">
-                            <img src="assets/media/gallery/thumbs/1.jpg" alt="" />
+                        
+                        <div ng-repeat="item in galleryImages" data-src="{{item.link}}" class="col-sm-2 col-xs-6" on-finish-render="test">
+                            <div class="lightbox-item">
+                                <img src="{{item.link}}" alt="" />
+                            </div>
                         </div>
-                    </div>
-    
-                    <div data-src="assets/media/gallery/2.jpg" class="col-sm-2 col-xs-6">
+                    
+
+
+                    <!-- <div data-src="assets/media/gallery/2.jpg" class="col-sm-2 col-xs-6">
                         <div class="lightbox-item">
                             <img src="assets/media/gallery/thumbs/2.jpg" alt=""  />
                         </div>
+
                     </div>
                
                     <div data-src="assets/media/gallery/3.jpg" class="col-sm-2 col-xs-6">
@@ -45,13 +50,12 @@
                         <div class="lightbox-item">
                             <img src="assets/media/gallery/thumbs/6.jpg" alt=""  />
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>
         
         <div class="card">
-            
             <div class="card-body card-padding">
                 <div class="row">
                     <div class="col-sm-6 m-b-20">
