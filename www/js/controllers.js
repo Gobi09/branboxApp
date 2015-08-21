@@ -39,22 +39,38 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute'])
     
   })
 
-.controller('locationCtrl', function($scope, Chats) {
-  
-  var myLatlng = new google.maps.LatLng(11.9310, 79.7852);
+.controller('locationCtrl', function($scope, $http) {
+  $http.post('http://www.appnlogic.com/branboxAppAdmin/branboxAdminUi/branbox.php',{'branboxVariable':'location', businessId:'1'},{headers: {'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8'} }).success(function(data){
+    $scope.initialize(data);
+  }).error(function(){
+      $scope.data = "error DataBase";
+  });
+  //initialize map
+  $scope.initialize = function(data) {
+    var infowindow = new google.maps.InfoWindow()
     var mapOptions = {
-      center: myLatlng,
-      zoom: 16,
-      mapTypeId: google.maps.MapTypeId.ROADMAP
+        center: new google.maps.LatLng(data[0]['latitude'], data[0]['longitude']),
+        zoom: 3,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
     };
     var map = new google.maps.Map(document.getElementById("locationMap"), mapOptions);
-      var myLocation = new google.maps.Marker({
-        position: new google.maps.LatLng(11.9310, 79.7852),
+    for (var i = 0; i < data.length; i++) {
+      var image = 'img/logo.jpg';
+      var marker = new google.maps.Marker({
         map: map,
-        title: "My Location"
+        icon: image,
+        position: new google.maps.LatLng (data[i]['latitude'], data[i]['longitude'])
       });
-    $scope.map = map;
-  
+      var content = "Business Location :" + data[i]['location'];     
+      google.maps.event.addListener(marker,'click', (function(marker,content,infowindow){ 
+        return function() {
+           infowindow.setContent(content);
+           infowindow.open(map,marker);
+        };
+      })(marker,content,infowindow)); 
+    } 
+    $scope.locationMap = map;
+  }
 })
 
 
@@ -91,7 +107,18 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute'])
     $scope.error = "server Error";     
   }); 
 })
-
+.directive('onFinishRender', function ($timeout) {
+    return {
+        restrict: 'A',
+        link: function (scope, element, attr) {
+            if (scope.$last === true) {
+                $timeout(function () {
+                    scope.$emit(attr.onFinishRender);
+                });
+            }
+        }
+    }
+})
 .controller('MenuController', function($scope,$http,$location) {
 
     var businessId=1;
@@ -192,24 +219,5 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute'])
           
         }
     }
-})
-    .directive('onFinishRender', function ($timeout) {
-    return {
-        restrict: 'A',
-        link: function (scope, element, attr) {
-            if (scope.$last === true) {
-                $timeout(function () {
-                    scope.$emit(attr.onFinishRender);
-                });
-            }
-        }
-    }
-})
-// .controller('myC', function($scope) {
-//     $scope.ta = [1, 2, 3, 4, 5, 6];
-    
-//     $scope.$on('test', function(ngRepeatFinishedEvent) {
-//         console.log($("p"));
-//         alert("done");
-//     });
-// }
+});
+
