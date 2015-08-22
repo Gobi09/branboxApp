@@ -52,13 +52,13 @@
         <script src="https://code.angularjs.org/1.4.4/angular-touch.js"></script>
         <script src="lib/ocLazyLoad/ocLazyLoad.js"></script>
         <!-- cordova script (this will be a 404 during development) -->
-        <script src="cordova.js"></script>
+        <script src="js/cordova.js"></script>
         <!-- your app's js -->
         <script src="js/app.js"></script>
         <script src="js/controllers.js"></script>
         <script src="js/services.js"></script>
         <script src="http://maps.googleapis.com/maps/api/js?sensor=true"></script>
-    
+        <!--<script src="js/module.js"></script>-->
     </head>
     <body ng-app="starter">
         <header id="header">
@@ -139,7 +139,7 @@
                     </ul> -->
                 </div>
             </aside>
-            <aside id="chat">
+            <!-- <aside id="chat">
                 <ul class="tab-nav tn-justified" role="tablist">
                     <li role="presentation" class="active"><a href="#friends" aria-controls="friends" role="tab" data-toggle="tab">Friends</a></li>
                     <li role="presentation"><a href="#online" aria-controls="online" role="tab" data-toggle="tab">Online Now</a></li>
@@ -288,7 +288,7 @@
                         </div>
                     </div>
                 </div>
-            </aside>
+            </aside> -->
             <section id="content" >
                 <div class="container">
                     <div ng-view></div>

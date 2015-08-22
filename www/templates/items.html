@@ -13,7 +13,7 @@
                     </div>
                 </div>
             </div>
-            <div ng-repeat="SubMenuItem in SubMenuItemData  | filter:SubMenuItem">
+            <div  class="order" ng-repeat="SubMenuItem in SubMenuItemData  | filter:SubMenuItem">
                 <h4 class="media-heading" ng-init="price = SubMenuItem.price">Item: 
                     {{SubMenuItem.name}} <span class="pull-right">Price: <span id="price{{$index}}"  ng-model="price">{{price}}</span> AED</span>
                     <input type="hidden" class="price{{$index}}" value="{{item.price}}">
@@ -34,18 +34,18 @@
                 </div>
                 <br>
 
-                 <div class="btn-group btn-group-lg">
-                    <button class="btn btn-danger btn-sm waves-effect" type="button" ng-click='minus($event,$index,SubMenuItem);' id="minus" value="1" >-</button>
-                    <input type="button"  value="1" name="quantity{{$index}}" ng-model="quantity" class="btn bgm-bluegray quantity1 btn-sm waves-effect"id="quantity{{$index}}">
+                 <div class="btn-group btn-group-lg ">
 
-                   <!--   -->
+                    <button class="btn btn-danger btn-sm waves-effect" type="button" ng-click='minus($event,$index,SubMenuItem);' id="minus" value="1" >-</button>
+
+                    <input type="button"  value="1" name="quantity" ng-model="quantity" class="btn bgm-bluegray quantity1 btn-sm waves-effect"id="quantity{{$index}}">
+
                     <button class="btn btn-danger btn-sm waves-effect"  ng-click='plus($event,$index,SubMenuItem);' id="plus" value="1" type="button">+</button>
                      
-                    
-
-                     <button class="btn bgm-teal  btn-sm waves-effect md-info" type="button" data-toggle="collapse" data-target="#collapseExample{{$index}}" aria-expanded="false" aria-controls="collapseExample{{$index}}">
+                    <button class="btn bgm-teal  btn-sm waves-effect md-info" type="button" data-toggle="collapse" data-target="#collapseExample{{$index}}" aria-expanded="false" aria-controls="collapseExample{{$index}}">
                     </button>
-                     <button class="btn bgm-gray btn-sm waves-effect text-center icon-left ion-ios-cart" value="1" id="addtocart{{$index}}" ng-click="addToCart($event,SubMenuItem);" type="button" ><i class="md-shopping-cart"></i></button>
+
+                    <button class="btn bgm-gray btn-sm waves-effect text-center icon-left ion-ios-cart" value="1" id="addtocart{{$index}}" ng-click="addToCart($event,$index,SubMenuItem);" type="button" ><i class="md-shopping-cart"></i></button>
                      
                 </div>
                 <div class="collapse m-t-10" id="collapseExample{{$index}}">
@@ -64,13 +64,13 @@
                                     <td>{{ingredients.ingredients}}-{{ingredients.price}} AED</td>
                                     <td>
                                         <label class="checkbox checkbox-inline m-r-20" >
-                                        <input type="checkbox" value="option1" checked ng-if="ingredients.category!='base'" >
+                                        <input type="checkbox" value="NO" ng-if="ingredients.category!='base'" ng-click="savecYesno($event,ingredients,$index);" checked  >
                                         <i class="input-helper"></i>
                                         </label>
                                     </td>
                                     <td>
                                         <div class="form-group fg-line">
-                                        <input id="exampleInputEmail1" class="form-control input-sm" type="email" placeholder="Extras">
+                                        <input id="exampleInputEmail1" class="form-control input-sm" ng-keyup="saveExtra($event,ingredients,$index)" type="email" placeholder="Extras">
                                         </div>
                                     </td>
                                 </tr>

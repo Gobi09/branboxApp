@@ -15071,8 +15071,13 @@ a.thumbnail.active {
 }
 
 .login-content .login-navigation > li:not(:hover) {
-  font-size: 0px;
-  border-radius: 100%;
+/*  font-size: 0px;
+  border-radius: 100%;*/
+  
+  border-radius: 10px;
+  padding: 0 5px;
+  font-size: 8px;
+  
 }
 
 .login-content .login-navigation > li:hover {
