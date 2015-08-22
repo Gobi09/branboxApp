@@ -1,18 +1,70 @@
 <ion-view>
     <div class="card" ng-controller="AddToCartController">
         <div class="card-body card-padding">
-            <div class="card-header jumbotron">
-                <h2>Restaurant Menus<small>Select Menu Categories</small></h2>
-                <p></p>
-                <div id="top-search-wrap">
-                    <input type="text">
-                </div>
-                <div class="chat-search">
-                    <div class="fg-line">
-                        <input type="search" class="form-control" ng-model="Menus"   placeholder="Search Menu ">
-                    </div>
-                </div>
+            <div class="card-header">
+                <h2>Your Orders<small>final summary</small></h2>
             </div>
+
+            <button ng-click="callfun(OrderedItems);" class="btn bgm-gray btn-sm waves-effect"> Show Orders</button>
+            <div class="table-responsive" style="" tabindex="5" id="orderdata">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <!-- <th></th> -->
+                            <th>Item</th>
+                            <th>Quantity</th>
+                            <th>Price</th>
+                            <th>Sub Total</th>
+                            <!-- <th></th> -->
+                        </tr>
+                    </thead>
+                    <tbody>
+                         <tr ng-repeat="order in OrderedItems">
+                            <td>
+                                <div>
+                                   <span class="span-sty" >{{order.itemName}}</span><br>
+                                    <img src="{{order.image}}" class="text-center" style="width:80px;">
+                                </div>
+                                
+                            </td>
+                            <!-- <td></td> -->
+                            <td> 
+
+                                <input type="text" class="form-control"ng-keyup="getsubtotal($event,$index,order);" name="quantity"class="item item-input "  id="quantity" value="{{order.quantity}}">
+
+
+                            </td>
+                            <td> 
+                                {{order.price}}
+                                <input type="hidden" style="width:25px"  readonly name="price"class="form-control" id="price" value="{{order.price}}">
+
+                            </td>
+                            <td> 
+                                {{order.subTotal}}
+                                <input type="hidden" style="width:60px" readonly name="subtotal"class="form-control" id="subTotal" value="{{order.subTotal}}">
+
+                            </td>
+                            <td>
+                                <button ng-click="removeOrder($index,order);" class="btn button-small bgm-red button-assertive"><i class="md  md-clear"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+
+                </table>
+                <div class=" button button-small  icon-right  text-center">
+                    Total: 
+                      {{ getTotal(); }} AED
+                </div>
+                <div class=" button button-small button-assertive  icon-right  text-center"  ng-click="getFood(OrderedItem)" id="food">
+                    Get Food
+                </div>
+                <a aria-expanded="false" data-toggle="dropdown" href="" ng-click="goback();" class="btn bgm-deeppurple btn-float z-depth-1 waves-effect pull-right">
+                    <i class="md  md-keyboard-backspace"></i>
+                </a>
+
+            </div>
+
           
            
             

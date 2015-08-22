@@ -216,7 +216,7 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
          }
          
          $scope.SubMenuItemIngredientsData=ingredients;
-         console.log($scope.SubMenuItemIngredientsData);
+         //console.log($scope.SubMenuItemIngredientsData);
          $scope.SubMenuItemData= json.rows;
           //console.log($scope.SubMenuItemData);
       }).error(function(){  
@@ -324,12 +324,12 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
           if(data=="NO")
           {
             $(event.target).val("YES");
-            alert(data);
+            //alert(data);
           } 
           else
           {
             $(event.target).val("NO");
-            alert(data);
+            //alert(data);
           }
           var db = window.openDatabase("branboxnew", "1.0", "branbox Demo", 200 * 1024 * 1024);
               db.transaction(function(tx){
@@ -396,16 +396,17 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
 
     $scope.totalAmount="";
      $scope.FinalOrderData="";
-     $scope.OrderedItem="";
+     //$scope.OrderedItems="";
      var json_arr =  [];  
-
+      $("#orderdata").hide();
      var db = window.openDatabase("branboxnew", "1.0", "branbox Demo", 200 * 1024 * 1024);
               db.transaction(function(tx){
                   tx.executeSql('SELECT * FROM orderitems',[], function (tx, results)
                   {
 
                     var itemLength = results.rows.length;
-                    alert(itemLength);
+                    //alert(itemLength+"length");
+                    console.log(results.rows.item(0));
 
                     var menudatas=results.rows;
                     for(var i = 0; i < itemLength; i++) 
@@ -413,14 +414,20 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
                         var row = menudatas.item(i);
                         var obj = {menuId:row.menuId,subMenuId:row.subMenuId,itemId:row.id,itemName:row.itemName,image:row.image,price:row.price,quantity:row.quantity,subTotal:row.subTotal};
                         json_arr.push(obj);
-                        //console.log(row);
+                        //console.log(json_arr);
+                        //alert(row.menuId);
                     }  
-                    $scope.OrderedItem=json_arr;
-                    alert($scope.OrderedItem.itemName);
-                    //console.log( $scope.OrderedItem);
+                    $scope.OrderedItems=json_arr;
+                    //alert(json_arr.menuId);
+                    console.log( $scope.OrderedItems);
                   });
               });
+        $scope.callfun=function(OrderedItems){
 
+            $("#orderdata").show();
+
+          //console.log(OrderedItems);
+        }
         $scope.removeOrder = function(index,order) {
             var db = window.openDatabase("branboxnew", "1.0", "branbox Demo", 200 * 1024 * 1024);
              db.transaction(function(tx){
@@ -430,17 +437,17 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
               function successID(){
                       return true;
                   }
-          $scope.OrderedItem.splice(index,1);
+          $scope.OrderedItems.splice(index,1);
            //alert(order.itemId);
         };
 
         $scope.getTotal = function(){
           //alert("call from");
             var total = 0;
-            var length= $scope.OrderedItem.length;
+            var length= $scope.OrderedItems.length;
 
             for(var i = 0; i < length; i++){
-                var product = $scope.OrderedItem[i];
+                var product = $scope.OrderedItems[i];
                 total += parseInt(product.subTotal);
                 //alert(product.subTotal);
             }
@@ -452,7 +459,7 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
         };
 
         $scope.getsubtotal = function(val,index,order){
-          console.log($scope.OrderedItem);
+          console.log($scope.OrderedItems);
             //alert();
             // var quantity=$("#quantity").val();
           var quantity=$(val.target).val() ;
@@ -465,7 +472,7 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
           else
           {
 
-            var data= angular.copy($scope.OrderedItem);
+            var data= angular.copy($scope.OrderedItems);
             var price=data[index].price;
             var total = quantity*price;
 
@@ -483,7 +490,7 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
                   }
 
                 });
-            $scope.OrderedItem.splice(index,1,{itemId: data[index].itemId,
+            $scope.OrderedItems.splice(index,1,{itemId: data[index].itemId,
               subMenuId:data[index].subMenuId,
               menuId:data[index].menuId,
               itemName:data[index].itemName,
