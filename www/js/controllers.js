@@ -394,6 +394,7 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
 
 .controller('AddToCartController', function($scope,$http,$location) {
 
+  alert("data");
     $scope.totalAmount="";
      $scope.FinalOrderData="";
      //$scope.OrderedItems="";
