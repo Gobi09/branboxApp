@@ -406,13 +406,13 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
 
                     var itemLength = results.rows.length;
                     //alert(itemLength+"length");
-                    console.log(results.rows.item(0));
+                    //console.log(results.rows.item(0));
 
                     var menudatas=results.rows;
                     for(var i = 0; i < itemLength; i++) 
                     {
                         var row = menudatas.item(i);
-                        var obj = {menuId:row.menuId,subMenuId:row.subMenuId,itemId:row.id,itemName:row.itemName,image:row.image,price:row.price,quantity:row.quantity,subTotal:row.subTotal};
+                        var obj = {menuId:row.menuId,subMenuId:row.subMenuId,itemId:row.itemId,itemName:row.itemName,image:row.image,price:row.price,quantity:row.quantity,subTotal:row.subTotal};
                         json_arr.push(obj);
                         //console.log(json_arr);
                         //alert(row.menuId);
@@ -461,6 +461,7 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
         };
 
         $scope.getsubtotal = function(val,index,order){
+
           console.log($scope.OrderedItems);
             //alert();
             // var quantity=$("#quantity").val();
@@ -473,12 +474,13 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
           }
           else
           {
-
+             //console.log(order[0]);
             var data= angular.copy($scope.OrderedItems);
+            console.log(data);
             var price=data[index].price;
             var total = quantity*price;
-            alert(index);
-              alert(data[index].itemId);
+           // alert(data[index].menuId);
+              //alert($scope.OrderedItems[index].itemId);
             var db = window.openDatabase("branboxnew", "1.0", "branbox Demo", 200 * 1024 * 1024);
               db.transaction(function(tx){
                   tx.executeSql('SELECT * FROM orderitems where itemId="'+data[index].itemId+'"',[], function (tx, results)
@@ -503,7 +505,7 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
               image:data[index].image,
               quantity: quantity,
               subTotal: total}); 
-            console.log($scope.OrderedItem);
+           // console.log($scope.OrderedItem);
             $scope.getTotal();
           }
         };
@@ -524,12 +526,14 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
                   json_arr.push(obj);
                   
               }  
-                $scope.FinalOrderData=json_arr;
+               // $scope.FinalOrderData=json_arr;
+
+                $scope.FinalOrderData=orderData;
                 console.log($scope.FinalOrderData);
 
                 $http.post('http://www.appnlogic.com/branboxAppAdmin/branboxAdminUi/ordertableData.php',$scope.FinalOrderData, {headers: {'Content-Type': 'application/x-www-form-urlencoded'} })
                   .success(function (json) {
-                   
+                   console.log(json);
                   }).error(function(){  
                       alert("server Error");
                    });
