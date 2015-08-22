@@ -360,14 +360,14 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
        $scope.saveExtra=function(event,json,index)
        {
           var data= $(event.target).val();
-          alert(json.id);
+          //alert(json.id);
 
           var db = window.openDatabase("branboxnew", "1.0", "branbox Demo", 200 * 1024 * 1024);
               db.transaction(function(tx){
                   tx.executeSql('SELECT * FROM orderingredients where ingId="'+json.id+'"',[], function (tx, results)
                 {
                   var itemLength = results.rows.length;
-                  alert(itemLength);
+                  //alert(itemLength);
                   var menudatas=results.rows;
                    if(itemLength==1 )
                    {
@@ -489,7 +489,7 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
                    if(itemLength==1 )
                    {
                       tx.executeSql('UPDATE  orderitems SET quantity="'+quantity+'" ,subTotal="'+total+'"  WHERE itemId="'+data[index].itemId+'" ',successID);
-                    alert("updated");
+                    //alert("updated");
                     }
                 });
                   function successID(){
@@ -511,22 +511,37 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
         };
 
         $scope.getFood=function(orderData){
-          alert();
+          //alert();
           var json_arr =  []; 
           //json_array= orderData;
-          console.log(orderData);
-          console.log(orderData[0].menuId);
+          //console.log(orderData);
+          //console.log(orderData[0].menuId);
           var itemLength = orderData.length;
 
-          console.log(itemLength);
-           for(var i = 0; i < itemLength; i++) 
-              {
-                  var row = orderData[i];
-                  var obj = {menuId:orderData.menuId,subMenuId:orderData.subMenuId,itemId:orderData.id,itemName:orderData.itemName,image:orderData.image,price:orderData.price,quantity:orderData.quantity,subTotal:orderData.subTotal};
-                  json_arr.push(obj);
+          //console.log(itemLength);
+           // for(var i = 0; i < itemLength; i++) 
+           //    {
+           //        var row = orderData[i];
+           //        var obj = {menuId:orderData.menuId,subMenuId:orderData.subMenuId,itemId:orderData.id,itemName:orderData.itemName,image:orderData.image,price:orderData.price,quantity:orderData.quantity,subTotal:orderData.subTotal};
+           //        json_arr.push(obj);
                   
-              }  
+           //    }  
+
                // $scope.FinalOrderData=json_arr;
+
+
+          var db = window.openDatabase("branboxnew", "1.0", "branbox Demo", 200 * 1024 * 1024);
+              db.transaction(function(tx){
+                  tx.executeSql('SELECT * FROM orderingredients',[], function (tx, results)
+                {
+                  var itemLength = results.rows.length;
+                  //alert(itemLength);
+                  var ingredientsDatas=results.rows;
+                  console.log(ingredientsDatas);
+                  
+                });
+                
+              });
 
                 $scope.FinalOrderData=orderData;
                 console.log($scope.FinalOrderData);
