@@ -599,9 +599,28 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
 
     $http.post('http://www.appnlogic.com/branboxAppAdmin/branboxAdminUi/ajaxLogin.php',{password:password,email:email}, {headers: {'Content-Type': 'application/x-www-form-urlencoded'} })
     .success(function (json) {
-      var ajaxlength = json.rows.length;
-       // alert(ajaxlength);
-        if(ajaxlength == 1){
+      //var ajaxlength = json.rows.length;
+      // alert(ajaxlength);
+      //console.log(json);
+      var id = json[0]['id'];
+      var email = json[0]['email'];
+      var userName  = json[0]['userName'];
+      var address1 = json[0]['address1'];
+      var address1 = json[0]['address2'];
+      var city = json[0]['city'];
+      var state = json[0]['state'];
+      var country = json[0]['country'];
+      var postalCode = json[0]['postalCode'];
+      localStorage.setItem("email", email);
+      localStorage.setItem("id", id);
+      localStorage.setItem("userName",userName );
+      localStorage.setItem("address1", address1);
+      localStorage.setItem("address2", address2);
+      localStorage.setItem("city",city );
+      localStorage.setItem("state",state );
+      localStorage.setItem("country", country);
+      localStorage.setItem("postalCode",postalCode );
+        if(ajaxlength == 1){          
           $location.path('/dashboard');
         }
         else
