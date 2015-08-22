@@ -550,6 +550,17 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
   $("#menu-trigger").removeClass("open");
   $scope.insertForm=function()
   {
+    // for submitting form
+    $scope.submitted = false;
+   
+      if ($scope.newUser.$valid) 
+      {
+        // Submit as normal
+      } else {
+        $scope.newUser.submitted = true;
+      }
+    
+    // for submitting form
     var fname = $("#fname").val(); 
     var password = $("#password").val();
     var gender = $("#gender").val();
@@ -580,6 +591,7 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
     }).error(function(){  
         alert("server Error");
       });
+
   }
 
 })
