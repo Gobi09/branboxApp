@@ -296,7 +296,7 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
                   tx.executeSql('SELECT * FROM orderitems where itemId="'+json.id+'"',[], function (tx, results)
                 {
                   var itemLength = results.rows.length;
-                  var menudatas=results.rows;
+                  var menudatas=results.resultsows;
                    if(itemLength==1 )
                    {
                       tx.executeSql('UPDATE  orderitems SET quantity="'+quantity+'" ,subTotal="'+price+'"  WHERE itemId="'+json.id+'" ',successID);
