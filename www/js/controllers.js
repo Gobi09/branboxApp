@@ -422,11 +422,13 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
                     console.log( $scope.OrderedItems);
                   });
               });
-        $scope.callfun=function(OrderedItems){
+        $scope.showfun=function(OrderedItems){
 
             $("#orderdata").show();
+        }
+        $scope.hidefun=function(OrderedItems){
 
-          //console.log(OrderedItems);
+            $("#orderdata").hide();
         }
         $scope.removeOrder = function(index,order) {
             var db = window.openDatabase("branboxnew", "1.0", "branbox Demo", 200 * 1024 * 1024);
@@ -475,15 +477,18 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
             var data= angular.copy($scope.OrderedItems);
             var price=data[index].price;
             var total = quantity*price;
-
+            alert(index);
+              alert(data[index].itemId);
             var db = window.openDatabase("branboxnew", "1.0", "branbox Demo", 200 * 1024 * 1024);
               db.transaction(function(tx){
-                  tx.executeSql('SELECT * FROM orderitems where itemId="'+json.id+'"',[], function (tx, results)
+                  tx.executeSql('SELECT * FROM orderitems where itemId="'+data[index].itemId+'"',[], function (tx, results)
                 {
                   var itemLength = results.rows.length;
-                  var menudatas=results.rows;
-                      tx.executeSql('UPDATE  orderitems SET quantity="'+quantity+'" ,subTotal="'+price+'"  WHERE itemId="'+order.id+'" ',successID);
-                       
+                   if(itemLength==1 )
+                   {
+                      tx.executeSql('UPDATE  orderitems SET quantity="'+quantity+'" ,subTotal="'+total+'"  WHERE itemId="'+data[index].itemId+'" ',successID);
+                    alert("updated");
+                    }
                 });
                   function successID(){
                       return true;
@@ -498,12 +503,13 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
               image:data[index].image,
               quantity: quantity,
               subTotal: total}); 
-            //console.log($scope.OrderedItem);
+            console.log($scope.OrderedItem);
             $scope.getTotal();
           }
         };
 
         $scope.getFood=function(orderData){
+          alert();
           var json_arr =  []; 
           //json_array= orderData;
           console.log(orderData);

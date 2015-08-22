@@ -1,11 +1,13 @@
 <ion-view>
     <div class="card" ng-controller="AddToCartController">
         <div class="card-body card-padding">
-            <div class="card-header">
-                <h2>Your Orders<small>final summary</small></h2>
+            <div class="card-header pull-center">
+
+                <h2 class="">Your Orders<small>final summary</small></h2>
             </div>
 
-            <button ng-click="callfun(OrderedItems);" class="btn bgm-gray btn-sm waves-effect"> Show Orders</button>
+            <button ng-click="showfun(OrderedItems);" class="btn bgm-orange  btn-sm waves-effect"> Show Orders</button>
+            <button ng-click="hidefun(OrderedItems);" class="btn bgm-bluegray  btn-sm waves-effect pull-right"> Hide Orders</button>
             <div class="table-responsive" style="" tabindex="5" id="orderdata">
                 <table class="table">
                     <thead>
@@ -55,18 +57,25 @@
                 <div class=" button button-small  icon-right  text-center">
                     Total: 
                       {{ getTotal(); }} AED
+
+                      <br>
+                      <br>
+                      <button ng-click="getFood(OrderedItems);" id="food" class="btn bgm-green btn-sm waves-effect t">Get Food</button>
                 </div>
-                <div class=" button button-small button-assertive  icon-right  text-center"  ng-click="getFood(OrderedItem)" id="food">
-                    Get Food
-                </div>
-                <a aria-expanded="false" data-toggle="dropdown" href="" ng-click="goback();" class="btn bgm-deeppurple btn-float z-depth-1 waves-effect pull-right">
-                    <i class="md  md-keyboard-backspace"></i>
-                </a>
+
+                
+
+               <!--  <div class=" button button-small button-assertive  icon-right  text-center"   >
+                   
+                </div> -->
+               
 
             </div>
 
           
-           
+            <a aria-expanded="false" data-toggle="dropdown" href="" ng-click="goback();" class="btn bgm-deeppurple btn-float z-depth-1 waves-effect pull-right">
+                    <i class="md  md-keyboard-backspace"></i>
+                </a>
             
         </div>
     </div>
