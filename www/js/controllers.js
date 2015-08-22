@@ -466,7 +466,7 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
     var city = $("#city").val();
     var bussinessId= $("#bussinessId").val();    
     var code = $("#postalCode").val();
-    alert(gender); 
+    //alert(gender); 
 
     $http.post('http://www.appnlogic.com/branboxAppAdmin/branboxAdminUi/registerUser.php',{busId:bussinessId,fname:fname,password:password,gender:gender,dob:dob,email:email,mobile:mobile,address1:address1,address2:address2,country:country,state:state,city:city,code:code}, {headers: {'Content-Type': 'application/x-www-form-urlencoded'} })
     .success(function (response) {
@@ -503,7 +503,7 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
     $http.post('http://www.appnlogic.com/branboxAppAdmin/branboxAdminUi/ajaxLogin.php',{password:password,email:email}, {headers: {'Content-Type': 'application/x-www-form-urlencoded'} })
     .success(function (json) {
       var ajaxlength = json.rows.length;
-        alert(ajaxlength);
+       // alert(ajaxlength);
         if(ajaxlength == 1){
           $location.path('/dashboard');
         }

@@ -1,106 +1,119 @@
 <ion-view>
+    <link href="cs/bootstrap.css" rel="stylesheet" />
+    <link href="css/bootstrap-theme.css" rel="stylesheet" />
+    <script src="lib/angular.js"></script>
+    <script src="js/_validation/app.js"></script>
+
     <div class="block-header">
         <img class="img-responsive img-circle" src="img/logo.jpg">        
     </div>
     <div class="bs-item z-depth-5">
         <div class="card" ng-controller="registerForm">
-            <div class="card-header">
-                <h2>Register</h2>
-            </div>
-            <div class="card-body card-padding">
-                <form role="form" >
-                    <div class="form-group fg-float">
-                        <div class="fg-line">
-                            <input class="form-control fg-input" type="text" id="fname">
+            <div class="container">
+                <div class="card-header">
+                    <h2>Register</h2>
+                </div>
+                <div class="card-body card-padding">
+                    <form role="form" name="newUser" >
+                        <div class="form-group fg-float" ng-class="{ 'has-error'newUser.fname.$invalid && (         newUser.name.$dirty || submitted)}">
+                            <div class="fg-line">
+                                <input class="form-control" type="text" id="fname" name="fname" ng-required="true" ng-minlength="3" ng-maxlength="8">
+                            </div>
+                            <label class="fg-label">First Name</label>
+                            <p ng-show="newUser.fname.$error.required && (newUser.fname.$dirty || submitted)"       class="help-block">You name is required.
+                            </p>
+                            <p ng-show="newUser.fname.$error.minlength && (newUser.fname.$dirty ||          submitted)" class="help-block">Username is too short.
+                            </p>
+                            <p ng-show="newUser.fname.$error.maxlength && (newUser.fname.$dirty ||          submitted)" class="help-block">Username is too long.
+                            </p>
+                        </div>                    
+                        <div class="form-group fg-float">
+                            <div class="fg-line">
+                                <input class="form-control fg-input" type="password" id="password" ng-pattern="/^\d+$/">
+                            </div>
+                            <label class="fg-label">Password</label>
                         </div>
-                        <label class="fg-label">First Name</label>
-                    </div>                    
-                    <div class="form-group fg-float">
-                        <div class="fg-line">
-                            <input class="form-control fg-input" type="password" id="password" ng-pattern="/^\d+$/">
+                        <div class="form-group fg-float">
+                            <div class="select">
+                                <select class="form-control" id="gender">
+                                    <option>Select</option>
+                                    <option value="m">Male</option>
+                                    <option value="f">Female</option>
+                                    <option value="o">Others</option>                               
+                                </select>
+                            </div>
+                            <!-- <div class="fg-line">
+                                <input class="form-control fg-input" type="text" id="gender">
+                            </div>
+                            <label class="fg-label">Gender</label> -->
                         </div>
-                        <label class="fg-label">Password</label>
-                    </div>
-                    <div class="form-group fg-float">
-                        <div class="select">
-                            <select class="form-control" id="gender">
-                                <option>Select</option>
-                                <option value="m">Male</option>
-                                <option value="f">Female</option>
-                                <option value="o">Others</option>                               
-                            </select>
+                        <div class="fg-float form-group">
+                            <div class="fg-line ">
+                                <input class="form-control date-picker" type="text" id="dob" >
+                            </div>
+                            <label class="fg-label">Date of Birth</label>
+                        </div>                    
+                        <div class="form-group fg-float">
+                            <div class="fg-line">
+                                <input class="form-control fg-input" type="email" id="email">
+                            </div>
+                            <label class="fg-label">Email</label>
                         </div>
-                        <!-- <div class="fg-line">
-                            <input class="form-control fg-input" type="text" id="gender">
+                        <div class="form-group fg-float">
+                            <div class="fg-line">
+                                <input class="form-control fg-input" type="text" id="mobile">
+                            </div>
+                            <label class="fg-label">Mobile Number</label>
                         </div>
-                        <label class="fg-label">Gender</label> -->
-                    </div>
-                    <div class="form-group  fg-float">
-                        <div class="dtp-container dropdown fg-line">
-                            <input class="form-control fg-input" type="text" id="dob">
+                        <div class="form-group fg-float">
+                            <div class="fg-line">
+                                <input class="form-control fg-input" type="text" id="address1">
+                            </div>
+                            <label class="fg-label">Address 1</label>
                         </div>
-                        <label class="fg-label">Date of Birth</label>
-                    </div>                    
-                    <div class="form-group fg-float">
-                        <div class="fg-line">
-                            <input class="form-control fg-input" type="email" id="email">
+                        <div class="form-group fg-float">
+                            <div class="fg-line">
+                                <input class="form-control fg-input" type="text" id="address2">
+                            </div>
+                            <label class="fg-label">Address 2</label>
                         </div>
-                        <label class="fg-label">Email</label>
-                    </div>
-                    <div class="form-group fg-float">
-                        <div class="fg-line">
-                            <input class="form-control fg-input" type="text" id="mobile">
+                        <div class="form-group fg-float">
+                            <div class="fg-line">
+                                <input class="form-control fg-input" type="text" id="city">
+                            </div>
+                            <label class="fg-label">City</label>
                         </div>
-                        <label class="fg-label">Mobile Number</label>
-                    </div>
-                    <div class="form-group fg-float">
-                        <div class="fg-line">
-                            <input class="form-control fg-input" type="text" id="address1">
+                        <div class="form-group fg-float">
+                            <div class="fg-line">
+                                <input class="form-control fg-input" type="text" id="state">
+                            </div>
+                            <label class="fg-label">State</label>
                         </div>
-                        <label class="fg-label">Address 1</label>
-                    </div>
-                    <div class="form-group fg-float">
-                        <div class="fg-line">
-                            <input class="form-control fg-input" type="text" id="address2">
+                        <div class="form-group fg-float">
+                            <div class="fg-line">
+                                <input class="form-control fg-input" type="text" id="country">
+                            </div>
+                            <label class="fg-label">Country</label>
+                        </div>                
+                        <div class="form-group fg-float">
+                            <div class="fg-line">
+                                <input class="form-control fg-input" type="text" id="postalCode">
+                                <input class="form-control fg-input" type="hidden" id="bussinessId" value="1">
+                                <input class="form-control fg-input" type="hidden" id="times" value="2:45">
+                            </div>
+                            <label class="fg-label">Postal code</label>
                         </div>
-                        <label class="fg-label">Address 2</label>
-                    </div>
-                    <div class="form-group fg-float">
-                        <div class="fg-line">
-                            <input class="form-control fg-input" type="text" id="city">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" value="">
+                                <i class="input-helper"></i>
+                                Terms and Condition
+                            </label>
                         </div>
-                        <label class="fg-label">City</label>
-                    </div>
-                    <div class="form-group fg-float">
-                        <div class="fg-line">
-                            <input class="form-control fg-input" type="text" id="state">
-                        </div>
-                        <label class="fg-label">State</label>
-                    </div>
-                    <div class="form-group fg-float">
-                        <div class="fg-line">
-                            <input class="form-control fg-input" type="text" id="country">
-                        </div>
-                        <label class="fg-label">Country</label>
-                    </div>                
-                    <div class="form-group fg-float">
-                        <div class="fg-line">
-                            <input class="form-control fg-input" type="text" id="postalCode">
-                            <input class="form-control fg-input" type="hidden" id="bussinessId" value="1">
-                            <input class="form-control fg-input" type="hidden" id="times" value="2:45">
-                        </div>
-                        <label class="fg-label">Postal code</label>
-                    </div>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" value="">
-                            <i class="input-helper"></i>
-                            Terms and Condition
-                        </label>
-                    </div>
-                    <a ng-click="insertForm();" type="submit" class="btn btn-primary btn-sm waves-effect">Submit</a>
-                    <button type="submit" class="btn btn-primary btn-sm waves-effect" onclick="window.history.back();">Cancel</button>
-                </form>
+                        <a  ng-click="insertForm()" type="submit" class="btn btn-primary btn-sm waves-effect">Submit</a>
+                        <button type="submit" class="btn btn-primary btn-sm waves-effect" onclick="window.history.back();">Cancel</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>

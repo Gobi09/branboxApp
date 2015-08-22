@@ -1,3 +1,5 @@
+//defining module
+var myapp = angular.module('myapp', []);
 angular.module('starter', ['ionic', 'ngRoute', 'starter.controllers', 'starter.services'])
 
 .config(['$routeProvider','$stateProvider',
