@@ -1,4 +1,4 @@
-angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute'])
+angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
 .controller('DashCtrl', function($scope,$ocLazyLoad) {
 
   
