@@ -485,7 +485,7 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
                     for(var i = 0; i < itemLength; i++) 
                     {
                         var row = menudatas.item(i);
-                        var obj = {menuId:row.menuId,subMenuId:row.subMenuId,itemId:row.itemId,userId:row.userId,itemName:row.itemName,image:row.image,price:row.price,quantity:row.quantity,subTotal:row.subTotal};
+                        var obj = {businessId:row.businessId,menuId:row.menuId,subMenuId:row.subMenuId,itemId:row.itemId,userId:row.userId,itemName:row.itemName,image:row.image,price:row.price,quantity:row.quantity,subTotal:row.subTotal};
                         json_arr.push(obj);
                         //console.log(json_arr);
                         //alert(row.menuId);
@@ -570,7 +570,9 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
                   }
 
                 });
-            $scope.OrderedItems.splice(index,1,{itemId: data[index].itemId,
+            $scope.OrderedItems.splice(index,1,{
+              businessId:data[index].businessId,
+              itemId:data[index].itemId,
               subMenuId:data[index].subMenuId,
               menuId:data[index].menuId,
               userId:data[index].userId,
@@ -643,6 +645,10 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
                   console.log(finaldata);
                   $http.post('http://www.appnlogic.com/branboxAppAdmin/branboxAdminUi/ordertableData.php',finaldata, {headers: {'Content-Type': 'application/x-www-form-urlencoded'} })
                     .success(function (json) {
+                      if(json.data=="success")
+                      {
+                         $location.path('/menu');
+                      }
                      console.log(json);
                     }).error(function(){  
                         alert("server Error");
@@ -770,6 +776,7 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
       var postalCode = json[0]['postalCode'];
       localStorage.setItem("email", email);
       localStorage.setItem("id", id);
+      localStorage.setItem("businessId", 1);
       localStorage.setItem("userName",userName );
       localStorage.setItem("address1", address1);
       localStorage.setItem("address2", address2);

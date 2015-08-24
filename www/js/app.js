@@ -36,15 +36,15 @@ var apps=angular.module('starter', ['ionic', 'ngRoute', 'starter.controllers', '
         {
             templateUrl: 'templates/items.html',
             controller: 'SubMenuItemController'
-        })
+        });
 
-      .when('/addTocart',
+        $routeProvider.when('/addTocart',
         {
             templateUrl: 'templates/addTocart.html',
             controller: 'AddToCartController'
-        })
+        });
 
-    .when('/contactForm',
+      $routeProvider.when('/contactForm',
         {
             templateUrl: 'templates/contactForm.html',
             controller: 'contactCtrl'

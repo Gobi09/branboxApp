@@ -4,7 +4,7 @@
         <div class="card-body card-padding">
             
             <div class="card-header jumbotron ">
-                <a aria-expanded="false" data-toggle="dropdown"  href="#addTocart" class="btn bgm-cyan btn-float z-depth-1 waves-effect pull-right">
+                <a aria-expanded="false" data-toggle="dropdown"  href="#addTocart" class="btn bgm-cyan top-float btn-float z-depth-1 waves-effect pull-right">
                    <i class="md md-shopping-cart md-white md-large"></i>
                 </a>
                 <h2>Items<small>Select Items</small></h2>
@@ -26,8 +26,8 @@
                         <input type="hidden" class="price{{$index}}" value="{{item.price}}">
                         <img alt="" style="width: 100%;" src="{{SubMenuItem.image}}">
                         <div class="caption">
-                            <h4 ng-init="price = SubMenuItem.price">{{SubMenuItem.name}}</h4>
-                            <p>Price: {{price}} <span class="pull-right">Sub Total: <span id="price{{$index}}"  ng-model="price">{{price}}</span> AED</span>
+                            <h4 ng-init="price = SubMenuItem.price" class>{{SubMenuItem.name}}</h4>
+                            <p id="fant"> Price: {{price}} <span class="pull-right">Sub Total: <span id="price{{$index}}"  ng-model="price">{{price}}</span> AED</span>
                            
                             </p>
                             <p>

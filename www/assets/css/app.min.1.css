@@ -11227,9 +11227,19 @@ input:focus {
   top: 15px;
 }
 
+
+/*gobi*/
+.card .card-header .top-float{
+  right: 25px;
+  /*bottom: -23px;*/
+  z-index: 1;
+}
+/*gobi*/
+
+
 .card .card-header .btn-float {
   right: 25px;
-  bottom: -23px;
+  /*bottom: -23px;*/
   z-index: 1;
 }
 
@@ -14350,12 +14360,32 @@ a.thumbnail.active {
   width: 100%;
   /*padding-bottom: 50px;*/
 }
+/*gobi*/
+
+@font-face {
+    font-family: gobi;
+    src: url('../fonts/Monky-Business.ttf');
+  
+}
+
+.order .thumbnail .caption h4{
+    font-family: gobi;
+    font-size: 35px;
+    
+}
+.order .thumbnail .caption #fant{
+    font-family: roboto;
+    /*font-size: 35px;*/
+    
+}
+/*gobi*/
+
 
 .carousel .carousel-caption > h3 {
   color: #fff;
   /*margin: 0 0 5px;*/
   font-weight: 300;
-  font-family: MS Serif;
+  font-family:monospace
 }
 
 .carousel .carousel-caption > p {
