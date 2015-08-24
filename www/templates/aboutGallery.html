@@ -3,11 +3,11 @@
         <div class="block-header">
             <h2>
                 About us
-                <small>Dubai, United Arab Emirates</small>
+                <!-- <small>Dubai, United Arab Emirates</small> -->
             </h2>
         </div>
         <div id="profile-main" class="card">
-            <div class="pm-overview c-overflow" style="overflow: hidden;" tabindex="5">
+            <div class="pm-overview c-overflow" style="overflow: hidden;background-image:url(assets/img/gooogd.jpg);" tabindex="5">
                 <div class="pmo-pic" >
                     <div class="p-relative">
                         <a href="">                            
@@ -60,46 +60,53 @@
                 <div class="pmb-block clearfix photos">          
                     <div class="lightbox row" style="background-image: url(assets/media/gallery/thumbs/reen.jpg)">    
                         <div class="lightbox row">
-                            <div class="col-md-3 col-sm-4 col-xs-6" data-src="assets/media/gallery/3.jpg">
+                            <div class="col-md-3 col-sm-4 col-xs-6" data-src="assets/media/gallery/thumbs/f6.jpg">
                                 <div class="lightbox-item p-item">
-                                    <img alt="" src="assets/media/gallery/thumbs/f1.jpg">
+                                    <img class="animated flip" alt="" src="assets/media/gallery/thumbs/f6.jpg">
                                 </div>
                             </div>  
-                            <div class="col-md-3 col-sm-4 col-xs-6" data-src="assets/media/gallery/2.jpg">
+                            <div class="col-md-3 col-sm-4 col-xs-6" data-src="assets/media/gallery/thumbs/f2.jpg">
                                 <div class="lightbox-item p-item">
                                     <img alt="" src="assets/media/gallery/thumbs/f2.jpg">
                                 </div>
                             </div>
-                            <div class="col-md-3 col-sm-4 col-xs-6" data-src="assets/media/gallery/1.jpg">
+                            <div class="col-md-3 col-sm-4 col-xs-6" data-src="assets/media/gallery/thumbs/f5.jpg">
                                 <div class="lightbox-item p-item">
-                                    <img alt="" src="assets/media/gallery/thumbs/f4.jpg">
+                                    <img alt="" src="assets/media/gallery/thumbs/f5.jpg">
                                 </div>
                             </div>
-                            <div class="col-md-3 col-sm-4 col-xs-6" data-src="assets/media/gallery/4.jpg">
-                                <div class="lightbox-item p-item">
-                                    <img alt="" src="assets/media/gallery/thumbs/f2.jpg">
-                                </div>
-                            </div>
-                            <div class="col-md-3 col-sm-4 col-xs-6" data-src="assets/media/gallery/1.jpg">
-                                <div class="lightbox-item p-item">
-                                    <img alt="" src="assets/media/gallery/thumbs/f1.jpg">
-                                </div>
-                            </div>
-                            <div class="col-md-3 col-sm-4 col-xs-6" data-src="assets/media/gallery/2.jpg">
+                            <div class="col-md-3 col-sm-4 col-xs-6" data-src="assets/media/gallery/thumbs/f4.jpg">
                                 <div class="lightbox-item p-item">
                                     <img alt="" src="assets/media/gallery/thumbs/f3.jpg">
                                 </div>
                             </div>
-                            <div class="col-md-3 col-sm-4 col-xs-6" data-src="assets/media/gallery/3.jpg">
+                            <div class="col-md-3 col-sm-4 col-xs-6" data-src="assets/media/gallery/thumbs/f1.jpg">
                                 <div class="lightbox-item p-item">
-                                    <img alt="" src="assets/media/gallery/thumbs/f4.jpg">
+                                    <img alt="" src="assets/media/gallery/thumbs/f1.jpg">
                                 </div>
                             </div>
-                        </div> 
-                        <div class="clearfix"></div>
+                            <div class="col-md-3 col-sm-4 col-xs-6" data-src="assets/media/gallery/thumbs/f3.jpg">
+                                <div class="lightbox-item p-item">
+                                    <img alt="" src="assets/media/gallery/thumbs/f3.jpg">
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-4 col-xs-6" data-src="assets/media/gallery/thumbs/f4.jpg">
+                                <div class="lightbox-item p-item">
+                                    <img alt="" src="assets/media/gallery/thumbs/f4.jpg">
+                                </div>                                                                
+                            </div>                                                        
+                        </div>                         
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </ion-view>
+<script>
+    $(document).ready(function(){
+        $('.lightbox').lightGallery({
+            enableTouch: true
+        });
+    });
+    
+</script>
