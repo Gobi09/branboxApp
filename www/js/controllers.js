@@ -282,7 +282,15 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
       $scope.addToCart=function(val,index,json)
     {
 
-      
+                var nFrom = $(this).attr('data-from');
+                var nAlign = $(this).attr('data-align');
+                var nIcons = $(this).attr('data-icon');
+                var nType = $(this).attr('data-type');
+                var nAnimIn = $(this).attr('data-animation-in');
+                var nAnimOut = $(this).attr('data-animation-out');
+                
+                
+
        //console.log(json);
            //var $row  = jQuery(this).parents('.order');
         var quantity= $("#quantity"+index).val();
@@ -291,21 +299,27 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
       //alert(quantity);
       //console.log(json.price);
       //alert(price);
+       var userid= localStorage.getItem("id");
         var db = window.openDatabase("branboxnew", "1.0", "branbox Demo", 200 * 1024 * 1024);
               db.transaction(function(tx){
                   tx.executeSql('SELECT * FROM orderitems where itemId="'+json.id+'"',[], function (tx, results)
                 {
                   var itemLength = results.rows.length;
+                  console.log(itemLength);
                   var menudatas=results.resultsows;
                    if(itemLength==1 )
                    {
                       tx.executeSql('UPDATE  orderitems SET quantity="'+quantity+'" ,subTotal="'+price+'"  WHERE itemId="'+json.id+'" ',successID);
                        
+                      notify(nFrom, nAlign, nIcons, nType, nAnimIn, nAnimOut);
+
+
                    }
                    else
                    {
-                     tx.executeSql('INSERT OR REPLACE INTO orderitems (businessId,menuId,subMenuId,itemId,itemName,image,price,subTotal,quantity,tax,offers)VALUES("'+json.businessId+'","'+json.menuId+'","'+json.subMenuId+'","'+json.id+'","'+json.name+'","'+json.image+'","'+json.price+'","'+price+'","'+quantity+'","'+json.tax+'","'+json.offers+'")',successID);
+                     tx.executeSql('INSERT OR REPLACE INTO orderitems (businessId,menuId,subMenuId,itemId,userId,itemName,image,price,subTotal,quantity,tax,offers)VALUES("'+json.businessId+'","'+json.menuId+'","'+json.subMenuId+'","'+json.id+'","'+userid+'","'+json.name+'","'+json.image+'","'+json.price+'","'+price+'","'+quantity+'","'+json.tax+'","'+json.offers+'")',successID);
                      
+                     notify(nFrom, nAlign, nIcons, nType, nAnimIn, nAnimOut);
                     
                    }
                  
@@ -316,6 +330,9 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
 
                   
               });
+
+
+          
       };
 
        $scope.savecYesno=function(event,json,index)
@@ -376,7 +393,7 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
                    }
                    else
                    {
-                     tx.executeSql('INSERT OR REPLACE INTO orderingredients (businessId,menuId,subMenuId,itemId,ingId,ingredientsYN,extras)VALUES("'+json.businessId+'","'+json.menuId+'","'+json.subMenuId+'","'+json.itemId+'","'+json.id+'","NO","'+data+'")',successID);
+                     tx.executeSql('INSERT OR REPLACE INTO orderingredients (businessId,menuId,subMenuId,itemId,ingId,ingredientsYN,extras)VALUES("'+json.businessId+'","'+json.menuId+'","'+json.subMenuId+'","'+json.itemId+'","'+json.id+'","YES","'+data+'")',successID);
                      
                     
                    }
@@ -389,12 +406,67 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
             }
 
 
+            function notify(from, align, icon, type, animIn, animOut){
+                $.growl({
+                    icon: icon,
+                    //title: 'Item',
+                    message: 'Item added in the Cart',
+                    url: ''
+                },{
+                        element: 'body',
+                        type: "inverse",
+                        allow_dismiss: true,
+                        placement: {
+                                from: from,
+                                align: align
+                        },
+                        offset: {
+                            x: 20,
+                            y: 85
+                        },
+                        spacing: 10,
+                        z_index: 1031,
+                        delay: 3000,
+                        timer: 500,
+                        url_target: '_blank',
+                        mouse_over: false,
+                        animate: {
+                                enter: animIn,
+                                exit: animOut
+                        },
+                        icon_type: 'class',
+                        template: '<div data-growl="container" class="alert" role="alert">' +
+                                        '<button type="button" class="close" data-growl="dismiss">' +
+                                            '<span aria-hidden="true">&times;</span>' +
+                                            '<span class="sr-only">Close</span>' +
+                                        '</button>' +
+                                        '<span data-growl="icon"></span>' +
+                                        '<span data-growl="title"></span>' +
+                                        '<span data-growl="message"></span>' +
+                                        '<a href="#" data-growl="url"></a>' +
+                                    '</div>'
+                });
+            };
+
+
+
+
+
+
+            
+           
+
+
 
 })
 
 .controller('AddToCartController', function($scope,$http,$location) {
 
-  alert("data");
+  //alert("data");
+  $scope.useremail= localStorage.getItem("email");
+  $scope.userName= localStorage.getItem("userName");
+  $scope.userid= localStorage.getItem("id");
+  //alert($scope.userName);
     $scope.totalAmount="";
      $scope.FinalOrderData="";
      //$scope.OrderedItems="";
@@ -413,7 +485,7 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
                     for(var i = 0; i < itemLength; i++) 
                     {
                         var row = menudatas.item(i);
-                        var obj = {menuId:row.menuId,subMenuId:row.subMenuId,itemId:row.itemId,itemName:row.itemName,image:row.image,price:row.price,quantity:row.quantity,subTotal:row.subTotal};
+                        var obj = {menuId:row.menuId,subMenuId:row.subMenuId,itemId:row.itemId,userId:row.userId,itemName:row.itemName,image:row.image,price:row.price,quantity:row.quantity,subTotal:row.subTotal};
                         json_arr.push(obj);
                         //console.log(json_arr);
                         //alert(row.menuId);
@@ -501,6 +573,7 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
             $scope.OrderedItems.splice(index,1,{itemId: data[index].itemId,
               subMenuId:data[index].subMenuId,
               menuId:data[index].menuId,
+              userId:data[index].userId,
               itemName:data[index].itemName,
               price:data[index].price,
               image:data[index].image,
@@ -512,13 +585,13 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
         };
 
         $scope.getFood=function(orderData){
-          //alert();
           var json_arr =  []; 
+          var finaldata=[];
           //json_array= orderData;
           //console.log(orderData);
           //console.log(orderData[0].menuId);
-          var itemLength = orderData.length;
-
+         // var itemLength = orderData.length;
+          //$scope.ingredients="";
           //console.log(itemLength);
            // for(var i = 0; i < itemLength; i++) 
            //    {
@@ -538,21 +611,46 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
                   var itemLength = results.rows.length;
                   //alert(itemLength);
                   var ingredientsDatas=results.rows;
-                  console.log(ingredientsDatas);
+                  //console.log(ingredientsDatas);
+
+                //alert(itemLength);
+                for(var i = 0; i < itemLength; i++) {
+                    var row = ingredientsDatas.item(i);
+                    var obj = {id:row.id,businessId:row.businessId,menuId:row.menuId,subMenuId:row.subMenuId,itemId:row.itemId,ingId:row.ingId,ingYN:row.ingredientsYN,notes:row.extras};
+                    json_arr.push(obj);
+                      //console.log(row);
+                }  
+                  $scope.additionalData=json_arr;
+
+                //console.log($scope.additionalData);
+
                   
                 });
                 
               });
+              
 
                 $scope.FinalOrderData=orderData;
-                console.log($scope.FinalOrderData);
+                //console.log($scope.FinalOrderData);
+               //console.log($scope.additionalData);
 
-                $http.post('http://www.appnlogic.com/branboxAppAdmin/branboxAdminUi/ordertableData.php',$scope.FinalOrderData, {headers: {'Content-Type': 'application/x-www-form-urlencoded'} })
-                  .success(function (json) {
-                   console.log(json);
-                  }).error(function(){  
-                      alert("server Error");
-                   });
+                // console.log(finaldata);
+                
+                setTimeout(function(){  
+                  finaldata.push($scope.FinalOrderData);
+                  finaldata.push($scope.additionalData);
+                  
+                  console.log(finaldata);
+                  $http.post('http://www.appnlogic.com/branboxAppAdmin/branboxAdminUi/ordertableData.php',finaldata, {headers: {'Content-Type': 'application/x-www-form-urlencoded'} })
+                    .success(function (json) {
+                     console.log(json);
+                    }).error(function(){  
+                        alert("server Error");
+                     });
+                  }, 1000);
+                    
+
+                
 
 
         };
@@ -561,6 +659,33 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
       {
         window.history.back();
       }
+
+
+       $('#food').click(function(){
+                swal({   
+                    title: "Conformation",   
+                    text: " item order completed!",   
+                    type: "warning",   
+                    showCancelButton: true,   
+                    confirmButtonColor: "#04bb1c",   
+                    confirmButtonText: "Yes, Ordered!",   
+                    cancelButtonText: "No, cancel!",   
+                    closeOnConfirm: false,   
+                    closeOnCancel: false 
+                }, function(isConfirm){   
+                    if (isConfirm) {  
+
+                        swal("Send!", "Order send Successfully :)", "success");   
+
+
+
+                    } else {     
+                        swal("Cancelled", "Order canceled :(", "error");   
+                    } 
+                });
+            });
+
+
 
 })
 
@@ -631,14 +756,14 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
 
     $http.post('http://www.appnlogic.com/branboxAppAdmin/branboxAdminUi/ajaxLogin.php',{password:password,email:email}, {headers: {'Content-Type': 'application/x-www-form-urlencoded'} })
     .success(function (json) {
-      //var ajaxlength = json.rows.length;
+      var ajaxlength = json.length;
       // alert(ajaxlength);
       //console.log(json);
       var id = json[0]['id'];
       var email = json[0]['email'];
       var userName  = json[0]['userName'];
       var address1 = json[0]['address1'];
-      var address1 = json[0]['address2'];
+      var address2 = json[0]['address2'];
       var city = json[0]['city'];
       var state = json[0]['state'];
       var country = json[0]['country'];
@@ -652,8 +777,9 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
       localStorage.setItem("state",state );
       localStorage.setItem("country", country);
       localStorage.setItem("postalCode",postalCode );
+
         if(ajaxlength == 1){          
-          $location.path('/dashboard');
+          $location.path('/menu');
         }
         else
         {
@@ -676,6 +802,12 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
   }
 
 })
+  
+  .controller('latestOfferController', function($scope,$http,$location) {  
 
+      $("#sidebar").removeClass("toggled");
+      $("#menu-trigger").removeClass("open");
+
+  })
 
 //check Login User data

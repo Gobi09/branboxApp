@@ -2,9 +2,11 @@
     <div class="card" ng-controller="AddToCartController">
         <div class="card-body card-padding">
             
-            <div class="card-header pull-center">
+            <div class="card-header ">
+                <h2> Name: {{userName}} <small>Email: {{useremail}}</small></h2>
+                <br>
+                <h2 class="pull-center">Your Orders<small>final summary</small>  </h2>
 
-                <h2 class="">Your Orders<small>final summary</small>  </h2>
             </div>
 
             <button ng-click="showfun(OrderedItems);" class="btn bgm-orange  btn-sm waves-effect"> Show Orders</button>

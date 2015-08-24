@@ -39,8 +39,18 @@ body {
 .pull-center
 {
   text-align: center;
+   color:#DD6B55;
 }
   
+.menu-image
+{
+  height: 200px;
+}
+
+.jumbotron .fg-line input
+{
+  border-radius: 10px;
+}
 
 /* gobi icon*/
 
@@ -1475,7 +1485,7 @@ img {
   vertical-align: middle;
 }
 
-.img-responsive,
+.img-responsive,*/
 .thumbnail > img,
 .thumbnail a > img,
 .carousel-inner > .item > img,
@@ -7954,6 +7964,12 @@ button.close {
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
 }
 
+.carousel-caption .ng-scope{
+  font-family: fantasy;
+}
+
+
+
 .carousel-caption .btn {
   text-shadow: none;
 }
@@ -7978,13 +7994,14 @@ button.close {
   .carousel-control .icon-next {
     margin-right: -15px;
   }
-
+/*gobi*/
   .carousel-caption {
     left: 20%;
     right: 20%;
-    padding-bottom: 30px;
+    height: 100px;
+    /*padding-bottom: 30px;*/
   }
-
+/*gobi*/
   .carousel-indicators {
     bottom: 20px;
   }
@@ -10543,12 +10560,12 @@ input:focus {
 .form-control {
   box-shadow: none;
   border: 0;
-  border-bottom: 1px solid #e0e0e0;
+  border-bottom: 2px solid #e0e0e0;
 }
 
 .form-control:active,
 .form-control:focus {
-  border-bottom-color: #b4b4b4;
+  border-bottom-color: #DD595C;
 }
 
 .dropdown-menu {
@@ -14331,13 +14348,14 @@ a.thumbnail.active {
   right: 0;
   bottom: 0;
   width: 100%;
-  padding-bottom: 50px;
+  /*padding-bottom: 50px;*/
 }
 
 .carousel .carousel-caption > h3 {
   color: #fff;
-  margin: 0 0 5px;
+  /*margin: 0 0 5px;*/
   font-weight: 300;
+  font-family: MS Serif;
 }
 
 .carousel .carousel-caption > p {
@@ -14346,7 +14364,7 @@ a.thumbnail.active {
 
 @media screen and (max-width: 991px) {
   .carousel .carousel-caption {
-    display: none;
+    /*display: none;*/
   }
 }
 
