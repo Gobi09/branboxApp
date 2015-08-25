@@ -22,29 +22,27 @@ var apps=angular.module('starter', ['ionic', 'ngRoute', 'starter.controllers', '
     //         templateUrl: 'templates/dashboard.html',
     //         controller: 'DashCtrl'
     //     })
-       .when('/menu',
+   .when('/menu',
         {
             templateUrl: 'templates/menu.html',
             controller: 'MenuController'
         })
-       .when('/subMenu/=:id',
+   .when('/subMenu/=:id',
         {
             templateUrl: 'templates/subMenu.html',
             controller: 'SubMenuController'
         })
-       .when('/items/=:menuId=:subMenuId',
+   .when('/items/=:menuId=:subMenuId',
         {
             templateUrl: 'templates/items.html',
             controller: 'SubMenuItemController'
-        });
-
-        $routeProvider.when('/addTocartpage',
+        })
+   .when('/addTocartpage',
         {
-            templateUrl: 'templates/addTocart.html',
+            templateUrl: 'templates/addItemTocart.html',
             controller: 'AddToCartCtrl'
-        });
-
-      $routeProvider.when('/contactForm',
+        })
+    .when('/contactForm',
         {
             templateUrl: 'templates/contactForm.html',
             controller: 'contactCtrl'
