@@ -315,7 +315,11 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
                 var nAnimIn = $(this).attr('data-animation-in');
                 var nAnimOut = $(this).attr('data-animation-out');
                 
-                
+    //             var currentdate = new Date(); 
+    // var datetime =currentdate.getDate() + "/"+ (currentdate.getMonth()+1)  + "/" + currentdate.getFullYear()+ "-"   
+    //               + currentdate.getHours() + ":"  
+    //               + currentdate.getMinutes();
+               // alert(datetime);
 
        //console.log(json);
            //var $row  = jQuery(this).parents('.order');
@@ -323,9 +327,10 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
       //var quantity=$(val.target).val();
       var price=json.price * quantity;
       //alert(quantity);
-      //console.log(json.price);
+      console.log(json);
       //alert(price);
        var userid= localStorage.getItem("id");
+       console.log(userid);
         var db = window.openDatabase("branboxnew", "1.0", "branbox Demo", 200 * 1024 * 1024);
               db.transaction(function(tx){
                   tx.executeSql('SELECT * FROM orderitems where itemId="'+json.id+'"',[], function (tx, results)
@@ -338,8 +343,6 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
                       tx.executeSql('UPDATE  orderitems SET quantity="'+quantity+'" ,subTotal="'+price+'"  WHERE itemId="'+json.id+'" ',successID);
                        
                       notify(nFrom, nAlign, nIcons, nType, nAnimIn, nAnimOut);
-
-
                    }
                    else
                    {
@@ -542,22 +545,22 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
            //alert(order.itemId);
         };
 
-        $scope.getTotal = function(){
-          //alert("call from");
-            var total = 0;
-            var length= $scope.OrderedItems.length;
+        // $scope.getTotal = function(){
+        //   //alert("call from");
+        //     var total = 0;
+        //     var length= $scope.OrderedItems.length;
 
-            for(var i = 0; i < length; i++){
-                var product = $scope.OrderedItems[i];
-                total += parseInt(product.subTotal);
-                //alert(product.subTotal);
-            }
-            $scope.totalAmount=total;
-            if (total==0) {
-              $("#food").hide();
-            };
-            return total;
-        };
+        //     for(var i = 0; i < length; i++){
+        //         var product = $scope.OrderedItems[i];
+        //         total += parseInt(product.subTotal);
+        //         //alert(product.subTotal);
+        //     }
+        //     $scope.totalAmount=total;
+        //     if (total==0) {
+        //       $("#food").hide();
+        //     };
+        //     return total;
+        // };
 
         $scope.getsubtotal = function(val,index,order){
 
@@ -678,8 +681,17 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
                   console.log(finaldata);
                   $http.post('http://www.appnlogic.com/branboxAppAdmin/branboxAdminUi/ordertableData.php',finaldata, {headers: {'Content-Type': 'application/x-www-form-urlencoded'} })
                     .success(function (json) {
+                     
+                      console.log(json);
                       if(json.data=="success")
                       {
+                         swal({   
+                            title: "Order Send Successfully!",   
+                            text: "Food Will Reach Soon",   
+                            timer: 2000,   
+                            showConfirmButton: false 
+                        });
+                          
                          $location.path('/menu');
                       }
                      console.log(json);
@@ -700,29 +712,29 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
       }
 
 
-       $('#food').click(function(){
-                swal({   
-                    title: "Conformation",   
-                    text: " item order completed!",   
-                    type: "warning",   
-                    showCancelButton: true,   
-                    confirmButtonColor: "#04bb1c",   
-                    confirmButtonText: "Yes, Ordered!",   
-                    cancelButtonText: "No, cancel!",   
-                    closeOnConfirm: false,   
-                    closeOnCancel: false 
-                }, function(isConfirm){   
-                    if (isConfirm) {  
+       // $('#food').click(function(){
+       //          swal({   
+       //              title: "Conformation",   
+       //              text: " item order completed!",   
+       //              type: "warning",   
+       //              showCancelButton: true,   
+       //              confirmButtonColor: "#04bb1c",   
+       //              confirmButtonText: "Yes, Ordered!",   
+       //              cancelButtonText: "No, cancel!",   
+       //              closeOnConfirm: false,   
+       //              closeOnCancel: false 
+       //          }, function(isConfirm){   
+       //              if (isConfirm) {  
 
-                        swal("Send!", "Order send Successfully :)", "success");   
+       //                  swal("Send!", "Order send Successfully :)", "success");   
 
 
 
-                    } else {     
-                        swal("Cancelled", "Order canceled :(", "error");   
-                    } 
-                });
-            });
+       //              } else {     
+       //                  swal("Cancelled", "Order canceled :(", "error");   
+       //              } 
+       //          });
+       //      });
 
 
 

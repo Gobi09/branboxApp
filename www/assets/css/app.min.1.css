@@ -15307,34 +15307,47 @@ body.login-content:after {
   
 }
 /*gobi*/
+
 body.login-content:before {
   height: 50%;
   width: 100%;
   position: absolute;
   top: 0;
   left: 0;
-  background: url('../img/steak.jpg');
-  /*background: #6075bf;*/
+  background: #00bcd4;
   content: "";
   z-index: 0;
-  background-size: 100% auto;
-  /**/
-  max-width: 100%;
-  
 }
+
+
+/*body.login-content:before {*/
+/*  height: 50%;*/
+/*  width: 100%;*/
+/*  position: absolute;*/
+/*  top: 0;*/
+/*  left: 0;*/
+/*  background: url('../img/steak.jpg') repeat;*/
+/*  /*background: #6075bf;*/*/
+/*  content: "";*/
+/*  z-index: 0;*/
+/*  background-size: 100% auto;*/
+/*  /**/*/
+/*  max-width: 100%;*/
+/*  */
+/*}*/
 /*#indexBack{*/
 /*   background: #f0f0f0;*/
 /*}*/
-#indexBack{
-  background: url('../img/steak.jpg') no-repeat bottom ;
--webkit-background-size: 100% auto;
--moz-background-size: 100% auto;
--o-background-size: 100% auto;
- background-size: 100% auto;
-  /**/
-  max-width: 100%;
- 
-}
+/*#indexBack{*/
+/*  background: url('../img/steak.jpg') repeat bottom ;*/
+/*-webkit-background-size: 100% auto;*/
+/*-moz-background-size: 100% auto;*/
+/*-o-background-size: 100% auto;*/
+/* background-size: 100% auto;*/
+/*  /**/*/
+/*  max-width: 100%;*/
+/* */
+/*}*/
 
 /*gobi*/
 
