@@ -20,7 +20,7 @@
         <script src="lib/ionic/js/angular-ui/angular-ui-router.js"></script>
     </head>
     
-    <body class="login-content" ng-app="mainApp">
+    <body class="login-content" id="indexBack">
         <!-- Login -->
         <div class="lc-block toggled" id="l-login">
             <div class="input-group m-b-20">
@@ -31,7 +31,7 @@
             </div>
             
             <div class="input-group m-b-20">
-                <span class="input-group-addon"><i class="md md-lock-open"></i></span>
+                <span class="input-group-addon"><i class="md md-lock-outline "></i></span>
                 <div class="fg-line">
                     <input type="password" class="form-control" id="pass" placeholder="Password">
                 </div>
@@ -47,12 +47,12 @@
                 </label>
             </div> -->
             
-            <div  class="btn btn-login btn-danger btn-float" id="login"><i class="md md-arrow-forward"></i></div>
+            <div  class="btn btn-login btn-danger btn-float" id="login"><i class="md md-local-restaurant"></i></div>
             
             <ul class="login-navigation">
                 <li class="bgm-red"><a href="mainpage.html#/register" style="color:white;">Register</a></li>
                 <li data-block="#l-forget-password" class="bgm-orange">Forgot Password?</li>
-                <li class="bgm-orange"><a href="mainpage.html#/menu" style="color:white;">Visitors</a></li>
+                <li class="bgm-green"><a href="mainpage.html#/menu" style="color:white;">Visitors</a></li>
             </ul>
         </div>
         

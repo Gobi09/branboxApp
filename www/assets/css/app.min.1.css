@@ -15192,8 +15192,9 @@ a.thumbnail.active {
 
 .login-content .lc-block {
   background: #fff;
+  border-radius: 16px;
   box-shadow: 0 1px 11px rgba(0, 0, 0, 0.27);
-  border-radius: 2px;
+  /*border-radius: 2px;*/
   padding: 35px 55px 35px;
   width: 500px;
   display: inline-block;
@@ -15303,18 +15304,39 @@ body.login-content:after {
   display: inline-block;
   width: 1px;
   height: 100%;
+  
 }
-
+/*gobi*/
 body.login-content:before {
   height: 50%;
   width: 100%;
   position: absolute;
   top: 0;
   left: 0;
-  background: #00bcd4;
+  background: url('../img/steak.jpg');
+  /*background: #6075bf;*/
   content: "";
   z-index: 0;
+  background-size: 100% auto;
+  /**/
+  max-width: 100%;
+  
 }
+/*#indexBack{*/
+/*   background: #f0f0f0;*/
+/*}*/
+#indexBack{
+  background: url('../img/steak.jpg') no-repeat bottom ;
+-webkit-background-size: 100% auto;
+-moz-background-size: 100% auto;
+-o-background-size: 100% auto;
+ background-size: 100% auto;
+  /**/
+  max-width: 100%;
+ 
+}
+
+/*gobi*/
 
 #profile-main {
   min-height: 500px;
