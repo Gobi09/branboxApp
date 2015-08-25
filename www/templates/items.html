@@ -4,7 +4,7 @@
         <div class="card-body card-padding">
             
             <div class="card-header jumbotron ">
-                <a aria-expanded="false" data-toggle="dropdown"  href="#addTocart" class="btn bgm-cyan top-float btn-float z-depth-1 waves-effect pull-right">
+                <a ng-show="useremail != null" href="#addTocart" class="btn bgm-cyan waves-effect pull-right">
                    <i class="md md-shopping-cart md-white md-large"></i>
                 </a>
                 <h2>Items<small>Select Items</small></h2>
@@ -37,7 +37,7 @@
                                  </span>
                                
 
-                                <span class="m-b-5  pull-right"  >
+                                <span class="m-b-5  pull-right" ng-show="useremail != null"  >
 
                                 <button class="btn btn-danger btn-sm waves-effect" type="button" ng-click='minus($event,$index,SubMenuItem);' id="minus" value="1" >-</button>
 
@@ -67,10 +67,15 @@
                                                 <tr ng-repeat="ingredients in SubMenuItemIngredientsData" ng-if="SubMenuItem.id==ingredients.itemId" >
                                                     <td>{{ingredients.ingredients}}-{{ingredients.price}} AED</td>
                                                     <td>
-                                                        <label class="checkbox checkbox-inline m-r-20" >
+                                                        <div class="toggle-switch" data-ts-color="green" ng-if="ingredients.category!='base'">
+                                                            <input  type="checkbox" value="NO"  ng-click="savecYesno($event,ingredients,$index);" checked   hidden="hidden" id="ts{{$index}}">
+                                                            <label class="ts-helper" for="ts{{$index}}"></label>
+                                                        </div>
+                                                       
+                                                        <!-- <label class="checkbox checkbox-inline m-r-20" >
                                                         <input type="checkbox" value="NO" ng-if="ingredients.category!='base'" ng-click="savecYesno($event,ingredients,$index);" checked  >
                                                         <i class="input-helper"></i>
-                                                        </label>
+                                                        </label> -->
                                                     </td>
                                                     <td>
                                                         <div class="form-group fg-line">

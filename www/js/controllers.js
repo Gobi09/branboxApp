@@ -1,8 +1,17 @@
 angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
-.controller('DashCtrl', function($scope,$ocLazyLoad) {
+
+
+
+// .controller('mainViewController', function($scope,$ocLazyLoad) {
+
+//      
+
+//   })
+
+// .controller('DashCtrl', function($scope,$ocLazyLoad) {
 
   
-  })
+//   })
 .controller('contactCtrl', function($scope,$http) {
 
     $("#sidebar").removeClass("toggled");
@@ -129,8 +138,13 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
     }
 })
 .controller('MenuController', function($scope,$http,$location) {
+
     $("#sidebar").removeClass("toggled");
   $("#menu-trigger").removeClass("open");
+   $scope.useremail= localStorage.getItem("email");
+      $scope.userName= localStorage.getItem("userName");
+       console.log($scope.userName);
+      // alert($scope.userName);
     var businessId=1;
           //Menus from server and sync here.....
     $http.post('http://www.appnlogic.com/branboxAppAdmin/branboxAdminUi/ajaxMenu.php',{bussId: businessId}, {headers: {'Content-Type': 'application/x-www-form-urlencoded'} })
@@ -152,6 +166,8 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
 .controller('SubMenuController', function($scope,$http,$location) {
     $("#sidebar").removeClass("toggled");
   $("#menu-trigger").removeClass("open");
+
+
     var businessId=1;
    var url = $location.url();
     var temp = url.split("=");
@@ -180,6 +196,9 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
 .controller('SubMenuItemController', function($scope,$http,$location) {
   $("#sidebar").removeClass("toggled");
   $("#menu-trigger").removeClass("open");
+
+  $scope.useremail= localStorage.getItem("email");
+  $scope.userName= localStorage.getItem("userName");
     var businessId=1;
     var url = $location.url();
     var url = $location.url();
@@ -240,12 +259,19 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
                
       $scope.goback=function()
       {
+        //alert();
         window.history.back();
       }
+
+      // $scope.goToCart=function()
+      // {
+      //    $location.path('/addTocart');
+      // }
+
     $scope.minus=function(val,index,item)
     {
       console.log(item);
-       
+      // alert();
      var total=$("#quantity"+index).val();
     // alert(total);
      total--;
@@ -630,8 +656,11 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
                 });
                 
               });
-              
 
+                var date= localStorage.getItem("date");
+                var time= localStorage.getItem("time");
+
+                
                 $scope.FinalOrderData=orderData;
                 //console.log($scope.FinalOrderData);
                //console.log($scope.additionalData);
@@ -641,6 +670,10 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
                 setTimeout(function(){  
                   finaldata.push($scope.FinalOrderData);
                   finaldata.push($scope.additionalData);
+                  if(date!="" && time!="")
+                  {
+                    $scope.TimedDelevery={date:date,time:time};
+                  }
                   
                   console.log(finaldata);
                   $http.post('http://www.appnlogic.com/branboxAppAdmin/branboxAdminUi/ordertableData.php',finaldata, {headers: {'Content-Type': 'application/x-www-form-urlencoded'} })
@@ -765,28 +798,33 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
       var ajaxlength = json.length;
       // alert(ajaxlength);
       //console.log(json);
-      var id = json[0]['id'];
-      var email = json[0]['email'];
-      var userName  = json[0]['userName'];
-      var address1 = json[0]['address1'];
-      var address2 = json[0]['address2'];
-      var city = json[0]['city'];
-      var state = json[0]['state'];
-      var country = json[0]['country'];
-      var postalCode = json[0]['postalCode'];
-      localStorage.setItem("email", email);
-      localStorage.setItem("id", id);
-      localStorage.setItem("businessId", 1);
-      localStorage.setItem("userName",userName );
-      localStorage.setItem("address1", address1);
-      localStorage.setItem("address2", address2);
-      localStorage.setItem("city",city );
-      localStorage.setItem("state",state );
-      localStorage.setItem("country", country);
-      localStorage.setItem("postalCode",postalCode );
-
+      if(ajaxlength==1)
+      {
+          var id = json[0]['id'];
+          var email = json[0]['email'];
+          var userName  = json[0]['userName'];
+          var address1 = json[0]['address1'];
+          var address2 = json[0]['address2'];
+          var city = json[0]['city'];
+          var state = json[0]['state'];
+          var country = json[0]['country'];
+          var postalCode = json[0]['postalCode'];
+          localStorage.setItem("email", email);
+          localStorage.setItem("id", id);
+          localStorage.setItem("businessId", 1);
+          localStorage.setItem("userName",userName );
+          localStorage.setItem("address1", address1);
+          localStorage.setItem("address2", address2);
+          localStorage.setItem("city",city );
+          localStorage.setItem("state",state );
+          localStorage.setItem("country", country);
+          localStorage.setItem("postalCode",postalCode );
+           window.location="mainpage.html";
+           // $location.path('/menu');
+      }
+     
         if(ajaxlength == 1){          
-          $location.path('/menu');
+         
         }
         else
         {

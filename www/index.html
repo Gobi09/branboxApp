@@ -7,9 +7,12 @@
         <title>Material Admin</title>
         
         <!-- Vendor CSS -->
+         <link href="assets/vendors/bower_components/sweetalert/dist/sweetalert-override.min.css" rel="stylesheet">
         <link href="assets/vendors/bower_components/animate.css/animate.min.css" rel="stylesheet">
         <link href="assets/vendors/bower_components/material-design-iconic-font/css/material-design-iconic-font.min.css" rel="stylesheet">
             
+        <script src="assets/vendors/bower_components/sweetalert/dist/sweetalert.min.js"></script>
+        
         <!-- CSS -->
         <link href="assets/css/app.min.1.css" rel="stylesheet">
         <link href="assets/css/app.min.2.css" rel="stylesheet">
@@ -23,32 +26,33 @@
             <div class="input-group m-b-20">
                 <span class="input-group-addon"><i class="md md-person"></i></span>
                 <div class="fg-line">
-                    <input type="text" class="form-control" placeholder="Username">
+                    <input type="text" class="form-control" id="name" placeholder="Username">
                 </div>
             </div>
             
             <div class="input-group m-b-20">
-                <span class="input-group-addon"><i class="md md-accessibility"></i></span>
+                <span class="input-group-addon"><i class="md md-lock-open"></i></span>
                 <div class="fg-line">
-                    <input type="password" class="form-control" placeholder="Password">
+                    <input type="password" class="form-control" id="pass" placeholder="Password">
                 </div>
             </div>
             
             <div class="clearfix"></div>
             
-            <div class="checkbox">
+            <!-- <div class="checkbox">
                 <label>
                     <input type="checkbox" value="">
                     <i class="input-helper"></i>
                     Keep me signed in
                 </label>
-            </div>
+            </div> -->
             
-            <a href="mainpage.html" class="btn btn-login btn-danger btn-float"><i class="md md-arrow-forward"></i></a>
+            <div  class="btn btn-login btn-danger btn-float" id="login"><i class="md md-arrow-forward"></i></div>
             
             <ul class="login-navigation">
-                <li data-block="#l-register" class="bgm-red">Register</li>
+                <li class="bgm-red"><a href="mainpage.html#/register" style="color:white;">Register</a></li>
                 <li data-block="#l-forget-password" class="bgm-orange">Forgot Password?</li>
+                <li class="bgm-orange"><a href="mainpage.html#/menu" style="color:white;">Visitors</a></li>
             </ul>
         </div>
         
@@ -95,12 +99,12 @@
         
         <!-- Forgot Password -->
         <div class="lc-block" id="l-forget-password">
-            <p class="text-left">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla eu risus. Curabitur commodo lorem fringilla enim feugiat commodo sed ac lacus.</p>
+            <p class="text-left">Enter Your Email Id</p>
             
             <div class="input-group m-b-20">
                 <span class="input-group-addon"><i class="md md-email"></i></span>
                 <div class="fg-line">
-                    <input type="text" class="form-control" placeholder="Email Address">
+                    <input type="text" class="form-control"  placeholder="Email Address">
                 </div>
             </div>
             
@@ -112,55 +116,11 @@
             </ul>
         </div>
         
-        <!-- Older IE warning message -->
-        <!--[if lt IE 9]>
-            <div class="ie-warning">
-                <h1 class="c-white">Warning!!</h1>
-                <p>You are using an outdated version of Internet Explorer, please upgrade <br/>to any of the following web browsers to access this website.</p>
-                <div class="iew-container">
-                    <ul class="iew-download">
-                        <li>
-                            <a href="http://www.google.com/chrome/">
-                                <img src="img/browsers/chrome.png" alt="">
-                                <div>Chrome</div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="https://www.mozilla.org/en-US/firefox/new/">
-                                <img src="img/browsers/firefox.png" alt="">
-                                <div>Firefox</div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="http://www.opera.com">
-                                <img src="img/browsers/opera.png" alt="">
-                                <div>Opera</div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="https://www.apple.com/safari/">
-                                <img src="img/browsers/safari.png" alt="">
-                                <div>Safari</div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="http://windows.microsoft.com/en-us/internet-explorer/download-ie">
-                                <img src="img/browsers/ie.png" alt="">
-                                <div>IE (New)</div>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-                <p>Sorry for the inconvenience!</p>
-            </div>   
-        <![endif]-->
         <script>
             var mainApp = angular.module("mainApp", []);
             mainApp.controller("studentController", function($scope,$http) {
                 
-                //$scope.student = {
-                //    
-                //}
+              
                 $scope.signUp = function(add){
                     var data = {
                         username:$scope.username,
@@ -193,3 +153,83 @@
     </body>
 
 </html>
+<script type="text/javascript">
+$("#login").click(function(){
+
+    var name = $("#name").val();
+    var pass = $("#pass").val();
+     
+    var pattern = new RegExp(/^[+a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i);
+     
+    if(!pattern.test(name))
+    {
+         swal({   
+                            title: "It is Required!",   
+                            text: "Please fill Valid Email.",   
+                            timer: 2000,   
+                            showConfirmButton: false 
+                        });
+         return false
+    }
+    //alert(pass);
+    if(pass=="")
+    {
+         swal({   
+                            title: "It is Required!",   
+                            text: "Please fill Password.",   
+                            timer: 2000,   
+                            showConfirmButton: false 
+                        });
+         return false
+    }
+
+     $.ajax({
+                type: "POST",
+                dataType: "json",
+                data:{email:name,pass:pass},
+                 url:"http://www.appnlogic.com/branboxAppAdmin/branboxAdminUi/ajaxLogin.php?id=1",
+                success: function(json){
+                     var ajaxlength = json.length;
+
+                    if(!json.error)
+                    {
+                       var id = json[0]['id'];
+                        var email = json[0]['email'];
+                        var userName  = json[0]['userName'];
+                        var address1 = json[0]['address1'];
+                        var address2 = json[0]['address2'];
+                        var city = json[0]['city'];
+                        var state = json[0]['state'];
+                        var country = json[0]['country'];
+                        var postalCode = json[0]['postalCode'];
+                        localStorage.setItem("email", email);
+                        localStorage.setItem("id", id);
+                        localStorage.setItem("businessId", 1);
+                        localStorage.setItem("userName",userName );
+                        localStorage.setItem("address1", address1);
+                        localStorage.setItem("address2", address2);
+                        localStorage.setItem("city",city );
+                        localStorage.setItem("state",state );
+                        localStorage.setItem("country", country);
+                        localStorage.setItem("postalCode",postalCode );
+                        console.log(json[0]['userName']);
+                        window.location="mainpage.html#/menu";
+                    }
+                    else
+                    {
+                        swal({   
+                            title: "Auto close alert!",   
+                            text: "I will close in 2 seconds.",   
+                            timer: 2000,   
+                            showConfirmButton: false 
+                        });
+                    }
+
+                   
+                   //alert();
+                },
+                });
+
+});
+</script>
+
