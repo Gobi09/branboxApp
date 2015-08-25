@@ -486,7 +486,7 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
 
 })
 
-.controller('AddToCartController', function($scope,$http,$location) {
+.controller('AddToCartCtrl', function($scope,$http,$location) {
 
   //alert("data");
   $scope.useremail= localStorage.getItem("email");

@@ -38,10 +38,10 @@ var apps=angular.module('starter', ['ionic', 'ngRoute', 'starter.controllers', '
             controller: 'SubMenuItemController'
         });
 
-        $routeProvider.when('/addTocart',
+        $routeProvider.when('/addTocartpage',
         {
             templateUrl: 'templates/addTocart.html',
-            controller: 'AddToCartController'
+            controller: 'AddToCartCtrl'
         });
 
       $routeProvider.when('/contactForm',
