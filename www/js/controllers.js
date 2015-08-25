@@ -768,7 +768,7 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
     var country = $("#country").val();
     var state = $("#state").val();
     var city = $("#city").val();
-    var bussinessId= $("#bussinessId").val();    
+    var bussinessId="1";    
     var code = $("#postalCode").val();
     //alert(gender); 
 
