@@ -1,0 +1,49 @@
+<ion-view >
+    <div class="container">
+        <div class="card">
+            <div class="pm-body clearfix">
+                <div class="pmb-block">
+                    <div class="pmbb-header">
+                        <h2>
+                            <i class="md md-equalizer m-r-5"></i>Time Delivery
+                        </h2> 
+                    </div>
+                </div>
+                <div class="pmbb-body p-l-30">
+                    <div class="row">
+                        <div class="col-sm-4">
+                        <!-- <p class="c-black f-500 m-b-20">Time Picker</p> -->
+                            <div class="input-group form-group">
+                                <span class="input-group-addon"><i class="md md-access-time"></i></span>
+                                <div class="dtp-container dropdown fg-line">
+                                    <input type='text' class="form-control datetimepicker" data-toggle="dropdown" placeholder="Click here...">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4">
+                        <!-- <p class="c-black f-500 m-b-20">Time Picker</p> -->
+                            <div class="input-group form-group">
+                                <span class="input-group-addon"><i class="md md-access-time"></i></span>
+                                <div class="dtp-container dropdown fg-line">
+                                    <input type='text' class="form-control timepicker" data-toggle="dropdown" placeholder="Click here...">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                                  
+            </div>            
+        </div>
+    </div>
+    <script type="text/javascript">
+        $('.datetimepicker').datetimepicker({
+            
+        });
+        $('.timepicker').datetimepicker({
+            pickDate: true
+        });
+
+
+    </script>
+</ion-view>

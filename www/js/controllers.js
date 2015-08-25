@@ -816,5 +816,17 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
       $("#menu-trigger").removeClass("open");
 
   })
+.controller('timeDelivery', function($scope,$http,$location) {  
+      $("#sidebar").removeClass("toggled");
+      $("#menu-trigger").removeClass("open");
+        $scope.datetime = {
+        datetimePicker: {
+          
+        }
+      };
+  })
+
+
+
 
 //check Login User data

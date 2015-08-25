@@ -95,6 +95,11 @@ var apps=angular.module('starter', ['ionic', 'ngRoute', 'starter.controllers', '
             templateUrl: 'templates/aboutGallery.html',
             //controller: 'aboutUs'
         })
+    .when('/timeDelivery',
+        {
+            templateUrl: 'templates/timeDelivery.html',
+            controller: 'timeDelivery'
+        })
     .otherwise('/dashboard');
 
 }]);
