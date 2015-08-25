@@ -854,14 +854,20 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
       $("#menu-trigger").removeClass("open");
 
   })
-.controller('timeDelivery', function($scope,$http,$location) {  
+.controller('timeDelivery', function($scope,$http) {  
       $("#sidebar").removeClass("toggled");
       $("#menu-trigger").removeClass("open");
-        $scope.datetime = {
-        datetimePicker: {
-          
-        }
-      };
+      $scope.save = function(){
+         var delvDate = $('#deliveryDate').val();           
+         var delvTime = $('#deliveryTime').val();           
+         var db = openDatabase('DeliveryDateTime', '1.0', 'Delivery Date Time', 1000 * 1024 * 1024);
+         db.transaction(function (tx) {
+          tx.executeSql('CREATE TABLE IF NOT EXISTS dateDelivery (id INTEGER PRIMARY KEY AUTOINCREMENT, date DATE, time DATETIME(200))');                  
+          tx.executeSql('INSERT OR REPLACE INTO dateDelivery (date, time) VALUES(?,?)',[delvDate,delvTime]);
+        });
+         
+      }      
+
   })
 
 

@@ -16,7 +16,7 @@
                             <div class="input-group form-group">
                                 <span class="input-group-addon"><i class="md md-access-time"></i></span>
                                 <div class="dtp-container dropdown fg-line">
-                                    <input type='text' class="form-control datetimepicker" data-toggle="dropdown" placeholder="Click here...">
+                                    <input type='text' id="deliveryDate" class="form-control datetimepicker" data-toggle="dropdown" placeholder="Date..">
                                 </div>
                             </div>
                         </div>
@@ -27,21 +27,28 @@
                             <div class="input-group form-group">
                                 <span class="input-group-addon"><i class="md md-access-time"></i></span>
                                 <div class="dtp-container dropdown fg-line">
-                                    <input type='text' class="form-control timepicker" data-toggle="dropdown" placeholder="Click here...">
+                                    <input type='text' id="deliveryTime" class="form-control timepicker" data-toggle="dropdown" placeholder="Time">
                                 </div>
                             </div>
                         </div>
                     </div>
-                                  
+                    <div class="row">
+                        <div class="col-sm-4 ">
+                            <div class="input-group form-group">
+                                <button class="btn btn-info waves-effect" ng-click="save()">save</button>
+                            </div>
+                        </div>
+                    </div>
             </div>            
         </div>
     </div>
     <script type="text/javascript">
         $('.datetimepicker').datetimepicker({
-            
+           format: 'DD-MM-YYYY'
         });
+        
         $('.timepicker').datetimepicker({
-            pickDate: true
+            format: 'HH:mm'
         });
 
 
