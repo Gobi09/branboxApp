@@ -545,22 +545,22 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
            //alert(order.itemId);
         };
 
-        // $scope.getTotal = function(){
-        //   //alert("call from");
-        //     var total = 0;
-        //     var length= $scope.OrderedItems.length;
+        $scope.getTotal = function(){
+          //alert("call from");
+            var total = 0;
+            var length= $scope.OrderedItems.length;
 
-        //     for(var i = 0; i < length; i++){
-        //         var product = $scope.OrderedItems[i];
-        //         total += parseInt(product.subTotal);
-        //         //alert(product.subTotal);
-        //     }
-        //     $scope.totalAmount=total;
-        //     if (total==0) {
-        //       $("#food").hide();
-        //     };
-        //     return total;
-        // };
+            for(var i = 0; i < length; i++){
+                var product = $scope.OrderedItems[i];
+                total += parseInt(product.subTotal);
+                //alert(product.subTotal);
+            }
+            $scope.totalAmount=total;
+            if (total==0) {
+              $("#food").hide();
+            };
+            return total;
+        };
 
         $scope.getsubtotal = function(val,index,order){
 
@@ -691,7 +691,17 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
                             timer: 2000,   
                             showConfirmButton: false 
                         });
-                          
+
+                              var db = window.openDatabase("branboxnew", "1.0", "branbox New", 200 * 1024 * 1024);
+                                  db.transaction(function(tx){
+                                        tx.executeSql('DELETE FROM orderitems');
+                                        //tx.executeSql('CREATE TABLE IF NOT EXISTS orderitems (id INTEGER PRIMARY KEY AUTOINCREMENT,businessId INTEGER ,menuId INTEGER, subMenuId INTEGER,itemId INTEGER,userId INTEGER, itemName TEXT, image TEXT, price TEXT, subTotal TEXT, quantity TEXT,tax TEXT,offers TEXT)');
+                                       tx.executeSql('DELETE FROM orderingredients');
+                                        //tx.executeSql('CREATE TABLE IF NOT EXISTS orderingredients (id INTEGER PRIMARY KEY AUTOINCREMENT,businessId INTEGER ,menuId INTEGER, subMenuId INTEGER,itemId INTEGER, ingId INTEGER, ingredientsYN TEXT, extras TEXT)');                  
+                                      
+                                      localStorage.setItem("dbclear", '1');
+                                  });
+                          //window.location="mainpage.html";
                          $location.path('/menu');
                       }
                      console.log(json);
