@@ -618,66 +618,39 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
         $scope.getFood=function(orderData){
           var json_arr =  []; 
           var finaldata=[];
-          //json_array= orderData;
-          //console.log(orderData);
-          //console.log(orderData[0].menuId);
-         // var itemLength = orderData.length;
-          //$scope.ingredients="";
-          //console.log(itemLength);
-           // for(var i = 0; i < itemLength; i++) 
-           //    {
-           //        var row = orderData[i];
-           //        var obj = {menuId:orderData.menuId,subMenuId:orderData.subMenuId,itemId:orderData.id,itemName:orderData.itemName,image:orderData.image,price:orderData.price,quantity:orderData.quantity,subTotal:orderData.subTotal};
-           //        json_arr.push(obj);
-                  
-           //    }  
-
-               // $scope.FinalOrderData=json_arr;
-
-
+          
           var db = window.openDatabase("branboxnew", "1.0", "branbox Demo", 200 * 1024 * 1024);
               db.transaction(function(tx){
                   tx.executeSql('SELECT * FROM orderingredients',[], function (tx, results)
                 {
                   var itemLength = results.rows.length;
-                  //alert(itemLength);
                   var ingredientsDatas=results.rows;
-                  //console.log(ingredientsDatas);
-
-                //alert(itemLength);
                 for(var i = 0; i < itemLength; i++) {
                     var row = ingredientsDatas.item(i);
                     var obj = {id:row.id,businessId:row.businessId,menuId:row.menuId,subMenuId:row.subMenuId,itemId:row.itemId,ingId:row.ingId,ingYN:row.ingredientsYN,notes:row.extras};
                     json_arr.push(obj);
-                      //console.log(row);
                 }  
                   $scope.additionalData=json_arr;
 
-                //console.log($scope.additionalData);
-
-                  
                 });
                 
               });
 
-                var date= localStorage.getItem("date");
-                var time= localStorage.getItem("time");
-
+                var date= localStorage.getItem("delvDate");
+                var time= localStorage.getItem("delvTime");
                 
                 $scope.FinalOrderData=orderData;
-                //console.log($scope.FinalOrderData);
-               //console.log($scope.additionalData);
-
-                // console.log(finaldata);
                 
                 setTimeout(function(){  
                   finaldata.push($scope.FinalOrderData);
                   finaldata.push($scope.additionalData);
                   if(date!="" && time!="")
                   {
+                    alert();
                     $scope.TimedDelevery={date:date,time:time};
+                    finaldata.push($scope.TimedDelevery);
                   }
-                  
+                 
                   console.log(finaldata);
                   $http.post('http://www.appnlogic.com/branboxAppAdmin/branboxAdminUi/ordertableData.php',finaldata, {headers: {'Content-Type': 'application/x-www-form-urlencoded'} })
                     .success(function (json) {
@@ -685,7 +658,9 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
                       console.log(json);
                       if(json.data=="success")
                       {
-                         swal({   
+                        localStorage.setItem("delvDate","");
+                        localStorage.setItem("delvTime","");
+                         swal({
                             title: "Order Send Successfully!",   
                             text: "Food Will Reach Soon",   
                             timer: 2000,   
@@ -695,10 +670,7 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
                               var db = window.openDatabase("branboxnew", "1.0", "branbox New", 200 * 1024 * 1024);
                                   db.transaction(function(tx){
                                         tx.executeSql('DELETE FROM orderitems');
-                                        //tx.executeSql('CREATE TABLE IF NOT EXISTS orderitems (id INTEGER PRIMARY KEY AUTOINCREMENT,businessId INTEGER ,menuId INTEGER, subMenuId INTEGER,itemId INTEGER,userId INTEGER, itemName TEXT, image TEXT, price TEXT, subTotal TEXT, quantity TEXT,tax TEXT,offers TEXT)');
-                                       tx.executeSql('DELETE FROM orderingredients');
-                                        //tx.executeSql('CREATE TABLE IF NOT EXISTS orderingredients (id INTEGER PRIMARY KEY AUTOINCREMENT,businessId INTEGER ,menuId INTEGER, subMenuId INTEGER,itemId INTEGER, ingId INTEGER, ingredientsYN TEXT, extras TEXT)');                  
-                                      
+                                       tx.executeSql('DELETE FROM orderingredients');                                      
                                       localStorage.setItem("dbclear", '1');
                                   });
                           //window.location="mainpage.html";
@@ -841,7 +813,7 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
           localStorage.setItem("state",state );
           localStorage.setItem("country", country);
           localStorage.setItem("postalCode",postalCode );
-           window.location="mainpage.html";
+           window.location="index.html";
            // $location.path('/menu');
       }
      
@@ -881,13 +853,32 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
       $("#menu-trigger").removeClass("open");
       $scope.save = function(){
          var delvDate = $('#deliveryDate').val();           
-         var delvTime = $('#deliveryTime').val();           
-         var db = openDatabase('DeliveryDateTime', '1.0', 'Delivery Date Time', 1000 * 1024 * 1024);
-         db.transaction(function (tx) {
-          tx.executeSql('CREATE TABLE IF NOT EXISTS dateDelivery (id INTEGER PRIMARY KEY AUTOINCREMENT, date DATE, time DATETIME(200))');                  
-          tx.executeSql('INSERT OR REPLACE INTO dateDelivery (date, time) VALUES(?,?)',[delvDate,delvTime]);
-        });
+         var delvTime = $('#deliveryTime').val();  
+
+         if(delvDate=="")
+          {
+               swal({   
+                                  title: "Please Give Valid Date!! ",   
+                                  text: "It is Required!",   
+                                  timer: 2000,   
+                                  showConfirmButton: false 
+                              });
+               return false
+          }
          
+          if(delvTime=="")
+          {
+               swal({   
+                                  title: "Please Give Time for Delivery.",   
+                                  text: " It is Required!",   
+                                  timer: 2000,   
+                                  showConfirmButton: false 
+                              });
+               return false
+          }
+        localStorage.setItem("delvDate", delvDate);
+        localStorage.setItem("delvTime", delvTime);
+        window.location="index.html";
       }      
 
   })
