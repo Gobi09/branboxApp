@@ -5,14 +5,14 @@
             <div class="card-header ">
                 <h2> Name: {{userName}} <small>Email: {{useremail}}</small></h2>
                 <br>
-                <h2 class="pull-center">Your Orders<small>final summary</small>  </h2>
+                <h2 class="pull-center" ng-show=" date =='' ">Your Orders<small>final summary</small>  </h2>
+                 <h2 class="pull-center" ng-show=" date !='' ">Your Timed Orders<small>final summary</small>  </h2>
 
             </div>
 
             <button ng-click="showfun(OrderedItems);" class="btn bgm-orange  btn-sm waves-effect"> Show Orders</button>
             <button ng-click="hidefun(OrderedItems);" class="btn bgm-bluegray  btn-sm waves-effect pull-right"> Hide Orders</button>
             <div class="table-responsive " style="" tabindex="2" id="orderdata">
-
                 <table class="table">
                     <thead>
                         <tr>

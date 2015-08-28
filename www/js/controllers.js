@@ -495,6 +495,8 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
   $scope.useremail= localStorage.getItem("email");
   $scope.userName= localStorage.getItem("userName");
   $scope.userid= localStorage.getItem("id");
+  $scope.date= localStorage.getItem("delvDate");
+  $scope.time= localStorage.getItem("delvTime");
   //alert($scope.userName);
     $scope.totalAmount="";
      $scope.FinalOrderData="";
@@ -646,7 +648,6 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
                   finaldata.push($scope.additionalData);
                   if(date!="" && time!="")
                   {
-                    alert();
                     $scope.TimedDelevery={date:date,time:time};
                     finaldata.push($scope.TimedDelevery);
                   }
