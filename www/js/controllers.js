@@ -137,15 +137,24 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
         }
     }
 })
-.controller('MenuController', function($scope,$http,$location) {
+.controller('MenuController', function($scope,$http,$location,alertmsg) {
 
     $("#sidebar").removeClass("toggled");
-  $("#menu-trigger").removeClass("open");
-   $scope.useremail= localStorage.getItem("email");
-      $scope.userName= localStorage.getItem("userName");
-       console.log($scope.userName);
-      // alert($scope.userName);
-    var businessId=1;
+    $("#menu-trigger").removeClass("open");
+    $scope.useremail= localStorage.getItem("email");
+    $scope.userName= localStorage.getItem("userName");
+   
+        var businessId=1;
+         $http.post('http://www.appnlogic.com/branboxAppAdmin/branboxAdminUi/ajaxOffers.php',{bussId:businessId}, {headers: {'Content-Type': 'application/x-www-form-urlencoded'} })
+            .success(function (json) {
+               
+                 $scope.OffersData=json.rows;
+                 $scope.countOffers=json.rows.length;
+                 console.log($scope.countOffers);
+              }).error(function(){  
+            alert("server Error");
+          });
+
           //Menus from server and sync here.....
     $http.post('http://www.appnlogic.com/branboxAppAdmin/branboxAdminUi/ajaxMenu.php',{bussId: businessId}, {headers: {'Content-Type': 'application/x-www-form-urlencoded'} })
       .success(function (json) {
@@ -154,7 +163,11 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
        
 
          $scope.MenuData= json.rows;
-          console.log($scope.MenuData);
+
+          
+          
+        
+         // console.log($scope.MenuData);
       }).error(function(){  
           alert("server Error");
        });
@@ -193,7 +206,7 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
       }
 
 })
-.controller('SubMenuItemController', function($scope,$http,$location) {
+.controller('SubMenuItemController', function($scope,$http,$location,alertmsg) {
   $("#sidebar").removeClass("toggled");
   $("#menu-trigger").removeClass("open");
 
@@ -306,7 +319,12 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
     }
 
       $scope.addToCart=function(val,index,json)
-    {
+    {   
+
+              //localStorage.setItem("cartCount", 0);
+
+        $scope.cartCountGet= localStorage.getItem("cartCount");
+         $("#cartCount").html($scope.cartCountGet);
 
                 var nFrom = $(this).attr('data-from');
                 var nAlign = $(this).attr('data-align');
@@ -314,6 +332,8 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
                 var nType = $(this).attr('data-type');
                 var nAnimIn = $(this).attr('data-animation-in');
                 var nAnimOut = $(this).attr('data-animation-out');
+                var message="Item Added to The Cart ";
+                var message1="Item Updated and added to The Cart ";
                 
     //             var currentdate = new Date(); 
     // var datetime =currentdate.getDate() + "/"+ (currentdate.getMonth()+1)  + "/" + currentdate.getFullYear()+ "-"   
@@ -333,22 +353,31 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
        console.log(userid);
         var db = window.openDatabase("branboxnew", "1.0", "branbox Demo", 200 * 1024 * 1024);
               db.transaction(function(tx){
-                  tx.executeSql('SELECT * FROM orderitems where itemId="'+json.id+'"',[], function (tx, results)
+                  tx.executeSql('SELECT * FROM orderitems where itemId="'+json.id+'"  and  orderType="order"  ',[], function (tx, results)
                 {
                   var itemLength = results.rows.length;
                   console.log(itemLength);
                   var menudatas=results.resultsows;
                    if(itemLength==1 )
                    {
-                      tx.executeSql('UPDATE  orderitems SET quantity="'+quantity+'" ,subTotal="'+price+'"  WHERE itemId="'+json.id+'" ',successID);
+                      tx.executeSql('UPDATE  orderitems SET quantity="'+quantity+'" ,subTotal="'+price+'"  WHERE itemId="'+json.id+'" and orderType="order"',successID);
                        
-                      notify(nFrom, nAlign, nIcons, nType, nAnimIn, nAnimOut);
+                      alertmsg.notify(nFrom, nAlign, nIcons, nType, nAnimIn, nAnimOut,message1);
                    }
                    else
                    {
-                     tx.executeSql('INSERT OR REPLACE INTO orderitems (businessId,menuId,subMenuId,itemId,userId,itemName,image,price,subTotal,quantity,tax,offers)VALUES("'+json.businessId+'","'+json.menuId+'","'+json.subMenuId+'","'+json.id+'","'+userid+'","'+json.name+'","'+json.image+'","'+json.price+'","'+price+'","'+quantity+'","'+json.tax+'","'+json.offers+'")',successID);
+                     tx.executeSql('INSERT OR REPLACE INTO orderitems (businessId,menuId,subMenuId,itemId,userId,itemName,image,price,subTotal,quantity,tax,offers,orderType)VALUES("'+json.businessId+'","'+json.menuId+'","'+json.subMenuId+'","'+json.id+'","'+userid+'","'+json.name+'","'+json.image+'","'+json.price+'","'+price+'","'+quantity+'","'+json.tax+'","'+json.offers+'","order")',successID);
                      
-                     notify(nFrom, nAlign, nIcons, nType, nAnimIn, nAnimOut);
+                     alertmsg.notify(nFrom, nAlign, nIcons, nType, nAnimIn, nAnimOut,message);
+                     var data=localStorage.getItem("cartCount");
+                        data++;
+                        //alert(data);
+                        localStorage.setItem("cartCount",data);
+                         $scope.cartCountGet= data;
+                      //localStorage.removeItem("cartCount");
+                      $("#cartCount").html(data);
+                      //$scope.cartCountGet=cartCountValue;
+                      console.log($scope.cartCountGet);
                     
                    }
                  
@@ -435,48 +464,6 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
             }
 
 
-            function notify(from, align, icon, type, animIn, animOut){
-                $.growl({
-                    icon: icon,
-                    //title: 'Item',
-                    message: 'Item added in the Cart',
-                    url: ''
-                },{
-                        element: 'body',
-                        type: "inverse",
-                        allow_dismiss: true,
-                        placement: {
-                                from: from,
-                                align: align
-                        },
-                        offset: {
-                            x: 20,
-                            y: 85
-                        },
-                        spacing: 10,
-                        z_index: 1031,
-                        delay: 3000,
-                        timer: 500,
-                        url_target: '_blank',
-                        mouse_over: false,
-                        animate: {
-                                enter: animIn,
-                                exit: animOut
-                        },
-                        icon_type: 'class',
-                        template: '<div data-growl="container" class="alert" role="alert">' +
-                                        '<button type="button" class="close" data-growl="dismiss">' +
-                                            '<span aria-hidden="true">&times;</span>' +
-                                            '<span class="sr-only">Close</span>' +
-                                        '</button>' +
-                                        '<span data-growl="icon"></span>' +
-                                        '<span data-growl="title"></span>' +
-                                        '<span data-growl="message"></span>' +
-                                        '<a href="#" data-growl="url"></a>' +
-                                    '</div>'
-                });
-            };
-
 
 
 
@@ -495,8 +482,10 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
   $scope.useremail= localStorage.getItem("email");
   $scope.userName= localStorage.getItem("userName");
   $scope.userid= localStorage.getItem("id");
+
   $scope.date= localStorage.getItem("delvDate");
   $scope.time= localStorage.getItem("delvTime");
+
   //alert($scope.userName);
     $scope.totalAmount="";
      $scope.FinalOrderData="";
@@ -843,10 +832,125 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
 
 })
   
-  .controller('latestOfferController', function($scope,$http,$location) {  
+  .controller('latestOfferController', function($scope,$http,$location,alertmsg) {  
+        var businessId=1;
+        //localStorage.setItem("cartCount", 0);
 
+        $scope.cartCountGet= localStorage.getItem("cartCount");
+         $("#cartCount").html($scope.cartCountGet);
+        $scope.cartCount= localStorage.getItem("cartCount");
+      $("#message").removeClass("open");
       $("#sidebar").removeClass("toggled");
       $("#menu-trigger").removeClass("open");
+      $scope.latestOffers="";
+      $http.post('http://www.appnlogic.com/branboxAppAdmin/branboxAdminUi/ajaxOffers.php',{bussId:businessId}, {headers: {'Content-Type': 'application/x-www-form-urlencoded'} })
+      .success(function (json) {
+      // console.log(json.rows);
+        //var ajaxlength = json.rows.length;
+        // console.log( json.rows[0].menuId);
+        // console.log( json.rows[0].subMenuId);
+        // console.log( json.rows[0].id);
+          $scope.latestOffers=json.rows;
+          console.log($scope.latestOffers);
+          }).error(function(){  
+        alert("server Error");
+      });
+
+    $scope.Add_toCart=function($event,$index,json)
+    {
+
+      // var cartCountValue=1;
+      // alert(cartCountValue);
+      var nFrom = "top";
+      var nAlign = "center";
+      var nIcons = "fa fa-comments";
+      var nType = "inverse";
+      var nAnimIn ="animated bounceIn";
+      var nAnimOut ="animated bounceOut";
+      var message="Item Added to The Cart";
+      var message1="Go to Cart page and Update It";
+
+      console.log(json);
+        var userid= localStorage.getItem("id");
+        if(userid==null)
+        {
+            swal({   
+                            title: "Unable to Order",   
+                            text: "Please log in",   
+                            timer: 2000,   
+                            showConfirmButton: false 
+                        });
+            $location.path('/login');
+        }
+        else
+        {
+           var db = window.openDatabase("branboxnew", "1.0", "branbox Demo", 200 * 1024 * 1024);
+          db.transaction(function(tx){
+            tx.executeSql('SELECT * FROM orderitems where itemId="'+json.itemId+'" and  orderType="offer" ',[], function (tx, results)
+                {
+                    var quantity=1;
+                    var price=json.price;
+                  var itemLength = results.rows.length;
+                  //console.log(itemLength);
+                  var menudatas=results.resultsows;
+                   
+                   if(itemLength==1 )
+                   {
+                      tx.executeSql('UPDATE  orderitems SET quantity="'+quantity+'" ,subTotal="'+price+'"  WHERE itemId="'+json.itemId+'"  and orderType="offer" ',successID);
+                       
+                       alertmsg.notify(nFrom, nAlign, nIcons, nType, nAnimIn, nAnimOut,message1);
+                   }
+                   else
+                   {
+                     tx.executeSql('INSERT OR REPLACE INTO orderitems (businessId,menuId,subMenuId,itemId,userId,itemName,image,price,subTotal,quantity,tax,offers,orderType)VALUES("'+json.businessId+'","'+json.menuId+'","'+json.subMenuId+'","'+json.itemId+'","'+userid+'","'+json.name+'","'+json.image+'","'+json.price+'","'+json.price+'","1","0","0","offer")',successID);
+                      alertmsg.notify(nFrom, nAlign, nIcons, nType, nAnimIn, nAnimOut,message);
+                        var data=localStorage.getItem("cartCount");
+                        data++;
+                        //alert(data);
+                        localStorage.setItem("cartCount",data);
+                         $scope.cartCountGet= data;
+                      //localStorage.removeItem("cartCount");
+                      $("#cartCount").html(data);
+                      //$scope.cartCountGet=cartCountValue;
+                      console.log($scope.cartCountGet);
+                      //cartCountValue++;
+                        
+                   }
+                 
+                });
+                function successID(){
+                    return true;
+              }
+            });
+
+          
+
+        }
+        
+
+
+    };
+
+    $scope.getCount=function()
+    {
+      //setTimeout(function() {
+         swal({   
+                            title: "Item Adding to the Cart",   
+                            text: "Please log in",   
+                            timer: 2000,   
+                            showConfirmButton: false 
+                        });
+
+        var data=localStorage.getItem("cartCount");
+        console.log(data);
+      //alert(data);
+       return data;
+      //},500)
+      
+    }
+
+
+
 
   })
 .controller('timeDelivery', function($scope,$http) {  

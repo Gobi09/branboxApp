@@ -2,53 +2,35 @@
         
         <div class="card" ng-controller="latestOfferController">
             <div class="card-body card-padding">
-                <p class="f-500 c-black m-b-20"><center><strong>Latest offers</strong></center></p>
-    
-                <div class="lightbox row">                    
-                    <div data-src="assets/media/gallery/f1.jpg" class="col-sm-4 col-xs-12">
-                        <h4>Item 1</h4>   
-                        Description                    
-                        <div class="lightbox-item" style="border: 1px solid red;">
-                            <a class="btn bgm-deeppurple btn-float z-depth-1 waves-effect" href="" data-toggle="         dropdown" aria-expanded="false">2%
-                                <i class="md md-shopping-cart"></i>
-                            </a>                         
-                            <img  src="assets/media/gallery/thumbs/f1.jpg" alt="" />                 
-                        </div>
-                    </div>
-    
-                    <div data-src="assets/media/gallery/f2.jpg" class="col-sm-4 col-xs-12">
-                        <h4>Item 2</h4> 
-                        Description
-                        <div class="lightbox-item" style="border: 1px solid red;">
-                            <a class="btn bgm-deeppurple btn-float z-depth-1 waves-effect" href="" data-toggle="         dropdown" aria-expanded="false">
-                                3%<i class="md md-shopping-cart"></i>
+                <div class="card-header jumbotron">
+                    <a ng-show="useremail != null" href="#addTocartpage" class="btn bgm-teal waves-effect pull-right">
+                       <i class="md md-shopping-cart md-white "></i>Cart(<span id="cartCount"></span>)
+                    </a>
+                    <h2>Latest Offers<small></small></h2>
+                    <p></p>
+                   
+                </div>
+                <!-- <p class="f-500 c-black m-b-20"><center><strong>Latest offers</strong></center></p>  #DD1C17 -->
+            
+                <div class="lightbox row" >    
+                    <div ng-repeat="offers in latestOffers">
+                        <div data-src="{{offers.image}}" class="col-sm-4 col-xs-12">
+                            <h4>{{offers.title}}</h4>   
+                            <span>{{offers.name}}</span>
+                            <div class="lightbox-item" style="background:#CC4946;">
+                                 <a class="btn bgm-deeporange  btn-float z-depth-1 waves-effect" href="" data-toggle="         dropdown" aria-expanded="false">
+                                   {{offers.price}} AED
+                                </a>    
+                                <img  src="{{offers.image}}" alt="" />  
+                            </div>
+                            <a aria-expanded="false" data-toggle="dropdown" href="" ng-click="Add_toCart($event,$index,offers);" class="btn bgm-deeporange btn-floatLeft z-depth-1 waves-effect pull-right">
+                                <i class="md md-shopping-cart md-white md-large"></i>
                             </a>
-                            <img  src="assets/media/gallery/thumbs/f2.jpg" alt=""  />
                         </div>
-                    </div>
-               
-                    <div data-src="assets/media/gallery/f3.jpg" class="col-sm-4 col-xs-12">
-                        <h4>Item 3</h4> 
-                        Description
-                        <div class="lightbox-item" style="border: 1px solid red;">
-                            <a class="btn bgm-deeppurple btn-float z-depth-1 waves-effect" href="" data-toggle="         dropdown" aria-expanded="false">
-                                4%<i class="md md-shopping-cart"></i>
-                            </a>
-                            <img  src="assets/media/gallery/thumbs/f3.jpg" alt="" />
 
-                        </div>
-                    </div>
-                
-                    <div data-src="assets/media/gallery/f4.jpg" class="col-sm-4 col-xs-12" >
-                        <h4>Item 4</h4> 
-                        Description
-                        <div class="lightbox-item" style="border: 1px solid red;">
-                            <a class="btn bgm-deeppurple btn-float z-depth-1 waves-effect" href="" data-toggle="         dropdown" aria-expanded="false">
-                                2%<i class="md md-shopping-cart"></i>
-                            </a>
-                            <img  src="assets/media/gallery/thumbs/f4.jpg" alt=""  />
-                        </div>
-                    </div>                                
+
+                    </div>       
+                         
                 </div>
             </div>
         </div>

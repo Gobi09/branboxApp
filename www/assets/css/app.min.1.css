@@ -9921,7 +9921,7 @@ body #content {
 }
 
 .top-menu > li .dropdown-menu-lg .lv-body {
-  height: 275px;
+ .top-menu > li > a > .tmn-counts /*height: 275px;*/
   overflow-y: auto;
 }
 
@@ -9991,7 +9991,7 @@ body #content {
   position: absolute;
   color: #FFF;
   font-style: normal;
-  background: #f44336;
+  background: #4285F4;
   padding: 1px 5px;
   border-radius: 2px;
   right: 7px;
@@ -13401,6 +13401,48 @@ fieldset[disabled] .btn-inverse:active {
   line-height: 100%;
   margin-right: 5px;
 }
+
+
+/*gobi*/
+
+.btn-floatLeft {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  line-height: 38px;
+}
+
+.btn-floatLeft:hover {
+  box-shadow: 0 2px 7px rgba(0, 0, 0, 0.18);
+}
+
+.btn-floatLeft i {
+  font-size: 23px;
+  -webkit-transition: all;
+  -o-transition: all;
+  transition: all;
+  -webkit-transition-duration: 500ms;
+  transition-duration: 500ms;
+}
+
+.btn-floatLeft:hover i {
+  -webkit-transform: rotate(360deg);
+  -ms-transform: rotate(360deg);
+  -o-transform: rotate(360deg);
+  transform: rotate(360deg);
+}
+
+.btn-floatLeft:not(.bgm-white):not(.bgm-gray) > i {
+  color: #fff;
+}
+
+.btn-floatLeft.bgm-white > i,
+.btn-floatLeft.bgm-gray > i {
+  color: #333;
+}
+
+
+/*Gobi*/
 
 .btn-float {
   width: 50px;
