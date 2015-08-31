@@ -9,9 +9,10 @@ var apps=angular.module('starter', ['ionic', 'ngRoute', 'starter.controllers', '
     if( datadata==null)
     {
          
-        
         var db = window.openDatabase("branboxnew", "1.0", "branbox New", 200 * 1024 * 1024);
               db.transaction(function(tx){
+                tx.executeSql('DROP TABLE IF EXISTS orderitems');
+                tx.executeSql('DROP TABLE IF EXISTS orderingredients');
                    // tx.executeSql('DELETE FROM orderitems');
                     tx.executeSql('CREATE TABLE IF NOT EXISTS orderitems (id INTEGER PRIMARY KEY AUTOINCREMENT,businessId INTEGER ,menuId INTEGER, subMenuId INTEGER,itemId INTEGER,userId INTEGER, itemName TEXT, image TEXT, price TEXT, subTotal TEXT, quantity TEXT,tax TEXT,offers TEXT,orderType TEXT)');
                    // tx.executeSql('DELETE FROM orderingredients');

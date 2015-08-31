@@ -325,75 +325,89 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
       $scope.addToCart=function(val,index,json)
     {   
 
+
+            var email = localStorage.getItem("email");
+            if(email==null)
+            {
+                swal({   
+                                title: "Unable to Order",   
+                                text: "Please log in",   
+                                timer: 2000,   
+                                showConfirmButton: false 
+                            });
+                $location.path('/login');
+            }
+            else
+            {
               //localStorage.setItem("cartCount", 0);
 
-        $scope.cartCountGet= localStorage.getItem("cartCount");
-         $("#cartCount").html($scope.cartCountGet);
+              $scope.cartCountGet= localStorage.getItem("cartCount");
+               $("#cartCount").html($scope.cartCountGet);
 
-                var nFrom = $(this).attr('data-from');
-                var nAlign = $(this).attr('data-align');
-                var nIcons = $(this).attr('data-icon');
-                var nType = $(this).attr('data-type');
-                var nAnimIn = $(this).attr('data-animation-in');
-                var nAnimOut = $(this).attr('data-animation-out');
-                var message="Item Added to The Cart ";
-                var message1="Item Updated and added to The Cart ";
-                
-    //             var currentdate = new Date(); 
-    // var datetime =currentdate.getDate() + "/"+ (currentdate.getMonth()+1)  + "/" + currentdate.getFullYear()+ "-"   
-    //               + currentdate.getHours() + ":"  
-    //               + currentdate.getMinutes();
-               // alert(datetime);
+                      var nFrom = $(this).attr('data-from');
+                      var nAlign = $(this).attr('data-align');
+                      var nIcons = $(this).attr('data-icon');
+                      var nType = $(this).attr('data-type');
+                      var nAnimIn = $(this).attr('data-animation-in');
+                      var nAnimOut = $(this).attr('data-animation-out');
+                      var message="Item Added to The Cart ";
+                      var message1="Item Updated and added to The Cart ";
+                      
+          //             var currentdate = new Date(); 
+          // var datetime =currentdate.getDate() + "/"+ (currentdate.getMonth()+1)  + "/" + currentdate.getFullYear()+ "-"   
+          //               + currentdate.getHours() + ":"  
+          //               + currentdate.getMinutes();
+                     // alert(datetime);
 
-       //console.log(json);
-           //var $row  = jQuery(this).parents('.order');
-        var quantity= $("#quantity"+index).val();
-      //var quantity=$(val.target).val();
-      var price=json.price * quantity;
-      //alert(quantity);
-      console.log(json);
-      //alert(price);
-       var userid= localStorage.getItem("id");
-       console.log(userid);
-        var db = window.openDatabase("branboxnew", "1.0", "branbox Demo", 200 * 1024 * 1024);
-              db.transaction(function(tx){
-                  tx.executeSql('SELECT * FROM orderitems where itemId="'+json.id+'"  and  orderType="order"  ',[], function (tx, results)
-                {
-                  var itemLength = results.rows.length;
-                  console.log(itemLength);
-                  var menudatas=results.resultsows;
-                   if(itemLength==1 )
-                   {
-                      tx.executeSql('UPDATE  orderitems SET quantity="'+quantity+'" ,subTotal="'+price+'"  WHERE itemId="'+json.id+'" and orderType="order"',successID);
+             //console.log(json);
+                 //var $row  = jQuery(this).parents('.order');
+              var quantity= $("#quantity"+index).val();
+            //var quantity=$(val.target).val();
+            var price=json.price * quantity;
+            //alert(quantity);
+            console.log(json);
+            //alert(price);
+             var userid= localStorage.getItem("id");
+             console.log(userid);
+              var db = window.openDatabase("branboxnew", "1.0", "branbox Demo", 200 * 1024 * 1024);
+                    db.transaction(function(tx){
+                        tx.executeSql('SELECT * FROM orderitems where itemId="'+json.id+'"  and  orderType="order"  ',[], function (tx, results)
+                      {
+                        var itemLength = results.rows.length;
+                        console.log(itemLength);
+                        var menudatas=results.resultsows;
+                         if(itemLength==1 )
+                         {
+                            tx.executeSql('UPDATE  orderitems SET quantity="'+quantity+'" ,subTotal="'+price+'"  WHERE itemId="'+json.id+'" and orderType="order"',successID);
+                             
+                            alertmsg.notify(nFrom, nAlign, nIcons, nType, nAnimIn, nAnimOut,message1);
+                         }
+                         else
+                         {
+                           tx.executeSql('INSERT OR REPLACE INTO orderitems (businessId,menuId,subMenuId,itemId,userId,itemName,image,price,subTotal,quantity,tax,offers,orderType)VALUES("'+json.businessId+'","'+json.menuId+'","'+json.subMenuId+'","'+json.id+'","'+userid+'","'+json.name+'","'+json.image+'","'+json.price+'","'+price+'","'+quantity+'","'+json.tax+'","'+json.offers+'","order")',successID);
+                           
+                           alertmsg.notify(nFrom, nAlign, nIcons, nType, nAnimIn, nAnimOut,message);
+                           var data=localStorage.getItem("cartCount");
+                              data++;
+                              //alert(data);
+                              localStorage.setItem("cartCount",data);
+                               $scope.cartCountGet= data;
+                            //localStorage.removeItem("cartCount");
+                            $("#cartCount").html(data);
+                            //$scope.cartCountGet=cartCountValue;
+                            console.log($scope.cartCountGet);
+                          
+                         }
                        
-                      alertmsg.notify(nFrom, nAlign, nIcons, nType, nAnimIn, nAnimOut,message1);
-                   }
-                   else
-                   {
-                     tx.executeSql('INSERT OR REPLACE INTO orderitems (businessId,menuId,subMenuId,itemId,userId,itemName,image,price,subTotal,quantity,tax,offers,orderType)VALUES("'+json.businessId+'","'+json.menuId+'","'+json.subMenuId+'","'+json.id+'","'+userid+'","'+json.name+'","'+json.image+'","'+json.price+'","'+price+'","'+quantity+'","'+json.tax+'","'+json.offers+'","order")',successID);
-                     
-                     alertmsg.notify(nFrom, nAlign, nIcons, nType, nAnimIn, nAnimOut,message);
-                     var data=localStorage.getItem("cartCount");
-                        data++;
-                        //alert(data);
-                        localStorage.setItem("cartCount",data);
-                         $scope.cartCountGet= data;
-                      //localStorage.removeItem("cartCount");
-                      $("#cartCount").html(data);
-                      //$scope.cartCountGet=cartCountValue;
-                      console.log($scope.cartCountGet);
-                    
-                   }
-                 
-                });
-                  function successID(){
-                      return true;
-                  }
+                      });
+                        function successID(){
+                            return true;
+                        }
 
-                  
-              });
+                        
+                    });
 
-
+          }
           
       };
 
@@ -509,7 +523,7 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
                     for(var i = 0; i < itemLength; i++) 
                     {
                         var row = menudatas.item(i);
-                        var obj = {businessId:row.businessId,menuId:row.menuId,subMenuId:row.subMenuId,itemId:row.itemId,userId:row.userId,itemName:row.itemName,image:row.image,price:row.price,quantity:row.quantity,subTotal:row.subTotal};
+                        var obj = {businessId:row.businessId,menuId:row.menuId,subMenuId:row.subMenuId,itemId:row.itemId,userId:row.userId,itemName:row.itemName,image:row.image,price:row.price,quantity:row.quantity,subTotal:row.subTotal,orderType:row.orderType};
                         json_arr.push(obj);
                         //console.log(json_arr);
                         //alert(row.menuId);
@@ -567,16 +581,16 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
           {
             
               $("#quantity").val(0);
-              $("#subTotal").val(0);  
+              $("#subTotal").val(0);
           }
           else
           {
              //console.log(order[0]);
             var data= angular.copy($scope.OrderedItems);
-            console.log(data);
+           // console.log(data);
             var price=$scope.OrderedItems[index].price;
             var total = quantity*price;
-           // alert($scope.OrderedItems[index].menuId);
+            alert($scope.OrderedItems[index].orderType);
               //alert($scope.OrderedItems[index].itemId);
             var db = window.openDatabase("branboxnew", "1.0", "branbox Demo", 200 * 1024 * 1024);
               db.transaction(function(tx){
@@ -604,16 +618,19 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
 
                 });
             $scope.OrderedItems.splice(index,1,{
-              businessId:data[index].businessId,
-              itemId:data[index].itemId,
-              subMenuId:data[index].subMenuId,
-              menuId:data[index].menuId,
-              userId:data[index].userId,
-              itemName:data[index].itemName,
-              price:data[index].price,
-              image:data[index].image,
+              businessId:$scope.OrderedItems[index].businessId,
+              itemId:$scope.OrderedItems[index].itemId,
+              subMenuId:$scope.OrderedItems[index].subMenuId,
+              menuId:$scope.OrderedItems[index].menuId,
+              userId:$scope.OrderedItems[index].userId,
+              itemName:$scope.OrderedItems[index].itemName,
+              price:$scope.OrderedItems[index].price,
+              image:$scope.OrderedItems[index].image,
               quantity: quantity,
-              subTotal: total}); 
+              subTotal: total,
+              orderType:$scope.OrderedItems[index].orderType
+
+            }); 
            // console.log($scope.OrderedItem);
             $scope.getTotal();
           }
