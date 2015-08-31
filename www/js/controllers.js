@@ -102,10 +102,14 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
     $("#sidebar").removeClass("toggled");
   $("#menu-trigger").removeClass("open");
   $http.post('http://www.appnlogic.com/branboxAppAdmin/branboxAdminUi/branbox.php', {branboxVariable:'aboutUs',businessId:'1'},{headers: {'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8'} })     
-  .success(function(data) {    
-    $scope.aboutImages = { src : data[0]['image'] };
+  .success(function(data) { 
+    $scope.aboutus=data;
+   // console.log($scope.aboutus);
+    $scope.aboutImages =data[0]['image'];
     $scope.title = data[0]['title'];
     $scope.description = data[0]['description'];     
+      $scope.aboutGalleryImages= data[0]['aboutGalleryImages'].split(",");    
+     console.log($scope.aboutGalleryImages);
   }).error(function(){         
     $scope.error = "server Error";     
   }); 
@@ -570,21 +574,30 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
              //console.log(order[0]);
             var data= angular.copy($scope.OrderedItems);
             console.log(data);
-            var price=data[index].price;
+            var price=$scope.OrderedItems[index].price;
             var total = quantity*price;
-           // alert(data[index].menuId);
+           // alert($scope.OrderedItems[index].menuId);
               //alert($scope.OrderedItems[index].itemId);
             var db = window.openDatabase("branboxnew", "1.0", "branbox Demo", 200 * 1024 * 1024);
               db.transaction(function(tx){
-                  tx.executeSql('SELECT * FROM orderitems where itemId="'+data[index].itemId+'"',[], function (tx, results)
+                tx.executeSql('SELECT * FROM orderitems where itemId="'+$scope.OrderedItems[index].itemId+'" and orderType="order"',[], function (tx, results)
                 {
                   var itemLength = results.rows.length;
                    if(itemLength==1 )
-                   {
-                      tx.executeSql('UPDATE  orderitems SET quantity="'+quantity+'" ,subTotal="'+total+'"  WHERE itemId="'+data[index].itemId+'" ',successID);
-                    //alert("updated");
+                    {
+                      tx.executeSql('UPDATE  orderitems SET quantity="'+quantity+'" ,subTotal="'+total+'"  WHERE itemId="'+$scope.OrderedItems[index].itemId+'" and orderType="order" ',successID);
+                      //alert("updated");
+                    }
+                    else
+                    {
+                      tx.executeSql('UPDATE  orderitems SET quantity="'+quantity+'" ,subTotal="'+total+'"  WHERE itemId="'+$scope.OrderedItems[index].itemId+'" and orderType="offer" ',successID);
                     }
                 });
+
+
+
+
+
                   function successID(){
                       return true;
                   }
@@ -616,13 +629,23 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
                 {
                   var itemLength = results.rows.length;
                   var ingredientsDatas=results.rows;
-                for(var i = 0; i < itemLength; i++) {
-                    var row = ingredientsDatas.item(i);
-                    var obj = {id:row.id,businessId:row.businessId,menuId:row.menuId,subMenuId:row.subMenuId,itemId:row.itemId,ingId:row.ingId,ingYN:row.ingredientsYN,notes:row.extras};
-                    json_arr.push(obj);
-                }  
-                  $scope.additionalData=json_arr;
+                  if(itemLength>0)
+                  {
+                    for(var i = 0; i < itemLength; i++) {
+                          var row = ingredientsDatas.item(i);
+                          var obj = {id:row.id,businessId:row.businessId,menuId:row.menuId,subMenuId:row.subMenuId,itemId:row.itemId,ingId:row.ingId,ingYN:row.ingredientsYN,notes:row.extras};
+                          json_arr.push(obj);
+                      }  
+                       $scope.additionalData=json_arr;
 
+                  }
+                  else
+                  {
+                     $scope.additionalData="empty";
+
+                  }
+                      
+                 
                 });
                 
               });
@@ -663,6 +686,7 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
                                        tx.executeSql('DELETE FROM orderingredients');                                      
                                       localStorage.setItem("dbclear", '1');
                                   });
+                                   localStorage.removeItem("cartCount");
                           //window.location="mainpage.html";
                          $location.path('/menu');
                       }

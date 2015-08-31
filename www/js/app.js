@@ -3,7 +3,8 @@ var apps=angular.module('starter', ['ionic', 'ngRoute', 'starter.controllers', '
 
     var datadata=localStorage.getItem("dbclear");
     localStorage.setItem("cartCount", 0);
-    alert(datadata);
+    localStorage.removeItem("cartCount");
+   // alert(datadata);
     //return false;
     if( datadata==null)
     {
@@ -25,7 +26,7 @@ var apps=angular.module('starter', ['ionic', 'ngRoute', 'starter.controllers', '
     }
     else
     {
-        alert("datadata");
+        //alert("datadata");
         //localStorage.setItem("dbclear", '0');
         var db = window.openDatabase("branboxnew", "1.0", "branbox New", 200 * 1024 * 1024);
               db.transaction(function(tx){
