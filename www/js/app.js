@@ -3,6 +3,7 @@ var apps=angular.module('starter', ['ionic', 'ngRoute', 'starter.controllers', '
 
     var datadata=localStorage.getItem("dbclear");
     localStorage.setItem("cartCount", 0);
+    localStorage.setItem("businessId", 1);
     localStorage.removeItem("cartCount");
    // alert(datadata);
     //return false;

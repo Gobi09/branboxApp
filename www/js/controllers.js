@@ -49,6 +49,37 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
       $scope.error = "server Error";     
      });
     
+
+    $scope.sendFeedBack=function()
+    {
+        var businessId=localStorage.getItem("businessId");
+        var name=$("#username").val();
+        var email=$("#email").val();
+        var feedbackMessage=$("#feedbackMessage").val();
+        var feedback={name:name,email:email,feedbackMessage:feedbackMessage,bussId:businessId};
+        console.log(feedback);
+         $http.post('http://www.appnlogic.com/branboxAppAdmin/branboxAdminUi/ajaxFeedBack.php',feedback,{headers: {'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8'} })     
+          .success(function(data) {   
+            console.log(data.success);
+            if(data.success="success")
+            {
+              swal({   
+                  title: "FeedBack Send Successfully",   
+                //  text: "Please log in",   
+                  timer: 2000,   
+                  showConfirmButton: false 
+              });
+            }
+            
+            
+            }).error(function(){         
+            $scope.error = "server Error";     
+           });
+
+    }
+
+
+
   })
 
 .controller('locationCtrl', function($scope, $http) {
@@ -151,7 +182,7 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
         var businessId=1;
          $http.post('http://www.appnlogic.com/branboxAppAdmin/branboxAdminUi/ajaxOffers.php',{bussId:businessId}, {headers: {'Content-Type': 'application/x-www-form-urlencoded'} })
             .success(function (json) {
-               
+               console.log(json);
                  $scope.OffersData=json.rows;
                  $scope.countOffers=json.rows.length;
                  console.log($scope.countOffers);

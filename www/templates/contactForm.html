@@ -5,7 +5,7 @@
 }
 </style>
 <ion-view>
-<div class="card bs-item z-depth-4"> 
+<div class="card bs-item z-depth-4" ng-controller="contactCtrl"> 
     <div class="contacts clearfix row">
         <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="card-header">
@@ -40,24 +40,24 @@
                         <div class="input-group">
                             <span class="input-group-addon"><i class="md md-person"></i></span>
                             <div class="fg-line">
-                                <input type="text" placeholder="Full Name" class="form-control">
+                                <input type="text" placeholder="Full Name" name="username" id="username" class="form-control">
                             </div>
                         </div><br>
                         <div class="input-group">
                             <span class="input-group-addon"><i class="md md-email"></i></span>
                             <div class="fg-line">
-                                <input type="text" placeholder="Email Address" class="form-control">
+                                <input type="text" placeholder="Email Address" name="email"  id="email" class="form-control">
                             </div>
                         </div><br>
                         <div class="input-group">
                             <span class="input-group-addon"><i class="md md-comment"></i></span>
                             <div class="fg-line">
-                                <textarea placeholder="Comments...." rows="5" class="form-control"></textarea>
+                                <textarea placeholder="Comments...." rows="5" name="feedbackMessage"  id="feedbackMessage" class="form-control"></textarea>
                             </div>
                         </div><br>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary btn-sm m-t-10">Submit</button>
+                <button type="submit" ng-click="sendFeedBack();" class="btn btn-primary btn-sm m-t-10">Submit</button>
             </form>
         </div>
     </div>
