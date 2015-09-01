@@ -17,10 +17,10 @@
   <preference name="DisallowOverscroll" value="true"/>
   <preference name="android-minSdkVersion" value="16"/>
   <preference name="BackupWebStorage" value="none"/>
-  <platform name="android">
-      <splash src="img/bg123 - Copy.jpg" density="land-Copy"/>
-  </platform>
-
+  <!--<platform name="android">
+     
+  </platform>-->
+ <splash src="img/bg123 - Copy.jpg" density="land-Copy"/>
   <feature name="StatusBar">
     <param name="ios-package" value="CDVStatusBar" onload="true"/>
   </feature>
