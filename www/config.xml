@@ -5,16 +5,22 @@
         An App With all.
     </description>
   <author email="hi@ionicframework" href="http://ionicframework.com/">
-      BharaniGuru R First App
+      Gobi C
     </author>
   <content src="index.html"/>
   <access origin="*"/>
-  <icon src="www/img/logo.jpg"></icon>
+  <icon src="res/ios/icon.png" platform="android" width="57" height="57" density="mdpi" />
+
+  <icon src="img/brn2.png"></icon>
   <preference name="webviewbounce" value="false"/>
   <preference name="UIWebViewBounce" value="false"/>
   <preference name="DisallowOverscroll" value="true"/>
   <preference name="android-minSdkVersion" value="16"/>
   <preference name="BackupWebStorage" value="none"/>
+  <platform name="android">
+      <splash src="img/bg123 - Copy.jpg" density="land-Copy"/>
+  </platform>
+
   <feature name="StatusBar">
     <param name="ios-package" value="CDVStatusBar" onload="true"/>
   </feature>

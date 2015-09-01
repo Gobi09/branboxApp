@@ -1,22 +1,29 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <widget id="com.ionicframework.myfirstapp716016" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-  <name>Branbox</name>
-  <description>
+    <name>Branbox</name>
+    <description>
         An App With all.
     </description>
-  <author email="hi@ionicframework" href="http://ionicframework.com/">
-      BharaniGuru R First App
+    <author email="hi@ionicframework" href="http://ionicframework.com/">
+        Gobi C
     </author>
-  <content src="index.html"/>
-  <access origin="*"/>
-  <icon src="www/img/logo.jpg"></icon>
-  <preference name="webviewbounce" value="false"/>
-  <preference name="UIWebViewBounce" value="false"/>
-  <preference name="DisallowOverscroll" value="true"/>
-  <preference name="android-minSdkVersion" value="16"/>
-  <preference name="BackupWebStorage" value="none"/>
-  <feature name="StatusBar">
+    <content src="index.html"/>
+    <access origin="*"/>
+    <!--<icon src="res/ios/icon.png" platform="android" width="57" height="57" density="mdpi" />-->
+    
+    <icon src="www/img/brn2.png"></icon>
+    <preference name="webviewbounce" value="false"/>
+    <preference name="UIWebViewBounce" value="false"/>
+    <preference name="DisallowOverscroll" value="true"/>
+    <preference name="android-minSdkVersion" value="16"/>
+    <preference name="BackupWebStorage" value="none"/>
+    <platform name="android">
+    <!-- you can use any density that exists in the Android project -->
+    <splash src="www/img/bg123 - Copy.jpg" density="land-Copy"/>
+    </platform>
+    
+    <feature name="StatusBar">
     <param name="ios-package" value="CDVStatusBar" onload="true"/>
-  </feature>
+    </feature>
   
 </widget>
