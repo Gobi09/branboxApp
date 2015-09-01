@@ -17,10 +17,10 @@
     <preference name="DisallowOverscroll" value="true"/>
     <preference name="android-minSdkVersion" value="16"/>
     <preference name="BackupWebStorage" value="none"/>
-    <platform name="android">
+    <!--<platform name="android">-->
     <!-- you can use any density that exists in the Android project -->
     <splash src="www/img/bg123 - Copy.jpg" density="land-Copy"/>
-    </platform>
+    <!--</platform>-->
     
     <feature name="StatusBar">
     <param name="ios-package" value="CDVStatusBar" onload="true"/>
