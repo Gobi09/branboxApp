@@ -1,6 +1,6 @@
 <ion-view>
     <div class="card" ng-controller="AddToCartCtrl">
-        <div class="card-body card-padding">
+        <div class="card-body card-padding" style="padding: 10px;">
             
             <div class="card-header ">
                 <h2> Name: {{userName}} <small>Email: {{useremail}}</small></h2>
@@ -34,22 +34,25 @@
                             </td>
                             <!-- <td></td> -->
                             <td> 
-
+                                <br>
                                 <input type="text" class="form-control"ng-keyup="getsubtotal($event,$index,order);" name="quantity"class="item item-input "  id="quantity" value="{{order.quantity}}">
 
 
                             </td>
                             <td> 
+                                <br><br>
                                 {{order.price}}
                                 <input type="hidden" style="width:25px"  readonly name="price"class="form-control" id="price" value="{{order.price}}">
 
                             </td>
                             <td> 
+                                <br><br>
                                 {{order.subTotal}}
                                 <input type="hidden" style="width:60px" readonly name="subtotal"class="form-control" id="subTotal" value="{{order.subTotal}}">
 
                             </td>
                             <td>
+                                <br><br>
                                 <button ng-click="removeOrder($index,order);" class="btn button-small bgm-red button-assertive"><i class="md  md-clear"></i>
                                 </button>
                             </td>

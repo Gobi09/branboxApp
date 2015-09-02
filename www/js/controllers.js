@@ -103,7 +103,7 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
       var image = 'img/logo.jpg';
       var marker = new google.maps.Marker({
         map: map,
-        icon: image,
+        // icon: image,
         position: new google.maps.LatLng (data[i]['latitude'], data[i]['longitude'])
       });
       var content = "Business Location :" + data[i]['location'];     
@@ -621,7 +621,7 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
            // console.log(data);
             var price=$scope.OrderedItems[index].price;
             var total = quantity*price;
-            alert($scope.OrderedItems[index].orderType);
+            //alert($scope.OrderedItems[index].orderType);
               //alert($scope.OrderedItems[index].itemId);
             var db = window.openDatabase("branboxnew", "1.0", "branbox Demo", 200 * 1024 * 1024);
               db.transaction(function(tx){
