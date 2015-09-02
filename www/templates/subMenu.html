@@ -19,9 +19,10 @@
                 <div class="fg-line">
                     <input type="text" class="form-control" placeholder="Search Sub Menu">
                 </div>
-            </div> -->
+            </div> --> 
             <div class="listview" ng-repeat="SubMenus in SubMenuData  | filter:SubMenus">
                 <a href="#items/={{SubMenus.menuId}}={{SubMenus.id}}" class="lv-item">
+                <!-- <a href="#items/=11=2" class="lv-item"> -->
                     <div class="media">
                         <div class="pull-left p-relative">
                             <img alt="" src="{{SubMenus.image}}" class="lv-img-sm">
@@ -80,9 +81,9 @@
                     </div>
                 </a> -->
             </div>
-             <a aria-expanded="false" data-toggle="dropdown" href="" ng-click="goback();" class="btn bgm-deeppurple btn-float z-depth-1 waves-effect pull-right">
+             <!-- <a aria-expanded="false" data-toggle="dropdown" href="" ng-click="goback();" class="btn bgm-deeppurple btn-float z-depth-1 waves-effect pull-right">
            <i class="md  md-keyboard-backspace"></i>
-        </a>
+        </a> -->
         </div>
     </div>
     
