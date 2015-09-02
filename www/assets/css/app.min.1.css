@@ -9725,7 +9725,7 @@ body {
 body {
   font-weight: 400;
   padding-top: 65px;
-  padding-bottom: 110px;
+  /*padding-bottom: 110px;*/
   -webkit-animation-name: fadeIn;
   animation-name: fadeIn;
   -webkit-animation-duration: 1000ms;
@@ -14555,7 +14555,7 @@ a.thumbnail.active {
 
 .myfont{
    font-family: gobi;
-    font-size: 25px;
+    font-size: 30px;
 }
 .order .thumbnail .caption h4{
     font-family: gobi;

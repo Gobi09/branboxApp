@@ -21,7 +21,7 @@
 
 
             <div class="row order" ng-repeat="SubMenuItem in SubMenuItemData  | filter:SubMenuItem">
-                <div class="col-sm-12 col-md-12">
+                <div class="col-sm-12">
                     <div class="thumbnail">
                         <input type="hidden" class="price{{$index}}" value="{{item.price}}">
                         <img alt="" style="width: 100%;" src="{{SubMenuItem.image}}">
@@ -37,7 +37,7 @@
                                  </span>
                                
                                  <!-- ng-show="useremail != null && SubMenuItem.online=='ON'"  -->
-                                <span class="m-b-5  pull-right" ng-show="SubMenuItem.online=='ON'"  >
+                                <span class=" pull-right" ng-show="SubMenuItem.online=='ON'"  >
 
                                 <button class="btn btn-danger btn-sm waves-effect" type="button" ng-click='minus($event,$index,SubMenuItem);' id="minus" value="1" >-</button>
 

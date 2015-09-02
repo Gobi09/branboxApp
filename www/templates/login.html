@@ -1,12 +1,21 @@
 <ion-view>
+<style type="text/css"> 
+.card {
+    width: auto;
+    height: 1000px;
+}
+</style>
     <!-- <div class="block-header">
         <img class="img-responsive img-circle" id="circle" src="img/logo.jpg">        
     </div> -->
-    <div class="bs-item z-depth-5" ng-controller="authentication">
+    <div class="" ng-controller="authentication">
+
         <div class="card">
+
             <div class="card-header">
-                <h2>Login</h2>
+                <!-- <h2>Login</h2> -->
             </div>
+             <br><br><br><br><br><br><br><br><br>
             <div class="card-body card-padding" style="padding: 10px;">
                 <form name="form"  role="form">
                     <div class="form-group input-group">
@@ -44,8 +53,11 @@
                             Don't forget to check me out
                         </label>
                     </div>
-                    <button type="submit" ng-click="loginAuthentication();" class="btn btn-primary btn-sm waves-effect">Sign In</button>
-                    <a href="#register" type="submit" class="btn btn-primary btn-sm">Register</a>
+                    <center>
+                         <button type="submit" ng-click="loginAuthentication();" class="btn bgm-deeporange btn-sm waves-effect">Sign In</button>
+                    <a href="#register" type="submit" class="btn bgm-green btn-sm">Register</a>
+                    </center>
+                   
                 </form>
             </div>
         </div>
