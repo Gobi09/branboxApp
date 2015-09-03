@@ -20,7 +20,7 @@
   <preference name="SplashScreen" value="screen"/>
   <preference name="SplashScreenDelay" value="3000"/>
   
-    <platform name="android">
+    <!--<platform name="android">-->
         
         <splash src="resources/android/splash/drawable-land-ldpi-screen.png" density="land-ldpi"/>
         <splash src="resources/android/splash/drawable-land-mdpi-screen.png" density="land-mdpi"/>
@@ -34,7 +34,7 @@
         <splash src="resources/android/splash/drawable-port-xhdpi-screen.png" density="port-xhdpi"/>
         <splash src="resources/android/splash/drawable-port-xxhdpi-screen.png" density="port-xxhdpi"/>
         <splash src="resources/android/splash/drawable-port-xxxhdpi-screen.png" density="port-xxxhdpi"/>
-    </platform>
+    <!--</platform>-->
   
   <!--<platform name="android">
      <splash src="img/bg123 - Copy.jpg" density="land-Copy"/>
