@@ -48,11 +48,11 @@ var apps=angular.module('starter', ['ionic', 'ngRoute', 'starter.controllers', '
 
  
   $routeProvider
-    // .when('/dashboard',
-    //     {
-    //         templateUrl: 'templates/dashboard.html',
-    //         controller: 'DashCtrl'
-    //     })
+    .when('/dashboard',
+        {
+            templateUrl: 'templates/dashboard.html',
+            controller: 'DashCtrl'
+        })
    .when('/menu',
         {
             templateUrl: 'templates/menu.html',
@@ -129,7 +129,7 @@ var apps=angular.module('starter', ['ionic', 'ngRoute', 'starter.controllers', '
             templateUrl: 'templates/timeDelivery.html',
             controller: 'timeDelivery'
         })
-    .otherwise('/menu');
+    .otherwise('/dashboard');
 
 }]);
 

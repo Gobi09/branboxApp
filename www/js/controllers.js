@@ -8,12 +8,13 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
 
 //   })
 
-// .controller('DashCtrl', function($scope,$ocLazyLoad) {
+.controller('DashCtrl', function($scope,$ocLazyLoad) {
 
-//     setTimeout(function(){
-//       $location.path('/menu');
-//     },5000);
-//   })
+    setTimeout(function(){
+     window.location="index1.html";
+      //$location.path('/menu');
+    },5000);
+  })
 .controller('contactCtrl', function($scope,$http) {
 
     $("#sidebar").removeClass("toggled");
@@ -176,7 +177,6 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
 })
 .controller('MenuController', function($scope,$http,$location,alertmsg) {
 
-    // $("#header").hide();
     $("#sidebar").removeClass("toggled");
     $("#menu-trigger").removeClass("open");
     $scope.useremail= localStorage.getItem("email");
