@@ -10,7 +10,9 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
 
 // .controller('DashCtrl', function($scope,$ocLazyLoad) {
 
-  
+//     setTimeout(function(){
+//       $location.path('/menu');
+//     },5000);
 //   })
 .controller('contactCtrl', function($scope,$http) {
 
@@ -174,6 +176,7 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
 })
 .controller('MenuController', function($scope,$http,$location,alertmsg) {
 
+    // $("#header").hide();
     $("#sidebar").removeClass("toggled");
     $("#menu-trigger").removeClass("open");
     $scope.useremail= localStorage.getItem("email");
