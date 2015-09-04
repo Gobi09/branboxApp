@@ -19,6 +19,7 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
 
     $("#sidebar").removeClass("toggled");
   $("#menu-trigger").removeClass("open");
+   localStorage.setItem("splash", 1);
   
     $http.post('http://www.appnlogic.com/branboxAppAdmin/branboxAdminUi/branbox.php', {branboxVariable:'contactUs',businessId:'6'},{headers: {'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8'} })     
     .success(function(data) {      
@@ -86,6 +87,7 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
   })
 
 .controller('locationCtrl', function($scope, $http) {
+  localStorage.setItem("splash", 1);
     $("#sidebar").removeClass("toggled");
   $("#menu-trigger").removeClass("open");
   $http.post('http://www.appnlogic.com/branboxAppAdmin/branboxAdminUi/branbox.php',{'branboxVariable':'location', businessId:'1'},{headers: {'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8'} }).success(function(data){
@@ -133,6 +135,7 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
 
 //author Pravinkumar on 20/8/2015
 .controller('aboutUs', function($scope,$http) {
+  localStorage.setItem("splash", 1);
     $("#sidebar").removeClass("toggled");
   $("#menu-trigger").removeClass("open");
   $http.post('http://www.appnlogic.com/branboxAppAdmin/branboxAdminUi/branbox.php', {branboxVariable:'aboutUs',businessId:'1'},{headers: {'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8'} })     
@@ -149,6 +152,7 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
   }); 
 })
 .controller('gallery', function($scope,$http) {
+  localStorage.setItem("splash", 1);
     $("#sidebar").removeClass("toggled");
   $("#menu-trigger").removeClass("open");
   $http.post('http://www.appnlogic.com/branboxAppAdmin/branboxAdminUi/branbox.php', {branboxVariable:'gallery',businessId:'1'},{headers: {'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8'} })     
@@ -177,6 +181,17 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
 })
 .controller('MenuController', function($scope,$http,$location,alertmsg) {
 
+  //   window.history.forward();
+  // function preventBack() { window.history.forward(1); }
+    window.onbeforeunload = function (e) {
+            var e = e || window.event;
+            
+            if (e) {
+                open(location, '_self').close();
+            }
+
+         };
+    localStorage.setItem("splash", 0);
     $("#sidebar").removeClass("toggled");
     $("#menu-trigger").removeClass("open");
     $scope.useremail= localStorage.getItem("email");
@@ -191,6 +206,8 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
                  console.log($scope.countOffers);
               }).error(function(){  
             alert("server Error");
+
+            // open(location, '_self').close(); 
           });
 
           //Menus from server and sync here.....
@@ -207,6 +224,7 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
         
          // console.log($scope.MenuData);
       }).error(function(){  
+         // open(location, '_self').close(); 
           alert("server Error");
        });
 
@@ -218,7 +236,7 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
     $("#sidebar").removeClass("toggled");
   $("#menu-trigger").removeClass("open");
 
-
+  localStorage.setItem("splash", 1);
     var businessId=1;
    var url = $location.url();
     var temp = url.split("=");
@@ -247,6 +265,7 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
 .controller('SubMenuItemController', function($scope,$http,$location,alertmsg) {
   $("#sidebar").removeClass("toggled");
   $("#menu-trigger").removeClass("open");
+  localStorage.setItem("splash", 1);
 
   $scope.useremail= localStorage.getItem("email");
   $scope.userName= localStorage.getItem("userName");
@@ -531,6 +550,7 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
 .controller('AddToCartCtrl', function($scope,$http,$location) {
 
   //alert("data");
+  localStorage.setItem("splash", 1);
   $scope.useremail= localStorage.getItem("email");
   $scope.userName= localStorage.getItem("userName");
   $scope.userid= localStorage.getItem("id");
@@ -791,6 +811,8 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
 .controller('registerForm', function($scope,$http,$location) {  
     $("#sidebar").removeClass("toggled");
   $("#menu-trigger").removeClass("open");
+  localStorage.setItem("splash", 1);
+
   $scope.insertForm=function()
   {
     // for submitting form
@@ -843,6 +865,7 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
 .controller('authentication', function($scope,$http,$location) {  
     $("#sidebar").removeClass("toggled");
   $("#menu-trigger").removeClass("open");
+  localStorage.setItem("splash", 1);
   $scope.loginAuthentication=function()
   {
     
@@ -910,7 +933,7 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
   .controller('latestOfferController', function($scope,$http,$location,alertmsg) {  
         var businessId=1;
         //localStorage.setItem("cartCount", 0);
-
+        localStorage.setItem("splash", 1);
         $scope.cartCountGet= localStorage.getItem("cartCount");
          $("#cartCount").html($scope.cartCountGet);
         $scope.cartCount= localStorage.getItem("cartCount");
@@ -1031,6 +1054,8 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
 .controller('timeDelivery', function($scope,$http) {  
       $("#sidebar").removeClass("toggled");
       $("#menu-trigger").removeClass("open");
+      localStorage.setItem("splash", 1);
+
       $scope.save = function(){
          var delvDate = $('#deliveryDate').val();           
          var delvTime = $('#deliveryTime').val();  

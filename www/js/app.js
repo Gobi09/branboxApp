@@ -5,6 +5,15 @@ var apps=angular.module('starter', ['ionic', 'ngRoute', 'starter.controllers', '
     localStorage.setItem("cartCount", 0);
     localStorage.setItem("businessId", 1);
     localStorage.removeItem("cartCount");
+    localStorage.setItem
+    localStorage.setItem("splash", 0);
+     //  var splash=localStorage.getItem("splash");
+     // if(splash=="0")
+     // {
+     //      window.history.forward();
+     //      function preventBack() { open(location, '_self').close(); }
+     //  }
+
    // alert(datadata);
     //return false;
     if( datadata==null)
