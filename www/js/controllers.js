@@ -205,7 +205,7 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
                  $scope.countOffers=json.rows.length;
                  console.log($scope.countOffers);
               }).error(function(){  
-            alert("server Error");
+            //alert("server Error");
 
             // open(location, '_self').close(); 
           });
@@ -225,7 +225,7 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
          // console.log($scope.MenuData);
       }).error(function(){  
          // open(location, '_self').close(); 
-          alert("server Error");
+         // alert("server Error");
        });
 
 
@@ -253,7 +253,7 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
          $scope.SubMenuData= json.rows;
           //console.log($scope.SubMenuData);
       }).error(function(){  
-          alert("server Error");
+          //alert("server Error");
        });
 
       $scope.goback=function()
@@ -309,7 +309,7 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
          $scope.SubMenuItemData= json.rows;
           //console.log($scope.SubMenuItemData);
       }).error(function(){  
-          alert("server Error");
+         // alert("server Error");
        });
 
 
@@ -763,7 +763,7 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
                       }
                      console.log(json);
                     }).error(function(){  
-                        alert("server Error");
+                       // alert("server Error");
                      });
                   }, 1000);
                     
@@ -851,10 +851,10 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
         $location.path('/menu');
 
       }else{
-        alert('fail');
+       // alert('fail');
       }
     }).error(function(){  
-        alert("server Error");
+       // alert("server Error");
       });
 
   }
@@ -924,7 +924,7 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
       //   alert('fail');
       // }
     }).error(function(){  
-        alert("server Error");
+        //alert("server Error");
       });
   }
 
@@ -951,7 +951,7 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
           $scope.latestOffers=json.rows;
           console.log($scope.latestOffers);
           }).error(function(){  
-        alert("server Error");
+        //alert("server Error");
       });
 
     $scope.Add_toCart=function($event,$index,json)
