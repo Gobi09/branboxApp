@@ -184,14 +184,15 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
 
     //window.history.forward();
   // function preventBack() { window.history.forward(1); }
-  //   window.onbeforeunload = function (e) {
-  //           var e = e || window.event;
+  
+    window.onbeforeunload = function (e) {
+            var e = e || window.event;
             
-  //           if (e) {
-  //               open(location, '_self').close();
-  //           }
+            if (e) {
+                open(location, '_self').close();
+            }
 
-  //        };
+         };
     localStorage.setItem("splash", 0);
     $("#sidebar").removeClass("toggled");
     $("#menu-trigger").removeClass("open");
@@ -948,7 +949,7 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
           localStorage.setItem("state",state );
           localStorage.setItem("country", country);
           localStorage.setItem("postalCode",postalCode );
-           window.location="index.html";
+           window.location="index2.html";
            // $location.path('/menu');
       }
      
