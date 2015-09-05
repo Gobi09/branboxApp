@@ -185,7 +185,7 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
     //window.history.forward();
   // function preventBack() { window.history.forward(1); }
 
-  
+
     window.onbeforeunload = function (e) {
             var e = e || window.event;
             
@@ -1050,8 +1050,8 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
                    else
                    {
                      tx.executeSql('INSERT OR REPLACE INTO orderitems (businessId,menuId,subMenuId,itemId,userId,itemName,image,price,subTotal,quantity,tax,offers,orderType)VALUES("'+json.businessId+'","'+json.menuId+'","'+json.subMenuId+'","'+json.itemId+'","'+userid+'","'+json.name+'","'+json.image+'","'+json.price+'","'+json.price+'","1","0","0","offer")',successID);
-                         $("#addtocart"+index).removeClass("bgm-gray");
-                            $("#addtocart"+index).addClass("bgm-green");
+                          // $("#addtocart"+index).removeClass("bgm-gray");
+                          //   $("#addtocart"+index).addClass("bgm-green");
                       alertmsg.notify(nFrom, nAlign, nIcons, nType, nAnimIn, nAnimOut,message);
                         var data=localStorage.getItem("cartCount");
                         data++;
