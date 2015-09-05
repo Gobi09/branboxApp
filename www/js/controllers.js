@@ -181,7 +181,7 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
 })
 .controller('MenuController', function($scope,$http,$location,alertmsg) {
 
-    window.history.forward();
+    //window.history.forward();
   function preventBack() { window.history.forward(1); }
     window.onbeforeunload = function (e) {
             var e = e || window.event;
