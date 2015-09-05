@@ -11352,6 +11352,15 @@ input:focus {
 .card {
   position: relative;
   background: #fff;
+  font-size: 18px;
+  /*box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15);*/
+  /*margin-bottom: 30px;*/
+}
+
+/* Gobi */
+
+.card p{
+ 
   font-size: 17px;
   /*box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15);*/
   /*margin-bottom: 30px;*/
