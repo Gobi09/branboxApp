@@ -1,6 +1,6 @@
 <style>
 #location {
-    height: 200px;
+    height: 300px;
     width: auto;
 }
 </style>
@@ -10,8 +10,8 @@
         <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="card-header">
                 <div id="location"> </div>  
-                <div class="card-body">
-                   <div class="row ">
+                <div class="card-body " >
+                   <div class="row " style="padding-left:10px;">
                         <div class="col-md-12 "> 
                             <h5><div ng-bind-html="name"></div> </h5>
                             <!-- <h5><div ng-bind-html="companyName"></div></h5> -->
@@ -21,7 +21,7 @@
                             <!-- <h5><div ng-bind-html="state"></div></h5> -->
                            <!--  <h5><div ng-bind-html="country"></div></h5>
                             <h5><div ng-bind-html="postalCode"></div></h5> -->
-                            <a class="btn bgm-teal" ng-href="tel: {{PhonenumberCall}}"><i class="md md-quick-contacts-dialer md-large"></i> {{PhonenumberCall}}</a>
+                            <a class="btn bgm-teal" ng-href="tel: {{PhonenumberCall}}"><i class="md md-call "></i> {{PhonenumberCall}}</a>
                             <!-- <a href="tel:{{PhonenumberCall}}" class="md md-quick-contacts-dialer md-large" > {{PhonenumberCall}} </a> -->
                             <!-- <h5><i class="md md-quick-contacts-dialer"></i> <div ng-bind-html="website"></div></h5></div> -->
                         </div>
@@ -36,7 +36,7 @@
     </div>    
 </div>
 <div class="card">
-        <div class="card-body card-padding">
+        <div class="card-body card-padding" style="padding-left:10px;">
             <form role="form">
                 <div class="row">
 

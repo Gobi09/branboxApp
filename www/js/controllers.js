@@ -184,6 +184,7 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
 
     //window.history.forward();
   // function preventBack() { window.history.forward(1); }
+
   
     window.onbeforeunload = function (e) {
             var e = e || window.event;
