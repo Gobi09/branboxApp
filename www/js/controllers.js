@@ -181,16 +181,16 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
 })
 .controller('MenuController', function($scope,$http,$location,alertmsg) {
 
-  //   window.history.forward();
-  // function preventBack() { window.history.forward(1); }
-    // window.onbeforeunload = function (e) {
-    //         var e = e || window.event;
+    window.history.forward();
+  function preventBack() { window.history.forward(1); }
+    window.onbeforeunload = function (e) {
+            var e = e || window.event;
             
-    //         if (e) {
-    //             open(location, '_self').close();
-    //         }
+            if (e) {
+                open(location, '_self').close();
+            }
 
-    //      };
+         };
     localStorage.setItem("splash", 0);
     $("#sidebar").removeClass("toggled");
     $("#menu-trigger").removeClass("open");
