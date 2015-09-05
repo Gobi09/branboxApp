@@ -183,14 +183,14 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
 
   //   window.history.forward();
   // function preventBack() { window.history.forward(1); }
-    window.onbeforeunload = function (e) {
-            var e = e || window.event;
+    // window.onbeforeunload = function (e) {
+    //         var e = e || window.event;
             
-            if (e) {
-                open(location, '_self').close();
-            }
+    //         if (e) {
+    //             open(location, '_self').close();
+    //         }
 
-         };
+    //      };
     localStorage.setItem("splash", 0);
     $("#sidebar").removeClass("toggled");
     $("#menu-trigger").removeClass("open");
@@ -432,13 +432,16 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
                          if(itemLength==1 )
                          {
                             tx.executeSql('UPDATE  orderitems SET quantity="'+quantity+'" ,subTotal="'+price+'"  WHERE itemId="'+json.id+'" and orderType="order"',successID);
-                             
+                              $("#addtocart"+index).removeClass("bgm-green");
+                              $("#addtocart"+index).addClass("bgm-deeporange");
                             alertmsg.notify(nFrom, nAlign, nIcons, nType, nAnimIn, nAnimOut,message1);
                          }
                          else
                          {
                            tx.executeSql('INSERT OR REPLACE INTO orderitems (businessId,menuId,subMenuId,itemId,userId,itemName,image,price,subTotal,quantity,tax,offers,orderType)VALUES("'+json.businessId+'","'+json.menuId+'","'+json.subMenuId+'","'+json.id+'","'+userid+'","'+json.name+'","'+json.image+'","'+json.price+'","'+price+'","'+quantity+'","'+json.tax+'","'+json.offers+'","order")',successID);
-                           
+                            $("#addtocart"+index).removeClass("bgm-bluegray");
+                            $("#addtocart"+index).addClass("bgm-green");
+
                            alertmsg.notify(nFrom, nAlign, nIcons, nType, nAnimIn, nAnimOut,message);
                            var data=localStorage.getItem("cartCount");
                               data++;
@@ -562,8 +565,10 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
     $scope.totalAmount="";
      $scope.FinalOrderData="";
      //$scope.OrderedItems="";
+     $scope.timedDelivery="";
      var json_arr =  [];  
       $("#orderdata").hide();
+       $("#timed").hide();
      var db = window.openDatabase("branboxnew", "1.0", "branbox Demo", 200 * 1024 * 1024);
               db.transaction(function(tx){
                   tx.executeSql('SELECT * FROM orderitems',[], function (tx, results)
@@ -590,11 +595,18 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
         $scope.showfun=function(OrderedItems){
 
             $("#orderdata").show();
+             $("#timed").show();
+             $scope.timedDelivery=1;
+
         }
         $scope.hidefun=function(OrderedItems){
 
-            $("#orderdata").hide();
+            //$("#orderdata").hide();
+            $("#orderdata").show();
+             $("#timed").hide();
+             $scope.timedDelivery=0;
         }
+
         $scope.removeOrder = function(index,order) {
             var db = window.openDatabase("branboxnew", "1.0", "branbox Demo", 200 * 1024 * 1024);
              db.transaction(function(tx){
@@ -693,7 +705,37 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
         $scope.getFood=function(orderData){
           var json_arr =  []; 
           var finaldata=[];
-          
+          if($scope.timedDelivery==1)
+          {
+              var delvDate = $('#deliveryDate').val();           
+              var delvTime = $('#deliveryTime').val();  
+
+              if(delvDate=="")
+              {
+                swal({   
+                  title: "Please Give Valid Date!! ",   
+                  text: "It is Required!",   
+                  timer: 2000,   
+                  showConfirmButton: false 
+                });
+                return false
+              }
+
+              if(delvTime=="")
+              {
+                swal({   
+                  title: "Please Give Time for Delivery.",   
+                  text: " It is Required!",   
+                  timer: 2000,   
+                  showConfirmButton: false 
+                });
+                return false
+              }
+              localStorage.setItem("delvDate", delvDate);
+              localStorage.setItem("delvTime", delvTime);
+
+          }
+            
           var db = window.openDatabase("branboxnew", "1.0", "branbox Demo", 200 * 1024 * 1024);
               db.transaction(function(tx){
                   tx.executeSql('SELECT * FROM orderingredients',[], function (tx, results)
@@ -772,6 +814,10 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
 
 
         };
+
+
+         
+
 
      $scope.goback=function()
       {
@@ -1001,6 +1047,8 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
                    else
                    {
                      tx.executeSql('INSERT OR REPLACE INTO orderitems (businessId,menuId,subMenuId,itemId,userId,itemName,image,price,subTotal,quantity,tax,offers,orderType)VALUES("'+json.businessId+'","'+json.menuId+'","'+json.subMenuId+'","'+json.itemId+'","'+userid+'","'+json.name+'","'+json.image+'","'+json.price+'","'+json.price+'","1","0","0","offer")',successID);
+                         $("#addtocart"+index).removeClass("bgm-gray");
+                            $("#addtocart"+index).addClass("bgm-green");
                       alertmsg.notify(nFrom, nAlign, nIcons, nType, nAnimIn, nAnimOut,message);
                         var data=localStorage.getItem("cartCount");
                         data++;

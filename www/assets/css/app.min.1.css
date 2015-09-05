@@ -4510,6 +4510,19 @@ fieldset[disabled] .btn-link:focus {
   border-radius: 2px;
 }
 
+/* gobi */
+
+  .btn-md,
+  .btn-group-md > .btn {
+  font-size: 15px;
+line-height: 1.5;
+width: 52px;
+border-radius: 73px;
+height: 51px;
+  }
+
+/* gobi*/
+
 .btn-sm,
 .btn-group-sm > .btn {
   padding: 5px 10px;
@@ -10409,6 +10422,8 @@ body #content {
   display: block;
   color: #4C4C4C;
   font-weight: 500;
+  /* gobi  change size  */
+  font-size: 20px;
   position: relative;
 }
 
@@ -10420,7 +10435,8 @@ body #content {
 #sidebar .main-menu > li > a > i {
   position: absolute;
   left: 16px;
-  font-size: 20px;
+/* gobi md change size  */
+  font-size: 30px;
   top: 0;
   width: 25px;
   text-align: center;
@@ -10723,7 +10739,7 @@ input:focus {
   }
 }
 
-/*gobi*/
+/*gobi media*/
 
 
 @media only screen and (min-width:480px) and (max-width: 640px)  {
@@ -10747,7 +10763,7 @@ input:focus {
     border-radius: 5px;
     height:43px;
     margin-top: -2px;
-     margin-left: -2px;
+     margin-left: 40px;
   }
   
 }
@@ -10759,7 +10775,7 @@ input:focus {
     border-radius: 5px;
     height:43px;
     margin-top: -2px;
-     margin-left: 39px;
+     margin-left: 60px;
   }
   
 } 
@@ -10788,7 +10804,19 @@ input:focus {
   }
   
 }
-@media only screen and (min-width:601px) and (max-width: 720px)  {
+@media only screen and (min-width:601px) and (max-width: 651px)  {
+  
+  #header .header-inner .logo img
+  {
+    width:86px;
+    border-radius: 5px;
+    height:43px;
+    margin-top: -2px;
+     margin-left: 203px;
+  }
+  
+}
+@media only screen and (min-width:651px) and (max-width: 720px)  {
   
   #header .header-inner .logo img
   {
