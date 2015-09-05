@@ -38,6 +38,7 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
           });
         $scope.map = map;
         // contact information  
+        $scope.PhonenumberCall=data['phoneNumber1'];
         $scope.name = '<div class="contactUsName">' +data['brandName']+','+ '</div>'; 
           $scope.companyName = '<div class="contactUsAdd">' +data['companyName']+','+ '</div>'; 
           $scope.address1 = '<div class="contactUsAdd">' +data['address1']+','+ '</div>'; 
@@ -182,15 +183,15 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
 .controller('MenuController', function($scope,$http,$location,alertmsg) {
 
     //window.history.forward();
-  function preventBack() { window.history.forward(1); }
-    window.onbeforeunload = function (e) {
-            var e = e || window.event;
+  // function preventBack() { window.history.forward(1); }
+  //   window.onbeforeunload = function (e) {
+  //           var e = e || window.event;
             
-            if (e) {
-                open(location, '_self').close();
-            }
+  //           if (e) {
+  //               open(location, '_self').close();
+  //           }
 
-         };
+  //        };
     localStorage.setItem("splash", 0);
     $("#sidebar").removeClass("toggled");
     $("#menu-trigger").removeClass("open");
@@ -432,8 +433,8 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
                          if(itemLength==1 )
                          {
                             tx.executeSql('UPDATE  orderitems SET quantity="'+quantity+'" ,subTotal="'+price+'"  WHERE itemId="'+json.id+'" and orderType="order"',successID);
-                              $("#addtocart"+index).removeClass("bgm-green");
-                              $("#addtocart"+index).addClass("bgm-deeporange");
+                              // $("#addtocart"+index).removeClass("bgm-green");
+                              // $("#addtocart"+index).addClass("bgm-deeporange");
                             alertmsg.notify(nFrom, nAlign, nIcons, nType, nAnimIn, nAnimOut,message1);
                          }
                          else

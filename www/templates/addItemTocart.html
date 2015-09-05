@@ -43,7 +43,7 @@
 
 
             </div>  
-            <div class="table-responsive " style="" tabindex="2" id="orderdata">
+            <div class=" " style="" tabindex="2" id="orderdata">
                  <div><br></div>
                 
 
@@ -62,14 +62,14 @@
                                 <div>
                                   
                                     <img src="{{order.image}}" class="text-center" style="width:80px;"><br>
-                                     <span class="span-sty" >{{order.itemName}}</span><br>
+                                    <span class="span-sty" >{{order.itemName}}</span><br>
                                 </div>
                                 
                             </td>
                             <!-- <td></td> -->
                             <td> 
                                 <br>
-                                <input type="text" class="form-control"ng-keyup="getsubtotal($event,$index,order);" name="quantity"class="item item-input "  id="quantity" value="{{order.quantity}}">
+                                <input type="text" style="width:30px;" class="form-control"ng-keyup="getsubtotal($event,$index,order);" name="quantity"class="item item-input "  id="quantity" value="{{order.quantity}}">
 
 
                             </td>
@@ -83,13 +83,15 @@
                                 <br><br>
                                 {{order.subTotal}}
                                 <input type="hidden" style="width:60px" readonly name="subtotal"class="form-control" id="subTotal" value="{{order.subTotal}}">
+                                 <button ng-click="removeOrder($index,order);" class="btn button-small bgm-red button-assertive"><i class="md  md-clear"></i>
+                                </button>
 
                             </td>
-                            <td>
+                            <!-- <td>
                                 <br><br>
                                 <button ng-click="removeOrder($index,order);" class="btn button-small bgm-red button-assertive"><i class="md  md-clear"></i>
                                 </button>
-                            </td>
+                            </td> -->
                         </tr>
                         
                     </tbody>

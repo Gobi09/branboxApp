@@ -4512,6 +4512,23 @@ fieldset[disabled] .btn-link:focus {
 
 /* gobi */
 
+.btn-md1,
+.btn-group-md1 > .btn {
+   font-size: 15px;
+line-height: 1.5;
+border-radius: 2px;
+height: 51px;
+width: 38px;
+}
+.btn-md2,
+.btn-group-md2 > .btn {
+   font-size: 15px;
+line-height: 1.5;
+border-radius: 2px;
+height: 51px;
+}
+
+
   .btn-md,
   .btn-group-md > .btn {
   font-size: 15px;
@@ -11335,6 +11352,7 @@ input:focus {
 .card {
   position: relative;
   background: #fff;
+  font-size: 17px;
   /*box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15);*/
   /*margin-bottom: 30px;*/
 }
@@ -14577,7 +14595,7 @@ a.thumbnail.active {
 
 @font-face {
     font-family: gobi;
-    src: url('../fonts/Monky-Business.ttf');
+    src: url('../fonts/2926.ttf');
   
 }
 
@@ -14592,7 +14610,7 @@ a.thumbnail.active {
 }
 .order .thumbnail .caption #fant{
     font-family: roboto;
-    /*font-size: 35px;*/
+    font-size: 17px;
     
 }
 /*gobi*/
