@@ -2109,8 +2109,8 @@ pre code {
 .col-lg-12 {
   position: relative;
   min-height: 1px;
-  padding-left: 15px;
-  padding-right: 15px;
+  padding-left: 7px;
+  padding-right: 8px;
 }
 
 .col-xs-1,
@@ -11249,7 +11249,8 @@ input:focus {
 .tab-nav > li > a {
   display: inline-block;
   color: #7a7a7a;
-  text-transform: uppercase;
+  /*text-transform: uppercase;*/
+/*  gobi */
   position: relative;
   width: 100%;
   -webkit-transition: all;

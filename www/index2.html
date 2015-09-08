@@ -183,12 +183,13 @@
                     </div>
 
                     <ul class="main-menu">
-                        <li><a href="#menu"><i class=" md-restaurant-menu md-large" menu-close="" nav-clear=""></i>Restuarant Menus</a></li>
+                        <li><a href="#login"><i class="md-person md-large" menu-close="" nav-clear=""></i>Sign In</a></li>
+                        <li><a href="#menu"><i class=" md-restaurant-menu md-large" menu-close="" nav-clear=""></i>Menus</a></li>
                         <li><a href="#latestOffers"> <i class=" md-wallet-giftcard md-large" menu-close="" nav-clear=""></i>Latest Offers</a></li>
                        <!--  <li  ng-show="useremail != null"><a  href="#timeDelivery"><i class="md-alarm md-large" menu-close="" nav-clear=""></i>Timed Delivery</a></li> -->
                         <li><a href="#aboutUs"><i class="md md-home md-large" menu-close="" nav-clear=""></i> About Us</a></li>
                         <li><a href="#location"><i class="md md-location-on md-large" menu-close="" nav-clear=""></i> Locations</a></li> 
-                        <li><a href="#login"><i class="md-person md-large" menu-close="" nav-clear=""></i> My Account </a></li>
+                       
                         <li><a href="#gallery"><i class="md-photo-library md-large" menu-close="" nav-clear=""></i>Gallery</a></li>
                         <li><a href="#contactForm"><i class="md-perm-phone-msg md-large" menu-close="" nav-clear=""></i> Contact Us</a></li>                  
                     </ul>
@@ -222,6 +223,14 @@ $("#logout").click(function () {
      localStorage.clear();
 
 })
+
+$(".main-menu").click(function () {
+    $("#sidebar").removeClass("toggled");
+    $("#menu-trigger").removeClass("open");
+    //localStorage.setItem("messageId", "hide");
+
+});
+
 </script>
 <style type="text/css">
 /*div.transparentbox

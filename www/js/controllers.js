@@ -24,19 +24,19 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
     $http.post('http://www.appnlogic.com/branboxAppAdmin/branboxAdminUi/branbox.php', {branboxVariable:'contactUs',businessId:'6'},{headers: {'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8'} })     
     .success(function(data) {      
     // contact map 
-        var myLatlng = new google.maps.LatLng(data['latitude'], data['longitude']);
-        var mapOptions = {
-          center: myLatlng,
-          zoom: 16,
-          mapTypeId: google.maps.MapTypeId.ROADMAP
-        };
-        var map = new google.maps.Map(document.getElementById("location"), mapOptions);     
-          var myLocation = new google.maps.Marker({
-            position: new google.maps.LatLng(data['latitude'], data['longitude']),
-            map: map,
-            title: "My Location"
-          });
-        $scope.map = map;
+        // var myLatlng = new google.maps.LatLng(data['latitude'], data['longitude']);
+        // var mapOptions = {
+        //   center: myLatlng,
+        //   zoom: 16,
+        //   mapTypeId: google.maps.MapTypeId.ROADMAP
+        // };
+        // var map = new google.maps.Map(document.getElementById("location"), mapOptions);     
+        //   var myLocation = new google.maps.Marker({
+        //     position: new google.maps.LatLng(data['latitude'], data['longitude']),
+        //     map: map,
+        //     title: "My Location"
+        //   });
+        // $scope.map = map;
         // contact information  
         $scope.PhonenumberCall=data['phoneNumber1'];
         $scope.name = '<div class="contactUsName">' +data['brandName']+','+ '</div>'; 
@@ -157,14 +157,15 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
     $("#sidebar").removeClass("toggled");
   $("#menu-trigger").removeClass("open");
   $http.post('http://www.appnlogic.com/branboxAppAdmin/branboxAdminUi/branbox.php', {branboxVariable:'gallery',businessId:'1'},{headers: {'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8'} })     
-  .success(function(data) {    
+  .success(function(data) {  
+    console.log(data);
     $scope.galleryImages=data;
     $scope.$on('test', function(ngRepeatFinishedEvent) {
         $('.lightbox').lightGallery({
             enableTouch: true
         });
     });
-  }).error(function(){         
+  }).error(function(){
     $scope.error = "server Error";     
   }); 
 })
@@ -184,16 +185,16 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
 
     //window.history.forward();
   // function preventBack() { window.history.forward(1); }
+  
 
-
-    window.onbeforeunload = function (e) {
-            var e = e || window.event;
+    // window.onbeforeunload = function (e) {
+    //         var e = e || window.event;
             
-            if (e) {
-                open(location, '_self').close();
-            }
+    //         if (e) {
+    //             open(location, '_self').close();
+    //         }
 
-         };
+    //      };
          
     localStorage.setItem("splash", 0);
     $("#sidebar").removeClass("toggled");
@@ -892,19 +893,41 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
     //alert(gender); 
 
     $http.post('http://www.appnlogic.com/branboxAppAdmin/branboxAdminUi/registerUser.php',{busId:bussinessId,fname:fname,password:password,gender:gender,dob:dob,email:email,mobile:mobile,address1:address1,address2:address2,country:country,state:state,city:city,code:code}, {headers: {'Content-Type': 'application/x-www-form-urlencoded'} })
-    .success(function (response) {
-       
-      if(response!==null)
-      {
-        //$location.path('templates/menu.html');
-        //alert('success');
-        $location.path('/menu');
+    //$http.post('http://www.sedarspine.com/BranboxAppMail/registerUser.php',{busId:bussinessId,fname:fname,password:password,gender:gender,dob:dob,email:email,mobile:mobile,address1:address1,address2:address2,country:country,state:state,city:city,code:code}, {headers: {'Content-Type': 'application/x-www-form-urlencoded'} })
+    .success(function (data) {
+        
+        //console.log(data.rows[0].id);
 
-      }else{
-       // alert('fail');
-      }
-    }).error(function(){  
-       // alert("server Error");
+            $.ajax({
+                type: "POST",
+                dataType:"json",
+                data:{id:data.rows[0].id,bId:bussinessId,email:email},
+                url: 'http://www.sedarspine.com/BranboxAppMail/registerUser.php',
+                crossDomain:true,
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                success:function (json)
+                {
+                  alert("alert");
+                },
+                error:function(error)
+                {
+
+                  window.location="index2.html";
+                }
+
+                
+             });
+            //console.log(data);
+              swal({  
+                      title: "Please Check Your Mail",   
+                      text: "Verification Link attatched",   
+                      timer: 5000,   
+                      showConfirmButton: false 
+                  });
+
+    }).error(function(){ 
+        
+        alert("server Error");
       });
 
   }

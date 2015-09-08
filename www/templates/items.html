@@ -10,7 +10,7 @@
        
         <div class="card-body card-padding">
             
-            <div class="card-header jumbotron ">
+            <!-- <div class="card-header jumbotron ">
                 <a ng-show="useremail != null" href="#addTocartpage" class="btn bgm-cyan waves-effect pull-right" style="margin-right:10px;">
                    <i class="md md-shopping-cart md-white"></i>Cart(<span id="cartCount"></span>)
                 </a>
@@ -19,7 +19,7 @@
                         <input type="search" class="form-control" ng-model="SubMenuItem" placeholder="Search Items ">
                     </div>
                 </div>
-            </div>
+            </div> -->
 
 
             <div class="row order" ng-repeat="SubMenuItem in SubMenuItemData  | filter:SubMenuItem">
@@ -29,12 +29,13 @@
                         <img alt="" style="width: 100%;" src="{{SubMenuItem.image}}">
                         <div class="caption">
                             <h4 ng-init="price = SubMenuItem.price" class>{{SubMenuItem.name}}</h4>
-                            <p id="fant"> Price: {{price}} <span class="pull-right">Sub Total: <span id="price{{$index}}"  ng-model="price">{{price}}</span> AED</span>
+                            <p id="fant"> Price: {{price}} 
+                               <!--  <span class="pull-right">Sub Total: <span id="price{{$index}}"  ng-model="price">{{price}}</span> AED</span> -->
                            
                             </p>
                             <p>
                                  <span>
-                                     <button class="btn bgm-teal   btn-md2 waves-effect" type="button" data-toggle="collapse" data-target="#collapseExample{{$index}}" aria-expanded="false" aria-controls="collapseExample{{$index}}">Ingredients
+                                     <button class="btn bgm-teal   btn-md2 waves-effect" type="button" data-toggle="collapse" data-target="#collapseExample{{$index}}" aria-expanded="false" aria-controls="collapseExample{{$index}}">Details
                                                                     </button>
                                  </span>
                                
