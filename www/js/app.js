@@ -6,16 +6,7 @@ var apps=angular.module('starter', ['ionic', 'ngRoute', 'starter.controllers', '
     localStorage.setItem("businessId", 1);
     localStorage.removeItem("cartCount");
     localStorage.setItem("splash", 0);
-     //  var splash=localStorage.getItem("splash");
-     // if(splash=="0")
-     // {
-     //      window.history.forward();
-     //      function preventBack() { open(location, '_self').close(); }
-     //  }
-
-   // alert(datadata);
-    //return false;
-    if( datadata==null)
+     if( datadata==null)
     {
          
         var db = window.openDatabase("branboxnew", "1.0", "branbox New", 200 * 1024 * 1024);
@@ -47,6 +38,13 @@ var apps=angular.module('starter', ['ionic', 'ngRoute', 'starter.controllers', '
                   
               });
     }
+     
+
+
+
+     
+
+
      
 
   })
