@@ -56,12 +56,30 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
     
 
     $scope.sendFeedBack=function()
-    {
+    { 
+
+      var Id = localStorage.getItem("id");
+      if(Id==null)
+      {
+          swal({   
+                          title: "Unable to Send Feed Back",   
+                          text: "Please log in",   
+                          timer: 2000,   
+                          showConfirmButton: false 
+                      });
+          $location.path('/login');
+      }
+      else{
+
+
+
+      
         var businessId=localStorage.getItem("businessId");
         var name=$("#username").val();
         var email=$("#email").val();
-        var feedbackMessage=$("#feedbackMessage").val();
-        var feedback={name:name,email:email,feedbackMessage:feedbackMessage,bussId:businessId};
+        var id=ocalStorage.getItem("id");
+        var feedMessage=$("#feedbackMessage").val();
+        var feedback={name:name,email:email,userId:id,feedbackMessage:feedMessage,bussId:businessId};
         console.log(feedback);
          $http.post('http://www.appnlogic.com/branboxAppAdmin/branboxAdminUi/ajaxFeedBack.php',feedback,{headers: {'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8'} })     
           .success(function(data) {   
@@ -80,6 +98,7 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
             }).error(function(){         
             $scope.error = "server Error";     
            });
+      }
 
     }
 
@@ -92,7 +111,10 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
     $("#sidebar").removeClass("toggled");
   $("#menu-trigger").removeClass("open");
   $http.post('http://www.appnlogic.com/branboxAppAdmin/branboxAdminUi/branbox.php',{'branboxVariable':'location', businessId:'1'},{headers: {'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8'} }).success(function(data){
+    $scope.LocationData=data;
+    console.log($scope.LocationData);
     $scope.initialize(data);
+
   }).error(function(){
       $scope.data = "error DataBase";
   });
@@ -112,7 +134,8 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
         // icon: image,
         position: new google.maps.LatLng (data[i]['latitude'], data[i]['longitude'])
       });
-      var content = "Business Location :" + data[i]['location'];     
+
+      var content = "Business Name:"+data[i]['branchname']+"... Address: "+data[i]['city']+","+data[i]['state']+","+data[i]['country'];     
       google.maps.event.addListener(marker,'click', (function(marker,content,infowindow){ 
         return function() {
            infowindow.setContent(content);
@@ -121,7 +144,45 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
       })(marker,content,infowindow)); 
     } 
     $scope.locationMap = map;
+  };
+
+  $scope.selectAction=function(data)
+  {
+     
+      var index=$(".location").val();
+      
+      if(index=="all")
+      {
+        $scope.initialize(data); 
+      }
+      // alert(index);
+       var infowindow = new google.maps.InfoWindow()
+      var mapOptions = {
+        center: new google.maps.LatLng(data[index]['latitude'], data[index]['longitude']),
+        zoom: 15,
+        mapTypeId: google.maps.MapTypeId.SATELLITE 
+    };
+ 
+      var map = new google.maps.Map(document.getElementById("locationMap"), mapOptions);
+      var marker = new google.maps.Marker({
+        map: map,
+        // icon: image,
+        position: new google.maps.LatLng (data[index]['latitude'], data[index]['longitude'])
+      });
+      var content = "Business Name:"+data[index]['branchname']+"... Address: "+data[index]['city']+","+data[index]['state']+","+data[index]['country'];     
+      google.maps.event.addListener(marker,'click', (function(marker,content,infowindow){ 
+        return function() {
+           infowindow.setContent(content);
+           infowindow.open(map,marker);
+        };
+      })(marker,content,infowindow)); 
+
+     // alert("completed");
   }
+
+
+
+
 })
 
 
@@ -157,15 +218,14 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
     $("#sidebar").removeClass("toggled");
   $("#menu-trigger").removeClass("open");
   $http.post('http://www.appnlogic.com/branboxAppAdmin/branboxAdminUi/branbox.php', {branboxVariable:'gallery',businessId:'1'},{headers: {'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8'} })     
-  .success(function(data) {  
-    console.log(data);
+  .success(function(data){
     $scope.galleryImages=data;
     $scope.$on('test', function(ngRepeatFinishedEvent) {
         $('.lightbox').lightGallery({
             enableTouch: true
         });
     });
-  }).error(function(){
+  }).error(function(){         
     $scope.error = "server Error";     
   }); 
 })
@@ -200,7 +260,9 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
     $("#sidebar").removeClass("toggled");
     $("#menu-trigger").removeClass("open");
     $scope.useremail= localStorage.getItem("email");
+    $scope.loggedIn=localStorage.getItem("loggedIn");
     $scope.userName= localStorage.getItem("userName");
+    $scope.userId= localStorage.getItem("id");
    
         var businessId=1;
          $http.post('http://www.appnlogic.com/branboxAppAdmin/branboxAdminUi/ajaxOffers.php',{bussId:businessId}, {headers: {'Content-Type': 'application/x-www-form-urlencoded'} })
@@ -210,12 +272,44 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
                  $scope.countOffers=json.rows.length;
                  console.log($scope.countOffers);
               }).error(function(){  
-            //alert("server Error");
-
-            // open(location, '_self').close(); 
           });
 
-          //Menus from server and sync here.....
+          var getMessage={
+              id:businessId,
+              useremail:$scope.useremail,
+              userId:$scope.userId,
+              message:'message'
+          }
+
+    if($scope.useremail!="" && $scope.userName!="")
+    {
+      $http.post('http://www.appnlogic.com/branboxAppAdmin/branboxAdminUi/ajaxGetMessage.php',getMessage, {headers: {'Content-Type': 'application/x-www-form-urlencoded'} })
+            .success(function (json) {
+               console.log(json);
+               if(json.rows=="undefined")
+               {
+                  $scope.FeedBackcount=null;
+               }
+               else
+               {  
+                  $scope.FeedBackMessage=json.rows;
+                  $scope.FeedBackcount=json.rows.length;
+                  console.log(countOffers11);
+                  console.log($scope.FeedBackMessage);
+               }
+                 
+              }).error(function(){
+          });
+    }
+
+        $("*#dropdownClose2").click(function () {
+
+     $scope.countOffers=null;
+    $(this).removeClass("open");
+});
+
+
+    //Menus from server and sync here.....
     $http.post('http://www.appnlogic.com/branboxAppAdmin/branboxAdminUi/ajaxMenu.php',{bussId: businessId}, {headers: {'Content-Type': 'application/x-www-form-urlencoded'} })
       .success(function (json) {
        
@@ -273,6 +367,7 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
   localStorage.setItem("splash", 1);
 
   $scope.useremail= localStorage.getItem("email");
+  $scope.userid= localStorage.getItem("id");
   $scope.userName= localStorage.getItem("userName");
     var businessId=1;
     var url = $location.url();
@@ -384,7 +479,7 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
     {   
 
 
-            var email = localStorage.getItem("email");
+            var email = localStorage.getItem("id");
             if(email==null)
             {
                 swal({   
@@ -410,13 +505,7 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
                       var nAnimOut = $(this).attr('data-animation-out');
                       var message="Item Added to The Cart ";
                       var message1="Item Updated and added to The Cart ";
-                      
-          //             var currentdate = new Date(); 
-          // var datetime =currentdate.getDate() + "/"+ (currentdate.getMonth()+1)  + "/" + currentdate.getFullYear()+ "-"   
-          //               + currentdate.getHours() + ":"  
-          //               + currentdate.getMinutes();
-                     // alert(datetime);
-
+          
              //console.log(json);
                  //var $row  = jQuery(this).parents('.order');
               var quantity= $("#quantity"+index).val();
@@ -938,16 +1027,60 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
 .controller('authentication', function($scope,$http,$location) {  
     $("#sidebar").removeClass("toggled");
   $("#menu-trigger").removeClass("open");
+  $scope.remember=localStorage.getItem("remember");
+     
+  if($scope.remember=="YES")
+  {
+    $("#remember").attr("checked","checked");
+    $scope.usneMail=localStorage.getItem("email");
+    $scope.password=localStorage.getItem("password");
+    // $('#email').val($scope.usneMail);
+    // $('#password').val($scope.password);
+    
+  }
   localStorage.setItem("splash", 1);
   $scope.loginAuthentication=function()
   {
     
     var password = $("#password").val();    
     var email = $("#email").val();  
-    // alert(password);
-    // alert(email);
-    // exit();  
 
+    var pattern = new RegExp(/^[+a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i);
+     
+    if(!pattern.test(email))
+    {
+         swal({   
+                            title: "Please fill Valid Email.",   
+                            // text: "",   
+                            timer: 2000,   
+                            showConfirmButton: false 
+                        });
+         return false
+    }
+    //alert(pass);
+    if(password=="")
+    {
+         swal({   
+                            // title: "It is Required!",   
+                            title: "Please fill Password.",   
+                            timer: 2000,   
+                            showConfirmButton: false 
+                        });
+         return false
+    }
+    if($("#remember").is(":checked"))
+    {
+        localStorage.setItem("remember","YES");
+    }
+    else
+    {
+      localStorage.setItem("remember","NO");
+    }
+
+    
+    // alert(password);
+     
+    
     $http.post('http://www.appnlogic.com/branboxAppAdmin/branboxAdminUi/ajaxLogin.php',{password:password,email:email}, {headers: {'Content-Type': 'application/x-www-form-urlencoded'} })
     .success(function (json) {
       var ajaxlength = json.length;
@@ -957,6 +1090,7 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
       {
           var id = json[0]['id'];
           var email = json[0]['email'];
+          var pass = json[0]['password'];
           var userName  = json[0]['userName'];
           var address1 = json[0]['address1'];
           var address2 = json[0]['address2'];
@@ -965,6 +1099,8 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
           var country = json[0]['country'];
           var postalCode = json[0]['postalCode'];
           localStorage.setItem("email", email);
+          localStorage.setItem("password", pass);
+          localStorage.setItem("loggedIn", "YES");
           localStorage.setItem("id", id);
           localStorage.setItem("businessId", 1);
           localStorage.setItem("userName",userName );
@@ -974,6 +1110,7 @@ angular.module('starter.controllers', ["oc.lazyLoad",'ngRoute','ngSanitize'])
           localStorage.setItem("state",state );
           localStorage.setItem("country", country);
           localStorage.setItem("postalCode",postalCode );
+
            window.location="index2.html";
            // $location.path('/menu');
       }

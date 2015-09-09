@@ -10,16 +10,16 @@
        
         <div class="card-body card-padding">
             
-            <!-- <div class="card-header jumbotron ">
-                <a ng-show="useremail != null" href="#addTocartpage" class="btn bgm-cyan waves-effect pull-right" style="margin-right:10px;">
+            <div class="card-header jumbotron ">
+                <a ng-show="userid != null" href="#addTocartpage" class="btn bgm-cyan waves-effect pull-right" style="margin-right:10px;">
                    <i class="md md-shopping-cart md-white"></i>Cart(<span id="cartCount"></span>)
                 </a>
-                <div class="chat-search">
+<!--                 <div class="chat-search">
                     <div class="fg-line">
                         <input type="search" class="form-control" ng-model="SubMenuItem" placeholder="Search Items ">
                     </div>
-                </div>
-            </div> -->
+                </div> -->
+            </div>
 
 
             <div class="row order" ng-repeat="SubMenuItem in SubMenuItemData  | filter:SubMenuItem">
@@ -56,13 +56,13 @@
                                
                                   <br>
                                 <div class="collapse m-t-10" id="collapseExample{{$index}}">
-                                    <h4>Ingredients</h4>
+                                    <!-- <h4>self explanatory</h4> -->
                                    <div class="table-responsive" style="">
                                         <table class="table">
                                             <thead>
                                                 <tr>
-                                                    <th>Ingredients-Price</th>
-                                                    <th>Yes/No</th>
+                                                    <th>self explanatory-Price</th>
+                                                    <th>&nbsp;</th>
                                                     <th>Notes</th>
                                                 </tr>
                                             </thead>  

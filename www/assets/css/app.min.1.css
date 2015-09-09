@@ -10767,7 +10767,7 @@ input:focus {
     border-radius: 5px;
     height:43px;
     margin-top: -2px;
-     margin-left: 245px;
+     margin-left: 225px;
   }
   
 } 
@@ -10780,7 +10780,7 @@ input:focus {
     border-radius: 5px;
     height:43px;
     margin-top: -2px;
-     margin-left: 40px;
+     /*margin-left: 10px;*/
   }
   
 }
@@ -10792,7 +10792,7 @@ input:focus {
     border-radius: 5px;
     height:43px;
     margin-top: -2px;
-     margin-left: 60px;
+     margin-left: 40px;
   }
   
 } 

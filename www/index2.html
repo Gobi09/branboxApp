@@ -83,13 +83,42 @@
                                 <input id="tw-switch" type="checkbox" hidden="hidden">
                                 <label for="tw-switch" class="ts-helper"></label>
                             </div>
+                        </labeli>
+
+                       
+                        <li class="dropdown" id="dropdownClose1">
+                            <a data-toggle="dropdown" class="tm-message" ng-show="FeedBackcount !=null " > 
+                                <i class="tmn-counts" id="dropdownCount1"><span>{{FeedBackcount}}</span></i>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-lg pull-right">
+                                <div class="listview">
+                                    <div class="lv-header">
+                                        Message
+                                    </div>
+                                    <div>
+                                        <div class="lv-body c-overflow" ng-repeat="feedback in FeedBackMessage" >
+                                            <a class="lv-item" href="#message">
+                                                <div class="media">
+                                                    <div class="pull-left">
+                                                        <i class="md-comment md-large"></i>
+                                                    </div>
+                                                    <div class="media-body">
+                                                        <div class="lv-title">{{feedback.sendMessage}}</div>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <a class="lv-footer" href="#">View All</a>
+                                </div>
+                            </div>
                         </li>
 
-                        <!--  <li id="top-search">
-                            <a class="tm-search" href="#"></a>
-                        </li> -->
-                        <li class="dropdown" id="message">
-                            <a data-toggle="dropdown" class="tm-message" ><i class="tmn-counts"><span>{{countOffers}}</span></i></a>
+                        <li class="dropdown" id="dropdownClose2">
+                            <a data-toggle="dropdown" class="tm-notification">
+                                <i class="tmn-counts"  id="dropdownCount2"><span>{{countOffers}}</span></i>
+                            </a>
+
                             <div class="dropdown-menu dropdown-menu-lg pull-right">
                                 <div class="listview">
                                     <div class="lv-header">
@@ -110,39 +139,19 @@
                                                     </div>
                                                 </div>
                                             </a>
-                                       <!--  <a class="lv-item" href="#">
-                                            <div class="media">
-                                                <div class="pull-left">
-                                                    <img class="lv-img-sm" src="assets/img/profile-pics/2.jpg" alt="">
-                                                </div>
-                                                <div class="media-body">
-                                                    <div class="lv-title">Jonathan Morris</div>
-                                                    <small class="lv-small">Nunc quis diam diamurabitur at dolor elementum, dictum turpis vel</small>
-                                                </div>
-                                            </div>
-                                        </a> -->
-                                      
+                                        </div>
                                     </div>
-
-                                    </div>
-                                    
-                                    <a class="lv-footer" href="#">View All</a>
+                                    <a class="lv-footer" href="#latestOffers">View All</a>
                                 </div>
                             </div>
                         </li>
-                       <li class="dropdown" ng-show="useremail != null">
+
+                       <li class="dropdown" ng-show="loggedIn != null">
                             <a class="tm-settings" data-toggle="dropdown"></a>
                             <ul class="dropdown-menu pull-right bgm-gray" style="font-size:19px;"> 
                                 <li ><a href="index2.html" id="logout" style="font-size:16px;" ><i class="md md-history"></i> Logout</a></li>
-                                <!-- <li></li> -->
                             </ul>
                         </li>
-                        <!-- <li>
-                              
-                             <a href="#addTocart"> <i class="md md-shopping-cart md-white md-large"></i></a>
-                        </li> -->
-<!--                         <li class="hidden-xs" id="chat-trigger" data-trigger="#chat">
-                        </li> -->
                     </ul>
                 </li>
             </ul>
@@ -158,33 +167,16 @@
                     <div class="profile-menu">
                         <a href="#">
                             <div class="profile-pic  pull-right transparentbox">
-                                <!-- <p>Branbox<p> -->
-                                <!-- <img src="img/brn1.png" alt="" style="height: 2pc;"> -->
                             </div>
-                            <!-- <div class="profile-info">
-                                Branbox
-                                <i class="md md-arrow-drop-down"></i>
-                            </div> -->
                         </a>
-                        <!-- <ul class="main-menu">
-                            <li>
-                                <a href="profile-about.html"><i class="md md-person"></i> View Profile</a>
-                            </li>
-                            <li>
-                                <a href="#"><i class="md md-settings-input-antenna"></i> Privacy Settings</a>
-                            </li>
-                            <li>
-                                <a href="#"><i class="md md-settings"></i> Settings</a>
-                            </li>
-                            <li>
-                                <a href="#"><i class="md md-history"></i> Logout</a>
-                            </li>
-                        </ul> -->
                     </div>
-
                     <ul class="main-menu">
+                        <!-- <li ng-show="register !='0'" ><a href="#register"><i class="md-person md-large" menu-close="" nav-clear=""></i>Register</a></li> -->
+
                         <li><a href="#login"><i class="md-person md-large" menu-close="" nav-clear=""></i>Sign In</a></li>
+
                         <li><a href="#menu"><i class=" md-restaurant-menu md-large" menu-close="" nav-clear=""></i>Menus</a></li>
+                        
                         <li><a href="#latestOffers"> <i class=" md-wallet-giftcard md-large" menu-close="" nav-clear=""></i>Latest Offers</a></li>
                        <!--  <li  ng-show="useremail != null"><a  href="#timeDelivery"><i class="md-alarm md-large" menu-close="" nav-clear=""></i>Timed Delivery</a></li> -->
                         <li><a href="#aboutUs"><i class="md md-home md-large" menu-close="" nav-clear=""></i> About Us</a></li>
@@ -219,17 +211,43 @@
 </html>
 <script type="text/javascript">
 $("#logout").click(function () {
-
-     localStorage.clear();
+        var email=  localStorage.getItem("email");
+        var password=  localStorage.getItem("password");
+    if(localStorage.getItem("remember")!="YES")
+    {
+        localStorage.clear();
+    }
+    else
+    {
+         localStorage.removeItem("loggedIn");
+         localStorage.removeItem("id");
+         
+    }
+    
 
 })
 
 $(".main-menu").click(function () {
     $("#sidebar").removeClass("toggled");
     $("#menu-trigger").removeClass("open");
-    //localStorage.setItem("messageId", "hide");
 
 });
+
+$("*#dropdownClose1").click(function () {
+    
+    $("#dropdownCount1").hide();
+    $(this).removeClass("open");
+});
+
+$("*#dropdownClose2").click(function () {
+    $("#dropdownCount2").hide();
+    $(this).removeClass("open");
+});
+
+
+    // setTimeout(function(){
+    // },5000);
+
 
 </script>
 <style type="text/css">
